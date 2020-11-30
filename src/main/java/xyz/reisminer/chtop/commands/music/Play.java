@@ -1,12 +1,10 @@
 package xyz.reisminer.chtop.commands.music;
 
-import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.Event;
 import org.apache.commons.lang3.math.NumberUtils;
-import xyz.reisminer.chtop.music.GuildMusicManager;
 import xyz.reisminer.chtop.music.PlayerManager;
 
 public class Play {
@@ -14,7 +12,7 @@ public class Play {
         String[] splitMessage = msg.getContentRaw().split(" ");
         final Member self = member.getGuild().getSelfMember();
         if (!self.getVoiceState().inVoiceChannel())
-            Join.join(msg);
+            Join.joiin(msg);
         if (splitMessage.length >= 2) {
             PlayerManager.getInstance().loadAndPlay(channel, splitMessage[1]);
             if (splitMessage.length > 2)

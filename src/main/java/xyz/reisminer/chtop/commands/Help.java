@@ -20,6 +20,8 @@ public class Help {
                     "\n" + Token.prefix + "volume"+
                     "\n" + Token.prefix + "leave" +
                     "\n" + Token.prefix + "say" +
+                    "\n" + Token.prefix + "rename" +
+                    "\n" + Token.prefix + "renameall" +
                     "\n" + Token.prefix + "prefix" +
                     "\n" + Token.prefix + "react"
             ).queue();
