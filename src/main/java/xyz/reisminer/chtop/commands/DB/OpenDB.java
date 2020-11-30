@@ -20,7 +20,8 @@ public class OpenDB {
                 retun.append(Token.prefix).append(cmd + "\n");
             }
         } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+            retun.append("`Couldn't connect to the Database.`");
+            System.err.println("DB Error:\n"+e);
         }
         return retun.toString();
     }

@@ -12,6 +12,7 @@ public class Help {
             channel.sendMessage("Static Commands: " +
                     "\n" + Token.prefix + "dm" +
                     "\n" + Token.prefix + "anondm" +
+                    "\n" + Token.prefix + "spamdm" +
                     "\n" + Token.prefix + "join" +
                     "\n" + Token.prefix + "play"+
                     "\n" + Token.prefix + "stop"+

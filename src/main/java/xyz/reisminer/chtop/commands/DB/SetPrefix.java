@@ -18,7 +18,8 @@ public class SetPrefix {
             Token.prefix = prefix;
             System.out.println("Prefix set to: " + Token.prefix);
         } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+            System.out.println("Prefix stays: " + Token.prefix);
+            System.err.println("DB Error:\n"+e);
         }
     }
 }

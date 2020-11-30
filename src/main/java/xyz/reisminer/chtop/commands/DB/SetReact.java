@@ -18,7 +18,8 @@ public class SetReact {
             Token.sendReacts = react;
             System.out.println("React set to: " + Token.sendReacts);
         } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+            System.out.println("React stays: " + Token.sendReacts);
+            System.err.println("DB Error:\n"+e);
         }
     }
 }

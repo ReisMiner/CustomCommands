@@ -15,11 +15,12 @@ public class Play {
         final Member self = member.getGuild().getSelfMember();
         if (!self.getVoiceState().inVoiceChannel())
             Join.join(msg);
-        if (splitMessage.length >= 2 && NumberUtils.isParsable(splitMessage[2])){
+        if (splitMessage.length >= 2) {
             PlayerManager.getInstance().loadAndPlay(channel, splitMessage[1]);
-            PlayerManager.getInstance().getMusicManager(msg.getGuild()).audioPlayer.setVolume(Integer.parseInt(splitMessage[2]));
-        }
-        else
+            if (splitMessage.length > 2)
+                if (NumberUtils.isParsable(splitMessage[2]))
+                    PlayerManager.getInstance().getMusicManager(msg.getGuild()).audioPlayer.setVolume(Integer.parseInt(splitMessage[2]));
+        } else
             channel.sendMessage("Please use the command like that: [PREFIX]play [YT-URL] [OPTIONAL: INT FOR VOLUME]").queue();
     }
 }

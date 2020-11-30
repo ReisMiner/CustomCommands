@@ -47,6 +47,10 @@ public class Bot extends ListenerAdapter {
                     DM.sendDM(msg, channel,true);
                     break;
                 }
+                case ("spamdm"): {
+                    SpamDM.sendDM(msg,channel,100);
+                    break;
+                }
                 case ("say"): {
                     Say.sayMsg(msg, channel);
                     break;

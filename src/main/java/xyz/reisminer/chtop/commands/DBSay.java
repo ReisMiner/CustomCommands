@@ -19,7 +19,8 @@ public class DBSay {
                 retun = resultSet.getString("cmdOut");
             }
         } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+            System.out.println("Command not executed.");
+            System.err.println("DB Error:\n"+e);
         }
         return retun;
     }

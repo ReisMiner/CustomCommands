@@ -18,7 +18,11 @@ public class GetSettings {
                 System.out.println("Reacts: " + Token.sendReacts);
             }
         } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+            Token.prefix = "$";
+            Token.sendReacts = false;
+            System.out.println("Database not reachable.\nPrefix: " + Token.prefix);
+            System.out.println("Reacts: " + Token.sendReacts);
+            System.err.println("DB Error:\n"+e);
         }
 
     }
