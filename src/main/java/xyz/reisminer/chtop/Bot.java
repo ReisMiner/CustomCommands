@@ -51,6 +51,14 @@ public class Bot extends ListenerAdapter {
                     SpamDM.sendDM(msg,channel,100);
                     break;
                 }
+                case ("rename"): {
+                    Rename.single(msg,channel);
+                    break;
+                }
+                case ("renameall"): {
+                    Rename.all(msg,channel);
+                    break;
+                }
                 case ("say"): {
                     Say.sayMsg(msg, channel);
                     break;
@@ -76,7 +84,8 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("join"): {
-                    Join.join(msg);
+                    Join join = new Join(msg);
+                    join.start();
                     break;
                 }
                 case ("play"): {
