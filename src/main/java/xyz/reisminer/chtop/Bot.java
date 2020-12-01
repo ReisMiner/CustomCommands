@@ -63,6 +63,14 @@ public class Bot extends ListenerAdapter {
                     Say.sayMsg(msg, channel);
                     break;
                 }
+                case ("give"): {
+                    RoleCommands.give(msg,channel);
+                    break;
+                }
+                case ("remove"): {
+                    RoleCommands.remove(msg,channel);
+                    break;
+                }
                 case ("react"): {
                     React.setReact(msg, channel);
                     break;
