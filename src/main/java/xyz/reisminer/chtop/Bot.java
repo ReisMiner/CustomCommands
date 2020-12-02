@@ -9,6 +9,8 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.jetbrains.annotations.NotNull;
 import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.music.*;
@@ -20,10 +22,14 @@ public class Bot extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
         JDABuilder.create(Token.TOKEN, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES)
                 .addEventListeners(new Bot())
+                .setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
+                .setMemberCachePolicy(MemberCachePolicy.ALL)
+                .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .build();
     }
 
     public void onReady(ReadyEvent event) {
+        Token.logChannel= event.getJDA().getTextChannelById(783372238199193600L);
         GetSettings.getSettings();
         event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
     }
@@ -56,7 +62,7 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("renameall"): {
-                    Rename.all(msg,channel);
+                    Rename.all(msg,channel,event);
                     break;
                 }
                 case ("say"): {

@@ -9,6 +9,7 @@ import xyz.reisminer.chtop.music.PlayerManager;
 
 public class Play {
     public static void play(Message msg, TextChannel channel, Event event, Member member) {
+        msg.delete().complete();
         String[] splitMessage = msg.getContentRaw().split(" ");
         final Member self = member.getGuild().getSelfMember();
         if (!self.getVoiceState().inVoiceChannel())

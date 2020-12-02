@@ -11,7 +11,6 @@ public class Join extends Thread{
         tmpmsg=msg;
     }
     public static void joiin(Message msg) {
-        String[] splitMessage = msg.getContentRaw().split(" ");
         Guild guild = msg.getGuild();
         Member member = guild.getMemberById(msg.getAuthor().getId());
         guild.getAudioManager().openAudioConnection(member.getVoiceState().getChannel());
