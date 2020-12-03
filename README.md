@@ -9,6 +9,8 @@ Funny Discord Bot :)
 4. Give the fields a value which corresponds with your data so you have working credentials.
 5. Try starting the Bot :)
 
+**Note:** Some stuff is hardcoded and you might want to adjust this stuff. But be warned: This code is **NOT** documented!
+
 # Help me. I get errors and cannot start the bot
 Not my beer. Google is your friend :)
     
