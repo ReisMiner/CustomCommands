@@ -65,8 +65,16 @@ public class Bot extends ListenerAdapter {
                     Rename.all(msg,channel,event);
                     break;
                 }
+                case ("renamereset"): {
+                    Rename.reset(msg,channel,event);
+                    break;
+                }
                 case ("say"): {
                     Say.sayMsg(msg, channel);
+                    break;
+                }
+                case ("b0ld"): {
+                    Say.sayMsgBold(msg, channel);
                     break;
                 }
                 case ("give"): {
@@ -83,10 +91,6 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("prefix"): {
                     Prefix.setPrefix(msg, channel, event);
-                    break;
-                }
-                case ("-$prefix"): {
-                    ResetPrefix.reset(msg, channel, event);
                     break;
                 }
                 case ("-$reload"): {
@@ -118,15 +122,24 @@ public class Bot extends ListenerAdapter {
                     Volume.setVolume(msg,channel);
                     break;
                 }
-
-
+                case ("kickrandom"): {
+                    Kick.Random(msg,channel,event);
+                    break;
+                }
+                case ("notsokickrandom"): {
+                    Kick.NotRandom(msg,channel,event);
+                    break;
+                }
                 default: {
                     if (msg.getAuthor().getIdLong() != 780394207251660800L)
                         channel.sendMessage(DBSay.dbSay(msg.getContentRaw())).queue();
                     break;
                 }
             }
+
         }
+        if(msg.getContentRaw().equalsIgnoreCase("$-$preifx"))
+            ResetPrefix.reset(msg, channel, event);
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
             msg.addReaction(":joinkohl:780369817307447317").complete();

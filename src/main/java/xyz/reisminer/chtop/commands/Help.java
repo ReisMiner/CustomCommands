@@ -10,21 +10,25 @@ public class Help {
         if (msg.getContentRaw().equalsIgnoreCase(Token.prefix + "help")) {
             channel.sendMessage("DB Commands: \n" + OpenDB.openDB()).queue();
             channel.sendMessage("Static Commands: " +
-                    "\n" + Token.prefix + "dm" +
-                    "\n" + Token.prefix + "anondm" +
-                    "\n" + Token.prefix + "spamdm" +
-                    "\n" + Token.prefix + "join" +
-                    "\n" + Token.prefix + "play"+
-                    "\n" + Token.prefix + "stop"+
-                    "\n" + Token.prefix + "skip"+
-                    "\n" + Token.prefix + "volume"+
-                    "\n" + Token.prefix + "leave" +
-                    "\n" + Token.prefix + "say" +
-                    "\n" + Token.prefix + "give" +
-                    "\n" + Token.prefix + "rename" +
-                    "\n" + Token.prefix + "renameall" +
-                    "\n" + Token.prefix + "prefix" +
-                    "\n" + Token.prefix + "react"
+                    " | " + Token.prefix + "dm" +
+                    " | " + Token.prefix + "anondm" +
+                    " | " + Token.prefix + "spamdm" +
+                    " | " + Token.prefix + "join" +
+                    " | " + Token.prefix + "play"+
+                    " | " + Token.prefix + "stop"+
+                    " | " + Token.prefix + "skip"+
+                    " | " + Token.prefix + "volume"+
+                    " | " + Token.prefix + "leave" +
+                    " | " + Token.prefix + "say" +
+                    " | " + Token.prefix + "b0ld" +
+                    " | " + Token.prefix + "give" +
+                    " | " + Token.prefix + "rename" +
+                    " | " + Token.prefix + "renameall" +
+                    " | " + Token.prefix + "renamereset" +
+                    " | " + Token.prefix + "kickrandom" +
+                    " | " + Token.prefix + "notsokickrandom" +
+                    " | " + Token.prefix + "prefix" +
+                    " | " + Token.prefix + "react"
             ).queue();
         }
     }

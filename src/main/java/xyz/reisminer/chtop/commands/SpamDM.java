@@ -3,6 +3,7 @@ package xyz.reisminer.chtop.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import org.apache.commons.lang3.math.NumberUtils;
 import xyz.reisminer.chtop.Token;
 
@@ -27,15 +28,19 @@ public class SpamDM {
             }
             String finalTmp = tmp.toString();
             int finalCount = count;
+            boolean error = false;
             msg.getMentionedMembers().get(0).getUser().openPrivateChannel().queue(channnel -> {
                 eb.setTitle("Your DM:", "http://reisminer.xyz");
                 eb.setDescription(finalTmp);
                 eb.setColor(Color.red);
                 eb.setImage(Token.shutImg);
-                for (int i = 0; i < finalCount; i++)
-                    channnel.sendMessage(eb.build()).queue();
+                for (int i = 0; i < finalCount; i++){
+                    if(!error)
+                        channnel.sendMessage(eb.build()).queue();
+                }
             });
             channel.sendMessage("Sending DMs").queue();
+            Token.logChannel.sendMessage("Spamming: "+msg.getMentionedUsers().get(0).getName()).queue();
         }
     }
 }

@@ -9,10 +9,9 @@ import xyz.reisminer.chtop.Token;
 public class Rename {
     public static void all(Message msg, TextChannel channel, Event event) {
         String[] splitMessage = msg.getContentRaw().split(" ");
-        System.out.println((long) msg.getJDA().getGuildById(msg.getGuild().getId()).getMembers().size());
         StringBuilder tmp = new StringBuilder(" ");
         if (splitMessage.length >= 2) {
-            Token.logChannel.sendMessage(msg.getAuthor().getName()+" changed everyone's name").queue();
+            Token.logChannel.sendMessage(msg.getAuthor().getName() + " changed everyone's name").queue();
             for (int i = 1; i < splitMessage.length; i++) {
                 tmp.append(splitMessage[i]).append(" ");
             }
@@ -20,30 +19,42 @@ public class Rename {
                 try {
                     member.modifyNickname(tmp.toString()).complete();
                 } catch (Exception ignored) {
-                    channel.sendMessage("No perms to edit `"+member.getNickname()+"`").queue();
+                    channel.sendMessage("No perms to edit `" + member.getNickname() + "`").queue();
                 }
             }
 
-        }else{
+        } else {
             channel.sendMessage("Use this command like this: [PREFIX]renameall [New NAME]").queue();
         }
     }
-    public static void single(Message msg,TextChannel channel){
+
+    public static void single(Message msg, TextChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         msg.delete().complete();
         StringBuilder tmp = new StringBuilder(" ");
         msg.getMentionedMembers();
-        if(splitMessage.length >= 3){
+        if (splitMessage.length >= 3) {
             for (int i = 2; i < splitMessage.length; i++) {
                 tmp.append(splitMessage[i]).append(" ");
             }
             try {
                 msg.getMentionedMembers().get(0).modifyNickname(String.valueOf(tmp)).complete();
             } catch (Exception ignored) {
-                channel.sendMessage("No perms to edit `"+msg.getMentionedMembers().get(0).getNickname()+"`").queue();
+                channel.sendMessage("No perms to edit `" + msg.getMentionedMembers().get(0).getNickname() + "`").queue();
             }
-        }else{
+        } else {
             channel.sendMessage("Use this command like this: [PREFIX]renameall [New NAME]").queue();
+        }
+    }
+
+    public static void reset(Message msg, TextChannel channel, Event event) {
+        Token.logChannel.sendMessage(msg.getAuthor().getName() + " reset everyone's name").queue();
+        for (Member member : event.getJDA().getGuildById(msg.getGuild().getId()).getMembers()) {
+            try {
+                member.modifyNickname("").complete();
+            } catch (Exception ignored) {
+                channel.sendMessage("No perms to edit `" + member.getNickname() + "`").queue();
+            }
         }
     }
 }

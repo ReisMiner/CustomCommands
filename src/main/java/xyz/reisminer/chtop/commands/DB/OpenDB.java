@@ -17,7 +17,7 @@ public class OpenDB {
                     .executeQuery("select * from command");
             while (resultSet.next()) {
                 String cmd = resultSet.getString("cmd");
-                retun.append(Token.prefix).append(cmd + "\n");
+                retun.append(Token.prefix).append(cmd + " | ");
             }
         } catch (SQLException e) {
             retun.append("`Couldn't connect to the Database.`");
