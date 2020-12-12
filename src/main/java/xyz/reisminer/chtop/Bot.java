@@ -29,7 +29,7 @@ public class Bot extends ListenerAdapter {
     }
 
     public void onReady(ReadyEvent event) {
-        Token.logChannel= event.getJDA().getTextChannelById(783372238199193600L);
+        Token.logChannel= event.getJDA().getTextChannelById(787026214207356938L);
         GetSettings.getSettings();
         event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
     }
@@ -58,7 +58,7 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("rename"): {
-                    Rename.single(msg,channel);
+                    Rename.single(msg,channel,event);
                     break;
                 }
                 case ("renameall"): {
