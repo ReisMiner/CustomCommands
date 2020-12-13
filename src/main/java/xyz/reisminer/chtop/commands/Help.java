@@ -8,11 +8,13 @@ import xyz.reisminer.chtop.commands.DB.OpenDB;
 
 public class Help {
     public static void help(Message msg, TextChannel channel) {
-
+        EmbedBuilder eb = new EmbedBuilder();
         if (msg.getContentRaw().equalsIgnoreCase(Token.prefix + "help")) {
 
             channel.sendMessage("DB Commands: \n" + OpenDB.openDB()).queue();
-
+            eb.setTitle("Add Commands here", "http://reisminer.xyz/dc");
+            eb.setDescription("PW: freddy");
+            channel.sendMessage(eb.build()).queue();
 
             channel.sendMessage("Music Commands: " +
                     " | " + Token.prefix + "join" +
@@ -30,6 +32,10 @@ public class Help {
             channel.sendMessage("Text Commands: " +
                     " | " + Token.prefix + "say" +
                     " | " + Token.prefix + "b0ld"
+            ).queue();
+            channel.sendMessage("Menu Commands: " +
+                    " | " + Token.prefix + "moods" +
+                    " | " + Token.prefix + "gibz"
             ).queue();
             channel.sendMessage("Moderator Commands: " +
                     " | " + Token.prefix + "give" +

@@ -32,6 +32,7 @@ public class Bot extends ListenerAdapter {
         Token.logChannel= event.getJDA().getTextChannelById(787026214207356938L);
         GetSettings.getSettings();
         event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
+        Menu.load();
     }
 
     @Override
@@ -75,6 +76,14 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("b0ld"): {
                     Say.sayMsgBold(msg, channel);
+                    break;
+                }
+                case ("moods"): {
+                    Menu.moods(channel);
+                    break;
+                }
+                case ("gibz"): {
+                    Menu.gibz(channel);
                     break;
                 }
                 case ("give"): {
