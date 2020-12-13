@@ -87,11 +87,11 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("give"): {
-                    RoleCommands.give(msg,channel);
+                    RoleCommands.give(msg,channel,event);
                     break;
                 }
                 case ("remove"): {
-                    RoleCommands.remove(msg,channel);
+                    RoleCommands.remove(msg,channel,event);
                     break;
                 }
                 case ("react"): {
