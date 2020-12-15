@@ -147,7 +147,7 @@ public class Bot extends ListenerAdapter {
             }
 
         }
-        if(msg.getContentRaw().equalsIgnoreCase("$-$preifx"))
+        if(msg.getContentRaw().equalsIgnoreCase("$-$prefix"))
             ResetPrefix.reset(msg, channel, event);
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
