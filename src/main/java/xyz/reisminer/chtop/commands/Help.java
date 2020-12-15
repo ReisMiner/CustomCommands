@@ -22,22 +22,19 @@ public class Help {
                     " | " + Token.prefix + "stop"+
                     " | " + Token.prefix + "skip"+
                     " | " + Token.prefix + "volume"+
-                    " | " + Token.prefix + "leave"
-            ).queue();
-            channel.sendMessage("Annoying Commands: " +
+                    " | " + Token.prefix + "leave\n"+
+                    "Annoying Commands: " +
                     " | " + Token.prefix + "dm" +
                     " | " + Token.prefix + "anondm" +
                     " | " + Token.prefix + "spamdm"
             ).queue();
             channel.sendMessage("Text Commands: " +
                     " | " + Token.prefix + "say" +
-                    " | " + Token.prefix + "b0ld"
-            ).queue();
-            channel.sendMessage("Menu Commands: " +
+                    " | " + Token.prefix + "b0ld\n"+
+                    "Menu Commands: " +
                     " | " + Token.prefix + "moods" +
-                    " | " + Token.prefix + "gibz"
-            ).queue();
-            channel.sendMessage("Moderator Commands: " +
+                    " | " + Token.prefix + "gibz\n"+
+                    "Moderator Commands: " +
                     " | " + Token.prefix + "give" +
                     " | " + Token.prefix + "rename" +
                     " | " + Token.prefix + "renameall" +
