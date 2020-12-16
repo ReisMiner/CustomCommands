@@ -3,7 +3,6 @@ package xyz.reisminer.chtop.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import org.apache.commons.lang3.math.NumberUtils;
 import xyz.reisminer.chtop.Token;
 

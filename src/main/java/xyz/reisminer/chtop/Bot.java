@@ -6,6 +6,8 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.events.message.MessageBulkDeleteEvent;
+import net.dv8tion.jda.api.events.message.MessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -34,7 +36,6 @@ public class Bot extends ListenerAdapter {
         event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
         Menu.load();
     }
-
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         Message msg = event.getMessage();
@@ -54,10 +55,15 @@ public class Bot extends ListenerAdapter {
                     DM.sendDM(msg, channel,true);
                     break;
                 }
+                case ("spam"): {
+                    Say.sayMsgSpam(msg);
+                    break;
+                }
                 case ("spamdm"): {
                     SpamDM.sendDM(msg,channel,100);
                     break;
                 }
+
                 case ("rename"): {
                     Rename.single(msg,channel,event);
                     break;
