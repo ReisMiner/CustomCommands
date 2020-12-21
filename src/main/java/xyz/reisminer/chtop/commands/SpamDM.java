@@ -3,7 +3,6 @@ package xyz.reisminer.chtop.commands;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import org.apache.commons.lang3.math.NumberUtils;
 import xyz.reisminer.chtop.Token;
 
@@ -15,7 +14,7 @@ public class SpamDM {
     public static void sendDM(Message msg, TextChannel channel, int count) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         StringBuilder tmp = new StringBuilder();
-        if ((msg.getMentionedUsers().get(0).getIdLong() != 15136536260378624L) && (msg.getMentionedUsers().get(0).getIdLong() != 286888695879958530L) && (msg.getMentionedUsers().get(0).getIdLong() != 384396707305357313L)) {
+        if ((msg.getMentionedUsers().get(0).getIdLong() != 215136536260378624L) && (msg.getMentionedUsers().get(0).getIdLong() != 286888695879958530L) && (msg.getMentionedUsers().get(0).getIdLong() != 84396707305357313L)) {
             if (NumberUtils.isParsable(splitMessage[2])) {
                 count = Integer.parseInt(splitMessage[2]);
                 tmp = new StringBuilder(" ");
