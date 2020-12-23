@@ -56,7 +56,8 @@ public class Help {
         if (splitMessage[1].equalsIgnoreCase("menu")) {
             channel.sendMessage("```Menu Commands: " +
                     " \n " + Token.prefix + "moods" +
-                    " \n " + Token.prefix + "gibz```"
+                    " \n " + Token.prefix + "gibz" +
+                    " \n " + Token.prefix + "trattoria```"
             ).queue();
         }
         if (splitMessage[1].equalsIgnoreCase("moderator")) {

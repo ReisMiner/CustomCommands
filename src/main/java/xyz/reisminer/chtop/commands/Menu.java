@@ -20,12 +20,14 @@ public class Menu {
     //five moods menu website
     static String url = "https://siemens.sv-restaurant.ch/de/menuplan/five-moods/";
     static String gibz = "https://zfv.ch/de/microsites/restaurant-treff/menuplan";
-    static Document document, documentGibz;
+    static String trattoria = "https://www.hotel-walensee.ch/guenstige-mittagsmenues-business-lunch/";
+    static Document document, documentGibz, documentTrattoria;
 
     public static void load() {
         try {
             document = Jsoup.connect(url).get();
             documentGibz = Jsoup.connect(gibz).get();
+            documentTrattoria = Jsoup.connect(trattoria).get();
             System.out.println("loaded Sites");
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,6 +76,20 @@ public class Menu {
         }
     }
 
+    public static void trattoria(TextChannel channel) {
+        if (!LocalDate.now().toString().equals(date)) {
+            date = LocalDate.now().toString();
+            System.out.println(date + " localdate -> " + LocalDate.now().toString());
+            load();
+        }
+        //sending the message
+        channel.sendMessage("```" + getTrattoria(0) + "\n============================\n"
+                + getTrattoria(1) + "\n============================\n"
+                + getTrattoria(2) + "\n============================\n"
+                + getTrattoria(3) +
+                "```").queue();
+    }
+
     public static String getMoods(int number) {
         Element body = document.select("body").get(0);
         Element menuline = body.select(".item-content .menuline").get(number);
@@ -88,5 +104,11 @@ public class Menu {
         documentGibz.select(".txt-slide").remove();
         Element menuline = body.select(".menu .txt-hold").get(number);
         return menuline;
+    }
+
+    public static String getTrattoria(int number) {
+        Element body = documentTrattoria.select("body").get(0);
+        Element menuDetail = body.select("#menu-1").select("p").get(number);
+        return menuDetail.text();
     }
 }

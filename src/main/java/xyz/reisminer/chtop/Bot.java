@@ -92,6 +92,10 @@ public class Bot extends ListenerAdapter {
                     Menu.gibz(channel);
                     break;
                 }
+                case ("trattoria"): {
+                    Menu.trattoria(channel);
+                    break;
+                }
                 case ("give"): {
                     RoleCommands.give(msg,channel,event);
                     break;

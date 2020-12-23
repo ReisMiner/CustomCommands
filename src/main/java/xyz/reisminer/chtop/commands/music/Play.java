@@ -19,7 +19,7 @@ public class Play {
             if (splitMessage.length > 2) {
                 if (NumberUtils.isParsable(splitMessage[2])) {
                     PlayerManager.getInstance().loadAndPlay(channel, splitMessage[1]);
-                    final GuildMusicManager musicManager = PlayerManager.getInstance().getMusicManager(msg.getGuild());
+                    GuildMusicManager musicManager = PlayerManager.getInstance().getMusicManager(msg.getGuild());
                     musicManager.scheduler.player.setVolume(Integer.parseInt(splitMessage[2]));
                 }
             } else
