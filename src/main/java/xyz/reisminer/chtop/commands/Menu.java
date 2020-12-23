@@ -1,11 +1,6 @@
 package xyz.reisminer.chtop.commands;
 
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Invite;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
