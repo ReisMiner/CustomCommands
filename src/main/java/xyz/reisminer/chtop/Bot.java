@@ -31,11 +31,12 @@ public class Bot extends ListenerAdapter {
     }
 
     public void onReady(ReadyEvent event) {
-        Token.logChannel= event.getJDA().getTextChannelById(787026214207356938L);
+        Token.logChannel = event.getJDA().getTextChannelById(787026214207356938L);
         GetSettings.getSettings();
         event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
         Menu.load();
     }
+
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         Message msg = event.getMessage();
@@ -48,11 +49,11 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("dm"): {
-                    DM.sendDM(msg,channel,false);
+                    DM.sendDM(msg, channel, false);
                     break;
                 }
                 case ("anondm"): {
-                    DM.sendDM(msg, channel,true);
+                    DM.sendDM(msg, channel, true);
                     break;
                 }
                 case ("spam"): {
@@ -60,20 +61,20 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("spamdm"): {
-                    SpamDM.sendDM(msg,channel,100);
+                    SpamDM.sendDM(msg, channel, 100);
                     break;
                 }
 
                 case ("rename"): {
-                    Rename.single(msg,channel,event);
+                    Rename.single(msg, channel, event);
                     break;
                 }
                 case ("renameall"): {
-                    Rename.all(msg,channel,event);
+                    Rename.all(msg, channel, event);
                     break;
                 }
                 case ("renamereset"): {
-                    Rename.reset(msg,channel,event);
+                    Rename.reset(msg, channel, event);
                     break;
                 }
                 case ("say"): {
@@ -97,11 +98,11 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("give"): {
-                    RoleCommands.give(msg,channel,event);
+                    RoleCommands.give(msg, channel, event);
                     break;
                 }
                 case ("remove"): {
-                    RoleCommands.remove(msg,channel,event);
+                    RoleCommands.remove(msg, channel, event);
                     break;
                 }
                 case ("react"): {
@@ -121,16 +122,20 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("join"): {
-                    Join join = new Join(msg);
-                    join.start();
+                    if (!Token.joinBlocked) {
+                        Join join = new Join(msg);
+                        join.start();
+                    } else {
+                        msg.getChannel().sendMessage("**Join got blocked**").queue();
+                    }
                     break;
                 }
                 case ("play"): {
-                    Play.play(msg,channel,event,member);
+                    Play.play(msg, channel, event, member);
                     break;
                 }
                 case ("skip"): {
-                    Skip.skip(channel,member,event);
+                    Skip.skip(channel, member, event);
                     break;
                 }
                 case ("stop"): {
@@ -138,15 +143,15 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("volume"): {
-                    Volume.setVolume(msg,channel);
+                    Volume.setVolume(msg, channel);
                     break;
                 }
                 case ("kickrandom"): {
-                    Kick.Random(msg,channel,event);
+                    Kick.Random(msg, channel, event);
                     break;
                 }
                 case ("notsokickrandom"): {
-                    Kick.NotRandom(msg,channel,event);
+                    Kick.NotRandom(msg, channel, event);
                     break;
                 }
                 default: {
@@ -157,8 +162,12 @@ public class Bot extends ListenerAdapter {
             }
 
         }
-        if(msg.getContentRaw().equalsIgnoreCase("$-$prefix"))
+        if (msg.getContentRaw().equalsIgnoreCase("$-$prefix"))
             ResetPrefix.reset(msg, channel, event);
+        if (msg.getContentRaw().equalsIgnoreCase("$-$blockjoin") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
+            Token.joinBlocked = !Token.joinBlocked;
+            Token.logChannel.sendMessage("Successfully (un)blocked the join command").queue();
+        }
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
             msg.addReaction(":joinkohl:780369817307447317").complete();
