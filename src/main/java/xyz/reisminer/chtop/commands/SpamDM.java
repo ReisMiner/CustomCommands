@@ -39,7 +39,8 @@ public class SpamDM {
                 }
             });
             channel.sendMessage("Sending DMs").queue();
-            Token.logChannel.sendMessage("Spamming: "+msg.getMentionedUsers().get(0).getName()).queue();
+            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` spammed `"+ msg.getMentionedMembers().get(0).getUser().getName()+"` full with the message: `"+tmp+"`").queue();
+
         }
     }
 }

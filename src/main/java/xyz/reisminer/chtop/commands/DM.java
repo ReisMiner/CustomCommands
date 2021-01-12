@@ -29,6 +29,8 @@ public class DM {
                 channnel.sendMessage(eb.build()).queue();
             });
         }
+
+        Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` sent a dm to `"+ msg.getMentionedMembers().get(0).getUser().getName()+"`").queue();
         channel.sendMessage("DM sent").queue();
     }
 }

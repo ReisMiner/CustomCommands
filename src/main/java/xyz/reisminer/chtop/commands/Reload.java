@@ -10,12 +10,14 @@ import static xyz.reisminer.chtop.GetSettings.getSettings;
 
 public class Reload {
     public static void reload(Message msg, TextChannel channel, Event event){
-        if (msg.getAuthor().getIdLong() == 215136536260378624L) {
+        if (msg.getAuthor().getIdLong() == Token.REISMINERID) {
             getSettings();
             Menu.load();
             channel.sendMessage("*Reloaded Settings And Menus*").queue();
             event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
         } else {
+            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` tried to reload the bot").queue();
+
             channel.sendMessage("*NO PERMS U NOOB*").queue();
         }
     }

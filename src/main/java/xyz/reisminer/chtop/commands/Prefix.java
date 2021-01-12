@@ -14,6 +14,8 @@ public class Prefix {
             SetPrefix.setPrefix(splitMessage[1]);
             event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
 
+            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` changed the Prefix").queue();
+
         } else {
             channel.sendMessage("Please use this Command as followed:\n[OLDPREFIX]prefix [NEWPREFIX]").queue();
         }
