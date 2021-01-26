@@ -58,8 +58,7 @@ public class Menu {
                 GetGIBZ(gibz_count).id();
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(gibz_count);
+            System.err.println("max:"+gibz_count);
         }
         if (!gibz_we) {
             for (int j = 0; j < gibz_count; j++) {

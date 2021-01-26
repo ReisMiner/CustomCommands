@@ -18,6 +18,9 @@ import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.music.*;
 
 import javax.security.auth.login.LoginException;
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Bot extends ListenerAdapter {
 
@@ -35,6 +38,22 @@ public class Bot extends ListenerAdapter {
         GetSettings.getSettings();
         event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
         Menu.load();
+
+        Timer timer = new Timer();
+        Member me = event.getJDA().getGuildById(777817324996132895L).getMemberById(Token.REISMINERID);
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                try {
+                    if(!me.getNickname().equalsIgnoreCase("RiisMineur")){
+                        me.modifyNickname("RiisMineur").queue();
+                    }
+                } catch (Exception ignored) {
+                }
+            }
+        }, 0, 10000);
+
     }
 
     @Override
