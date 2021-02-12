@@ -3,6 +3,7 @@ Funny Discord Bot :)
 
 # How To use it for ur own server?
 0. Make a new App on the Discord dev portal (Google it), make it a bot and invite it with admin privileges to your server.
+   Or Invite the bot through this link: https://s.reisminer.xyz/bot
 1. Yoink this Repo via clone. In IntelliJ you can just create a new project from Version Control to do so. The IDE will then create a Gradle Project and download all the libraries used.
 2. Make a Token.java with following fields: TOKEN, prefix, sendreacts, shutImg.
 3. If you got a Database to store all your userdefined commands add DBurl, DBusername and DBpassword too. If you got no databse then good luck removing all that stuff. Basically its just deleting the DB package in commands and then you'll see all the errors :)
