@@ -15,6 +15,7 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.jetbrains.annotations.NotNull;
 import xyz.reisminer.chtop.commands.*;
+import xyz.reisminer.chtop.commands.DB.SetStuff;
 import xyz.reisminer.chtop.commands.music.*;
 
 import javax.security.auth.login.LoginException;
@@ -41,15 +42,33 @@ public class Bot extends ListenerAdapter {
 
         Timer timer = new Timer();
         Member me = event.getJDA().getGuildById(777817324996132895L).getMemberById(Token.REISMINERID);
+        Member sebi = event.getJDA().getGuildById(777817324996132895L).getMemberById(485407839095881749L);
+
         timer.schedule(new TimerTask() {
 
             @Override
             public void run() {
-                try {
-                    if(!me.getNickname().equalsIgnoreCase("RiisMineur")){
-                        me.modifyNickname("RiisMineur").queue();
+                if (Token.autoRename) {
+                    try {
+                        if (!sebi.getNickname().equalsIgnoreCase("xX oMeGaBoOmErBoi Xx 4k20hzLP") || sebi.getUser().getName().equals(sebi.getNickname())) {
+                            sebi.modifyNickname("xX oMeGaBoOmErBoi Xx 4k20hzLP").queue();
+                        }
+                    } catch (Exception e) {
+                        try {
+                            sebi.modifyNickname("xX oMeGaBoOmErBoi Xx 4k20hzLP").queue();
+                        } catch (Exception ignored) {
+                        }
                     }
-                } catch (Exception ignored) {
+                    try {
+                        if (!me.getNickname().equalsIgnoreCase("RiisMineur") || me.getUser().getName().equals(me.getNickname())) {
+                            me.modifyNickname("RiisMineur").queue();
+                        }
+                    } catch (Exception e) {
+                        try {
+                            me.modifyNickname("RiisMineur").queue();
+                        } catch (Exception ignored) {
+                        }
+                    }
                 }
             }
         }, 0, 10000);
@@ -184,7 +203,11 @@ public class Bot extends ListenerAdapter {
         if (msg.getContentRaw().equalsIgnoreCase("$-$prefix"))
             ResetPrefix.reset(msg, channel, event);
         if (msg.getContentRaw().equalsIgnoreCase("$-$blockjoin") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
-            Token.joinBlocked = !Token.joinBlocked;
+            SetStuff.setJoinBlock(!Token.joinBlocked);
+            Token.logChannel.sendMessage("Successfully (un)blocked the join command").queue();
+        }
+        if (msg.getContentRaw().equalsIgnoreCase("$-$autorename") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
+            SetStuff.setAutoRename(!Token.autoRename);
             Token.logChannel.sendMessage("Successfully (un)blocked the join command").queue();
         }
         if (Token.sendReacts) {

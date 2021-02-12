@@ -5,13 +5,13 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.Event;
 import xyz.reisminer.chtop.Token;
+import xyz.reisminer.chtop.commands.DB.SetStuff;
 
-import static xyz.reisminer.chtop.commands.DB.SetPrefix.setPrefix;
 
 public class ResetPrefix {
     public static void reset(Message msg, TextChannel channel, Event event){
         if (msg.getAuthor().getIdLong() == 215136536260378624L) {
-            setPrefix("$");
+            SetStuff.setPrefix("$");
             channel.sendMessage("*Reset prefix to $*").queue();
             event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
         } else {

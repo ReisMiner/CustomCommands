@@ -3,13 +3,13 @@ package xyz.reisminer.chtop.commands;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import xyz.reisminer.chtop.Token;
-import xyz.reisminer.chtop.commands.DB.SetReact;
+import xyz.reisminer.chtop.commands.DB.SetStuff;
 
 public class React {
     public static void setReact(Message msg, TextChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         if (splitMessage.length == 2 && (splitMessage[1].equals("true") || splitMessage[1].equals("false"))) {
-            SetReact.setReact(splitMessage[1].equals("true"));
+            SetStuff.setReact(splitMessage[1].equals("true"));
 
             Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` changed state of react").queue();
 

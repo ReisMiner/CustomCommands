@@ -14,8 +14,12 @@ public class GetSettings {
             if (resultSet.next()) {
                 Token.prefix = resultSet.getString("prefix");
                 Token.sendReacts = resultSet.getBoolean("react");
+                Token.autoRename = resultSet.getBoolean("rename");
+                Token.joinBlocked= resultSet.getBoolean("join");
                 System.out.println("Prefix: " + Token.prefix);
                 System.out.println("Reacts: " + Token.sendReacts);
+                System.out.println("AutoRename: " + Token.autoRename);
+                System.out.println("JoinBlocked: " + Token.joinBlocked);
             }
         } catch (SQLException e) {
             Token.prefix = "$";
