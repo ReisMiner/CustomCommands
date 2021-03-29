@@ -14,10 +14,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.jetbrains.annotations.NotNull;
 import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
-import xyz.reisminer.chtop.commands.gamble.earn;
-import xyz.reisminer.chtop.commands.gamble.gamble;
-import xyz.reisminer.chtop.commands.gamble.gambleDB;
-import xyz.reisminer.chtop.commands.gamble.getPeterZ;
+import xyz.reisminer.chtop.commands.gamble.*;
 import xyz.reisminer.chtop.commands.music.*;
 
 import javax.security.auth.login.LoginException;
@@ -212,6 +209,14 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("roulette"): {
                     gamble.roulette(msg, channel);
+                    break;
+                }
+                case ("rob"): {
+                    rob.steal(msg, channel);
+                    break;
+                }
+                case ("leaderboard"): {
+                    leaderboard.showTopTen(channel);
                     break;
                 }
                 case ("earn"): {
