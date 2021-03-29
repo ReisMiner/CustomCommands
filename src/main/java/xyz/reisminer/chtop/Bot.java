@@ -43,6 +43,7 @@ public class Bot extends ListenerAdapter {
         Timer timer = new Timer();
         Member me = event.getJDA().getGuildById(777817324996132895L).getMemberById(Token.REISMINERID);
         Member sebi = event.getJDA().getGuildById(777817324996132895L).getMemberById(485407839095881749L);
+        Member jannis = event.getJDA().getGuildById(777817324996132895L).getMemberById(406837798755368980L);
 
         timer.schedule(new TimerTask() {
 
@@ -50,22 +51,22 @@ public class Bot extends ListenerAdapter {
             public void run() {
                 if (Token.autoRename) {
                     try {
-                        if (!sebi.getNickname().equalsIgnoreCase("xX oMeGaBoOmErBoi Xx 4k20hzLP") || sebi.getUser().getName().equals(sebi.getNickname())) {
-                            sebi.modifyNickname("xX oMeGaBoOmErBoi Xx 4k20hzLP").queue();
+                        if (!sebi.getNickname().equalsIgnoreCase("xX_oMeGaBoOmErBoi_Xx_4k420hzLP") || sebi.getUser().getName().equals(sebi.getNickname())) {
+                            sebi.modifyNickname("xX_oMeGaBoOmErBoi_Xx_4k420hzLP").queue();
                         }
                     } catch (Exception e) {
                         try {
-                            sebi.modifyNickname("xX oMeGaBoOmErBoi Xx 4k20hzLP").queue();
+                            sebi.modifyNickname("xX_oMeGaBoOmErBoi_Xx_4k420hzLP").queue();
                         } catch (Exception ignored) {
                         }
                     }
                     try {
-                        if (!me.getNickname().equalsIgnoreCase("RiisMineur") || me.getUser().getName().equals(me.getNickname())) {
-                            me.modifyNickname("RiisMineur").queue();
+                        if (!jannis.getNickname().equalsIgnoreCase("spastbun") || jannis.getUser().getName().equals(jannis.getNickname())) {
+                            jannis.modifyNickname("spastbun").queue();
                         }
                     } catch (Exception e) {
                         try {
-                            me.modifyNickname("RiisMineur").queue();
+                            jannis.modifyNickname("spastbun").queue();
                         } catch (Exception ignored) {
                         }
                     }
@@ -208,7 +209,7 @@ public class Bot extends ListenerAdapter {
         }
         if (msg.getContentRaw().equalsIgnoreCase("$-$autorename") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
             SetStuff.setAutoRename(!Token.autoRename);
-            Token.logChannel.sendMessage("Successfully (un)blocked the join command").queue();
+            Token.logChannel.sendMessage("Successfully toggled auto rename").queue();
         }
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
