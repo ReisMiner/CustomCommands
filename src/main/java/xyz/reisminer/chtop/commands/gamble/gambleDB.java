@@ -36,7 +36,6 @@ public class gambleDB {
             ResultSet resultSet = statement.executeQuery("select * from currencies where IDLong like "+user.getIdLong()+"");
             if (resultSet.next()) {
                 balance=resultSet.getDouble(3);
-                System.out.println(balance);
             }
         } catch (SQLException e) {
             System.err.println("DB Error:\n"+e);

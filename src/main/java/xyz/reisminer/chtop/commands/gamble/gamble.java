@@ -16,7 +16,13 @@ public class gamble {
 
             User author = msg.getAuthor();
 
-            double wagerdAmount = Double.parseDouble(splitMessage[1]);
+            double wagerdAmount;
+
+            if(splitMessage[1].equalsIgnoreCase("max")){
+                wagerdAmount = getCurrencyOfUser(author);
+            }else{
+                wagerdAmount=Double.parseDouble(splitMessage[1]);
+            }
 
             if (wagerdAmount > 0) {
 
@@ -31,7 +37,8 @@ public class gamble {
                     Random rand = new Random();
 
                     int n = rand.nextInt(101);
-                    if (n <55) {
+                    System.out.println(n);
+                    if (n <45) {
                         changeBalance(author, -wagerdAmount);
                         channel.sendMessage("<@" + author.getIdLong() + ">, You Lost `" + wagerdAmount + "` peterZ! You now have `" + getCurrencyOfUser(author) + "` peterZ!").queue();
                         System.out.println(author.getName() + " Gambled and lost " + wagerdAmount);
@@ -47,7 +54,8 @@ public class gamble {
                 channel.sendMessage("Cannot wager negative amount!").queue();
             }
         } else {
-            channel.sendMessage("CMD Usage: [PREFIX]roulette <amount to wager>").queue();
+            channel.sendMessage("CMD Usage: [PREFIX]roulette <amount to wager>.\n" +
+                                    "CMD Usage: [PREFIX]roulette max.").queue();
         }
     }
 }
