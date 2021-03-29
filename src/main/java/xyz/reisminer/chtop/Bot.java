@@ -14,11 +14,18 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.jetbrains.annotations.NotNull;
 import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
+import xyz.reisminer.chtop.commands.gamble.earn;
+import xyz.reisminer.chtop.commands.gamble.gamble;
+import xyz.reisminer.chtop.commands.gamble.gambleDB;
+import xyz.reisminer.chtop.commands.gamble.getPeterZ;
 import xyz.reisminer.chtop.commands.music.*;
 
 import javax.security.auth.login.LoginException;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static xyz.reisminer.chtop.commands.gamble.gambleDB.addNewUser;
+import static xyz.reisminer.chtop.commands.gamble.gambleDB.userExists;
 
 public class Bot extends ListenerAdapter {
 
@@ -78,6 +85,14 @@ public class Bot extends ListenerAdapter {
         Message msg = event.getMessage();
         TextChannel channel = event.getChannel();
         Member member = event.getMember();
+        if (!msg.getMentionedMembers().isEmpty()) {
+            if(msg.getMentionedMembers().get(0).getIdLong()==Token.BOTID)
+                if (!userExists(msg.getAuthor())) {
+                    addNewUser(msg.getAuthor());
+                }
+            gambleDB.changeBalance(msg.getAuthor(), 1);
+        }
+
         if (msg.getContentRaw().startsWith(Token.prefix)) {
             switch (msg.getContentRaw().split(" ")[0].substring(Token.prefix.length()).toLowerCase()) {
                 case ("help"): {
@@ -188,6 +203,19 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("notsokickrandom"): {
                     Kick.NotRandom(msg, channel, event);
+                    break;
+                }
+//========================== GAMBLE COMMANDS ==========================================
+                case ("wallet"): {
+                    getPeterZ.getWallet(msg, channel);
+                    break;
+                }
+                case ("roulette"): {
+                    gamble.roulette(msg, channel);
+                    break;
+                }
+                case ("earn"): {
+                    earn.earn(msg, channel);
                     break;
                 }
                 default: {

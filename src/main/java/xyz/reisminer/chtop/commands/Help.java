@@ -16,6 +16,7 @@ public class Help {
                     Token.prefix + "help music\n" +
                     Token.prefix + "help annoying\n" +
                     Token.prefix + "help text\n" +
+                    Token.prefix + "help gambling\n" +
                     Token.prefix + "help menu\n" +
                     Token.prefix + "help moderator\n" +
                     Token.prefix + "help settings```\n"
@@ -51,6 +52,14 @@ public class Help {
             channel.sendMessage("```Text Commands: " +
                     " \n " + Token.prefix + "say" +
                     " \n " + Token.prefix + "b0ld```"
+            ).queue();
+        }
+        if (splitMessage[1].equalsIgnoreCase("gambling")) {
+            channel.sendMessage("```Gambling Commands: " +
+                    " \n " + Token.prefix + "wallet" +
+                    " \n " + Token.prefix + "roulette" +
+                    " \n " + Token.prefix + "earn (not Working yet)"+
+                    "\n\n To get peterZ, ping this Bot!```"
             ).queue();
         }
         if (splitMessage[1].equalsIgnoreCase("menu")) {
