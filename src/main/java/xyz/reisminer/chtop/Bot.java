@@ -6,8 +6,6 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.ReadyEvent;
-import net.dv8tion.jda.api.events.message.MessageBulkDeleteEvent;
-import net.dv8tion.jda.api.events.message.MessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -19,7 +17,6 @@ import xyz.reisminer.chtop.commands.DB.SetStuff;
 import xyz.reisminer.chtop.commands.music.*;
 
 import javax.security.auth.login.LoginException;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
