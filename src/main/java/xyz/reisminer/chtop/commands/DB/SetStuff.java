@@ -2,10 +2,7 @@ package xyz.reisminer.chtop.commands.DB;
 
 import xyz.reisminer.chtop.Token;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SetStuff {
     public static void setReact(Boolean react) {
@@ -67,4 +64,5 @@ public class SetStuff {
             System.err.println("DB Error:\n"+e);
         }
     }
+
 }
