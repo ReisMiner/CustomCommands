@@ -3,6 +3,7 @@ package xyz.reisminer.chtop.commands.gamble;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
+import xyz.reisminer.chtop.Token;
 
 import java.util.Random;
 
@@ -16,7 +17,7 @@ public class rob {
             User author = msg.getAuthor();
             User victim = msg.getMentionedMembers().get(0).getUser();
 
-            if (!victim.isBot()) {
+            if (victim.getIdLong() != Token.BOTID) {
 
                 int stealAmount;
 
@@ -37,6 +38,7 @@ public class rob {
 
                         int n = rand.nextInt(101);
                         System.out.println(n);
+
                         if (n < 50) {
                             changeBalance(author, stealAmount);
                             changeBalance(victim, -stealAmount);
@@ -55,11 +57,51 @@ public class rob {
                     channel.sendMessage("Cannot steal negative amount!").queue();
                 }
             } else {
-                channel.sendMessage("Cannot rob a Bot!").queue();
+                channel.sendMessage("Cannot rob CustomCommands!").queue();
             }
         } else {
             channel.sendMessage("CMD Usage: [PREFIX]rob <@someone> <amount to steal>.\n" +
                     "NOTE: You can lose your money too and give it to the other person ;)").queue();
+        }
+    }
+
+    public static void gift(Message msg, TextChannel channel) {
+        String[] splitMessage = msg.getContentRaw().split(" ");
+        if (splitMessage.length == 3 && !msg.getMentionedMembers().isEmpty()) {
+            User author = msg.getAuthor();
+            User victim = msg.getMentionedMembers().get(0).getUser();
+
+            if (victim.getIdLong()!= Token.BOTID) {
+
+                int giftAmount;
+
+                giftAmount = Integer.parseInt(splitMessage[2]);
+
+                if (giftAmount > 0) {
+
+                    if (!userExists(victim)) {
+                        addNewUser(victim);
+                    }
+
+                    int walletAmountSelf = getCurrencyOfUser(author);
+
+                    if (giftAmount <= walletAmountSelf) {
+
+                        changeBalance(author, -giftAmount);
+                        changeBalance(victim, giftAmount);
+                        channel.sendMessage("<@" + author.getIdLong() + ">, You gifted `" + giftAmount + "` peterZ to " + victim.getName() + "! You now have `" + getCurrencyOfUser(author) + "` peterZ!").queue();
+                        System.out.println(author.getName() + " Gifted" + giftAmount);
+                    } else {
+                        channel.sendMessage("You are too poor :(").queue();
+                    }
+                } else {
+                    channel.sendMessage("Cannot gift negative amount!").queue();
+                }
+            } else {
+                channel.sendMessage("Cannot gift to CustomCommands!").queue();
+            }
+        } else {
+            channel.sendMessage("CMD Usage: [PREFIX]gift <@someone> <amount to steal>.\n").queue();
         }
     }
 }

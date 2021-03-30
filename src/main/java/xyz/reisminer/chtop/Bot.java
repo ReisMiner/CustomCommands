@@ -216,6 +216,10 @@ public class Bot extends ListenerAdapter {
                     rob.steal(msg, channel);
                     break;
                 }
+                case ("gift"): {
+                    rob.gift(msg, channel);
+                    break;
+                }
                 case ("leaderboard"): {
                     leaderboard.showTopTen(channel);
                     break;

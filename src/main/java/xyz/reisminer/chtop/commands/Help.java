@@ -59,6 +59,7 @@ public class Help {
                     " \n " + Token.prefix + "wallet" +
                     " \n " + Token.prefix + "roulette" +
                     " \n " + Token.prefix + "rob" +
+                    " \n " + Token.prefix + "gift" +
                     " \n " + Token.prefix + "leaderboard" +
                     " \n " + Token.prefix + "earn (not Working yet)"+
                     "\n\n To get peterZ, ping this Bot!```"
