@@ -11,11 +11,19 @@ public class getPeterZ {
     public static void getWallet(Message msg, TextChannel channel) {
 
         User author = msg.getAuthor();
-
-        if (!userExists(author)) {
-            addNewUser(author);
+        if (!msg.getMentionedMembers().isEmpty()) {
+            User checkFrom = msg.getMentionedMembers().get(0).getUser();
+            if (!userExists(checkFrom)) {
+                addNewUser(checkFrom);
+            }
+            channel.sendMessage("<@" + author.getIdLong() + ">, The Wallet you looked up contains `" + getCurrencyOfUser(checkFrom) + "` peterZ!").queue();
+            System.out.println(author.getName() + " Checked " + checkFrom.getName() + "'s wallet.");
+        } else {
+            if (!userExists(author)) {
+                addNewUser(author);
+            }
+            channel.sendMessage("<@" + author.getIdLong() + ">, Your Wallet contains `" + getCurrencyOfUser(author) + "` peterZ!").queue();
+            System.out.println(author.getName() + " Checked their wallet.");
         }
-        channel.sendMessage("<@" + author.getIdLong() + ">, Your Wallet contains `" + getCurrencyOfUser(author) + "` peterZ!").queue();
-        System.out.println(author.getName() + " Checked their wallet.");
     }
 }

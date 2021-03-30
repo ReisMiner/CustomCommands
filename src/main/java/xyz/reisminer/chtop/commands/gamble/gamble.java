@@ -16,12 +16,12 @@ public class gamble {
 
             User author = msg.getAuthor();
 
-            double wagerdAmount;
+            int wagerdAmount;
 
             if(splitMessage[1].equalsIgnoreCase("max")){
                 wagerdAmount = getCurrencyOfUser(author);
             }else{
-                wagerdAmount=Double.parseDouble(splitMessage[1]);
+                wagerdAmount=Integer.parseInt(splitMessage[1]);
             }
 
             if (wagerdAmount > 0) {
@@ -30,7 +30,7 @@ public class gamble {
                     addNewUser(author);
                 }
 
-                double walletAmount = getCurrencyOfUser(author);
+                int walletAmount = getCurrencyOfUser(author);
 
                 if (wagerdAmount <= walletAmount) {
 

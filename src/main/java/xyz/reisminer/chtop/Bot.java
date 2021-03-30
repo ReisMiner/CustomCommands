@@ -83,11 +83,12 @@ public class Bot extends ListenerAdapter {
         TextChannel channel = event.getChannel();
         Member member = event.getMember();
         if (!msg.getMentionedMembers().isEmpty()) {
-            if(msg.getMentionedMembers().get(0).getIdLong()==Token.BOTID)
+            if (msg.getMentionedMembers().get(0).getIdLong() == Token.BOTID) {
                 if (!userExists(msg.getAuthor())) {
                     addNewUser(msg.getAuthor());
                 }
-            gambleDB.changeBalance(msg.getAuthor(), 1);
+                gambleDB.changeBalance(msg.getAuthor(), 5);
+            }
         }
 
         if (msg.getContentRaw().startsWith(Token.prefix)) {

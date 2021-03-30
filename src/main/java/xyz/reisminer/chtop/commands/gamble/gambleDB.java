@@ -29,14 +29,14 @@ public class gambleDB {
             return true;
         }
     }
-    public static double getCurrencyOfUser(User user) {
-        double balance=-1337;
+    public static int getCurrencyOfUser(User user) {
+        int balance=-1337;
         try (Connection connection = DriverManager.getConnection(Token.DBurl, Token.DBusername, Token.DBpassword)) {
             Statement statement = connection.createStatement();
             // Result set get the result of the SQL query
             ResultSet resultSet = statement.executeQuery("select * from currencies where IDLong like "+user.getIdLong()+"");
             if (resultSet.next()) {
-                balance=resultSet.getDouble(3);
+                balance=resultSet.getInt(3);
             }
         } catch (SQLException e) {
             System.err.println("DB Error:\n"+e);
@@ -44,11 +44,11 @@ public class gambleDB {
         }
         return balance;
     }
-    public static void changeBalance(User user, double amount) {
+    public static void changeBalance(User user, int amount) {
         try (Connection connection = DriverManager.getConnection(Token.DBurl, Token.DBusername, Token.DBpassword)) {
             Statement statement = connection.createStatement();
             // Result set get the result of the SQL query update currencies set amount=amount+1 where username like 'ReisMiner'
-            String s =String.format("UPDATE currencies set amount=amount+%.2f where `username` like '%s'",amount,user.getName());
+            String s =String.format("UPDATE currencies set amount=amount+%d where `IDLong` like '%d'",amount,user.getIdLong());
             statement.executeUpdate(s);
         } catch (SQLException e) {
             System.err.println("Chanbe balance: DB Error:\n"+e);

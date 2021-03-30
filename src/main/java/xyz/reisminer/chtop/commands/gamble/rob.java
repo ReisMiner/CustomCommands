@@ -13,45 +13,49 @@ public class rob {
     public static void steal(Message msg, TextChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         if (splitMessage.length == 3 && !msg.getMentionedMembers().isEmpty()) {
-
             User author = msg.getAuthor();
             User victim = msg.getMentionedMembers().get(0).getUser();
 
-            double stealAmount;
+            if (!victim.isBot()) {
 
-            stealAmount=Double.parseDouble(splitMessage[2]);
+                int stealAmount;
 
-            if (stealAmount > 0) {
+                stealAmount = Integer.parseInt(splitMessage[2]);
 
-                if (!userExists(victim)) {
-                    addNewUser(victim);
-                }
+                if (stealAmount > 0) {
 
-                double walletAmountSelf = getCurrencyOfUser(author);
-                double walletAmountVictim= getCurrencyOfUser(victim);
+                    if (!userExists(victim)) {
+                        addNewUser(victim);
+                    }
 
-                if (stealAmount<= walletAmountSelf && walletAmountVictim>= stealAmount) {
+                    int walletAmountSelf = getCurrencyOfUser(author);
+                    int walletAmountVictim = getCurrencyOfUser(victim);
 
-                    Random rand = new Random();
+                    if (stealAmount <= walletAmountSelf && walletAmountVictim >= stealAmount) {
 
-                    int n = rand.nextInt(101);
-                    System.out.println(n);
-                    if (n <40) {
-                        changeBalance(author, stealAmount);
-                        changeBalance(victim, -stealAmount);
-                        channel.sendMessage("<@" + author.getIdLong() + ">, You Robbed `" + stealAmount + "` peterZ from "+victim.getName()+"! You now have `" + getCurrencyOfUser(author) + "` peterZ!").queue();
-                        System.out.println(author.getName() + " Robbed and won " + stealAmount);
+                        Random rand = new Random();
+
+                        int n = rand.nextInt(101);
+                        System.out.println(n);
+                        if (n < 50) {
+                            changeBalance(author, stealAmount);
+                            changeBalance(victim, -stealAmount);
+                            channel.sendMessage("<@" + author.getIdLong() + ">, You Robbed `" + stealAmount + "` peterZ from " + victim.getName() + "! You now have `" + getCurrencyOfUser(author) + "` peterZ!").queue();
+                            System.out.println(author.getName() + " Robbed and won " + stealAmount);
+                        } else {
+                            changeBalance(author, -stealAmount);
+                            changeBalance(victim, stealAmount);
+                            channel.sendMessage("<@" + author.getIdLong() + ">, You got caught by the guards! You lost `" + stealAmount + "` peterZ! You now have `" + getCurrencyOfUser(author) + "` peterZ!").queue();
+                            System.out.println(author.getName() + " Robbed and lost " + stealAmount);
+                        }
                     } else {
-                        changeBalance(author, -stealAmount);
-                        changeBalance(victim, stealAmount);
-                        channel.sendMessage("<@" + author.getIdLong() + ">, You got caught by the guards! You lost `" + stealAmount + "` peterZ! You now have `" + getCurrencyOfUser(author) + "` peterZ!").queue();
-                        System.out.println(author.getName() + " Robbed and lost " + stealAmount);
+                        channel.sendMessage("You or your Victim are too poor :(").queue();
                     }
                 } else {
-                    channel.sendMessage("You or your Victim are too poor :(").queue();
+                    channel.sendMessage("Cannot steal negative amount!").queue();
                 }
-            }else{
-                channel.sendMessage("Cannot steal negative amount!").queue();
+            } else {
+                channel.sendMessage("Cannot rob a Bot!").queue();
             }
         } else {
             channel.sendMessage("CMD Usage: [PREFIX]rob <@someone> <amount to steal>.\n" +
