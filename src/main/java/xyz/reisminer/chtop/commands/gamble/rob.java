@@ -30,7 +30,7 @@ public class rob {
                 double walletAmountSelf = getCurrencyOfUser(author);
                 double walletAmountVictim= getCurrencyOfUser(victim);
 
-                if (walletAmountSelf >= walletAmountVictim && stealAmount<= walletAmountSelf && walletAmountVictim>= stealAmount) {
+                if (stealAmount<= walletAmountSelf && walletAmountVictim>= stealAmount) {
 
                     Random rand = new Random();
 
