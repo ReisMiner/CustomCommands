@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.*;
 
@@ -34,7 +34,7 @@ public class gamble {
 
                 if (wagerdAmount <= walletAmount) {
 
-                    Random rand = new Random();
+                    SecureRandom rand = new SecureRandom();
 
                     int n = rand.nextInt(101);
                     System.out.println(n);

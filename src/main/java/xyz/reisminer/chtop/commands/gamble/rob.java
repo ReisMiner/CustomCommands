@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import xyz.reisminer.chtop.Token;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.*;
@@ -19,9 +20,7 @@ public class rob {
 
             if (victim.getIdLong() != Token.BOTID) {
 
-                int stealAmount;
-
-                stealAmount = Integer.parseInt(splitMessage[2]);
+                int stealAmount = Integer.parseInt(splitMessage[2]);
 
                 if (stealAmount > 0) {
 
@@ -34,7 +33,7 @@ public class rob {
 
                     if (stealAmount <= walletAmountSelf && walletAmountVictim >= stealAmount) {
 
-                        Random rand = new Random();
+                        SecureRandom rand = new SecureRandom();
 
                         int n = rand.nextInt(101);
                         System.out.println(n);
