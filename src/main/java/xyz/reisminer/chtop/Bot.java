@@ -42,7 +42,6 @@ public class Bot extends ListenerAdapter {
         Menu.load();
 
         Timer timer = new Timer();
-        Member me = event.getJDA().getGuildById(777817324996132895L).getMemberById(Token.REISMINERID);
         Member sebi = event.getJDA().getGuildById(777817324996132895L).getMemberById(485407839095881749L);
         Member jannis = event.getJDA().getGuildById(777817324996132895L).getMemberById(406837798755368980L);
 
@@ -223,10 +222,6 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("leaderboard"): {
                     leaderboard.showTopTen(msg,channel);
-                    break;
-                }
-                case ("earn"): {
-                    earn.earn(msg, channel);
                     break;
                 }
                 default: {

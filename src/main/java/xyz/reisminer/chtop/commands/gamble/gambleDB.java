@@ -56,7 +56,7 @@ public class gambleDB {
     }
     public static String getLeaderBoard(int userCount) {
         StringBuilder retun = new StringBuilder();
-        retun.append("```Top "+userCount+" :\n");
+        retun.append("```Top ").append(userCount).append(" :\n");
         try (Connection connection = DriverManager.getConnection(Token.DBurl, Token.DBusername, Token.DBpassword)) {
             Statement statement = connection.createStatement();
             // Result set get the result of the SQL query

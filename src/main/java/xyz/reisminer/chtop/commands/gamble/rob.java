@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.entities.User;
 import xyz.reisminer.chtop.Token;
 
 import java.security.SecureRandom;
-import java.util.Random;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.*;
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.getCurrencyOfUser;
