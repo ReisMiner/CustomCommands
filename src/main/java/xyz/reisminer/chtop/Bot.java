@@ -208,7 +208,8 @@ public class Bot extends ListenerAdapter {
                     getPeterZ.getWallet(msg, channel);
                     break;
                 }
-                case ("roulette"): {
+                case ("roulette"):
+                case ("r"): {
                     gamble.roulette(msg, channel);
                     break;
                 }
@@ -221,7 +222,7 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("leaderboard"): {
-                    leaderboard.showTopTen(channel);
+                    leaderboard.showTopTen(msg,channel);
                     break;
                 }
                 case ("earn"): {

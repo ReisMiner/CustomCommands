@@ -57,7 +57,7 @@ public class gamble {
             }
         } else {
             channel.sendMessage("CMD Usage: [PREFIX]roulette <amount to wager>.\n" +
-                    "CMD Usage: [PREFIX]roulette max.").queue();
+                    "CMD Usage: [PREFIX]roulette [max/half].\n").queue();
         }
     }
 }

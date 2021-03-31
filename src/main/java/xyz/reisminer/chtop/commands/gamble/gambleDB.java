@@ -1,10 +1,10 @@
 package xyz.reisminer.chtop.commands.gamble;
 
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import xyz.reisminer.chtop.Token;
 
 import java.sql.*;
-import java.util.List;
 
 public class gambleDB {
     public static void addNewUser(User user) {
@@ -54,14 +54,14 @@ public class gambleDB {
             System.err.println("Chanbe balance: DB Error:\n"+e);
         }
     }
-    public static String getLeaderBoard() {
+    public static String getLeaderBoard(int userCount) {
         StringBuilder retun = new StringBuilder();
-        retun.append("```Top 10:\n");
+        retun.append("```Top "+userCount+" :\n");
         try (Connection connection = DriverManager.getConnection(Token.DBurl, Token.DBusername, Token.DBpassword)) {
             Statement statement = connection.createStatement();
             // Result set get the result of the SQL query
             ResultSet resultSet = statement
-                    .executeQuery("select * from currencies order by amount desc limit 10");
+                    .executeQuery("select * from currencies order by amount desc limit "+userCount);
             int i = 1;
             while (resultSet.next()) {
                 String name = resultSet.getString("username");
@@ -75,5 +75,22 @@ public class gambleDB {
             System.err.println("DB Error:\n"+e);
         }
         return retun.toString();
+    }
+
+    public static User getUserByName(String name, Message msg) {
+        long retunIDLong = -1337;
+        try (Connection connection = DriverManager.getConnection(Token.DBurl, Token.DBusername, Token.DBpassword)) {
+            Statement statement = connection.createStatement();
+            // Result set get the result of the SQL query
+            ResultSet resultSet = statement
+                    .executeQuery("select * from currencies where username like '"+name+"'");
+            if (resultSet.next()) {
+                retunIDLong = resultSet.getLong("IDLong");
+                            }
+        } catch (SQLException e) {
+            System.err.println("DB Error:\n"+e);
+        }
+
+        return msg.getJDA().getUserById(retunIDLong);
     }
 }

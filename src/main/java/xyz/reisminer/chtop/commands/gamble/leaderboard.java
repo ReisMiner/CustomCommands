@@ -2,12 +2,17 @@ package xyz.reisminer.chtop.commands.gamble;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
-
-import static xyz.reisminer.chtop.commands.gamble.gambleDB.*;
 
 public class leaderboard {
-    public static void showTopTen(TextChannel channel) {
-        channel.sendMessage(gambleDB.getLeaderBoard()).queue();
+    public static void showTopTen(Message msg, TextChannel channel) {
+        String[] splitMessage = msg.getContentRaw().split(" ");
+        if (splitMessage.length == 2) {
+            int count = Integer.parseInt(splitMessage[1]);
+            channel.sendMessage(gambleDB.getLeaderBoard(count)).queue();
+        } else if(splitMessage.length==1) {
+            channel.sendMessage(gambleDB.getLeaderBoard(10)).queue();
+        }else{
+            channel.sendMessage("CMD Usage: [PREFIX]leaderboard <optional: how many users u wanna see>").queue();
+        }
     }
 }

@@ -14,11 +14,21 @@ import static xyz.reisminer.chtop.commands.gamble.gambleDB.getCurrencyOfUser;
 public class rob {
     public static void steal(Message msg, TextChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
-        if (splitMessage.length == 3 && !msg.getMentionedMembers().isEmpty()) {
+        if (splitMessage.length == 3) {
+            User victim;
+            boolean error = false;
             User author = msg.getAuthor();
-            User victim = msg.getMentionedMembers().get(0).getUser();
-
-            if (victim.getIdLong() != Token.BOTID) {
+            if(!msg.getMentionedMembers().isEmpty()) {
+                victim = msg.getMentionedMembers().get(0).getUser();
+            }else{
+                victim = getUserByName(splitMessage[1],msg);
+                try {
+                    victim.getIdLong();
+                }catch (NullPointerException e){
+                    error=true;
+                }
+            }
+            if (!error && victim.getIdLong() != Token.BOTID) {
 
                 int stealAmount = Integer.parseInt(splitMessage[2]);
 
@@ -53,10 +63,11 @@ public class rob {
                         channel.sendMessage("You or your Victim are too poor :(").queue();
                     }
                 } else {
-                    channel.sendMessage("Cannot steal negative amount!").queue();
+                    channel.sendMessage("Cannot steal negative or no amount!").queue();
                 }
             } else {
-                channel.sendMessage("Cannot rob CustomCommands!").queue();
+                channel.sendMessage("Cannot rob this User. Make sure its spelled correctly. If not sure look in leaderboard!\n" +
+                        "Note: Cannot rob CustomCommands!").queue();
             }
         } else {
             channel.sendMessage("CMD Usage: [PREFIX]rob <@someone> <amount to steal>.\n" +
