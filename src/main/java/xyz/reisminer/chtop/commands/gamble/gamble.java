@@ -18,10 +18,12 @@ public class gamble {
 
             int wagerdAmount;
 
-            if(splitMessage[1].equalsIgnoreCase("max")){
+            if (splitMessage[1].equalsIgnoreCase("max")) {
                 wagerdAmount = getCurrencyOfUser(author);
-            }else{
-                wagerdAmount=Integer.parseInt(splitMessage[1]);
+            } else if (splitMessage[1].equalsIgnoreCase("half")) {
+                wagerdAmount = getCurrencyOfUser(author) / 2;
+            } else {
+                wagerdAmount = Integer.parseInt(splitMessage[1]);
             }
 
             if (wagerdAmount > 0) {
@@ -38,7 +40,7 @@ public class gamble {
 
                     int n = rand.nextInt(101);
                     System.out.println(n);
-                    if (n <45) {
+                    if (n < 45) {
                         changeBalance(author, -wagerdAmount);
                         channel.sendMessage("<@" + author.getIdLong() + ">, You Lost `" + wagerdAmount + "` peterZ! You now have `" + getCurrencyOfUser(author) + "` peterZ!").queue();
                         System.out.println(author.getName() + " Gambled and lost " + wagerdAmount);
@@ -50,12 +52,12 @@ public class gamble {
                 } else {
                     channel.sendMessage("You are too poor! You wagered `" + wagerdAmount + "` but only have `" + walletAmount + "` peterZ in your Wallet!").queue();
                 }
-            }else{
+            } else {
                 channel.sendMessage("Cannot wager negative amount!").queue();
             }
         } else {
             channel.sendMessage("CMD Usage: [PREFIX]roulette <amount to wager>.\n" +
-                                    "CMD Usage: [PREFIX]roulette max.").queue();
+                    "CMD Usage: [PREFIX]roulette max.").queue();
         }
     }
 }
