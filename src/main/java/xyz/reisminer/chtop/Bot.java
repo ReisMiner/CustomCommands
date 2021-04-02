@@ -105,7 +105,8 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("spam"): {
-                    Say.sayMsgSpam(msg);
+                    Spam spam = new Spam(msg);
+                    spam.start();
                     break;
                 }
                 case ("spamdm"): {

@@ -31,26 +31,4 @@ public class Say{
             channel.sendMessage(tmp).queue();
         }
     }
-
-    public static void sayMsgSpam(Message msg) {
-        msg.delete().complete();
-        String[] splitMessage = msg.getContentRaw().split(" ");
-        StringBuilder tmp = new StringBuilder();
-        int count =0;
-
-        if (splitMessage.length >= 3) {
-            if (NumberUtils.isParsable(splitMessage[1])) {
-                count = Integer.parseInt(splitMessage[1]);
-                tmp = new StringBuilder(" ");
-            }
-            for (int i = 2; i < splitMessage.length; i++) {
-                tmp.append(splitMessage[i]).append(" ");
-            }
-            for(int i =0; i<count;i++){
-                msg.getChannel().sendMessage(tmp).queue();
-            }
-        }else{
-            msg.getChannel().sendMessage("Command Usage: [PREFIX]spam [COUNT] [MESSAGE]").queue();
-        }
-    }
 }
