@@ -81,6 +81,8 @@ public class Bot extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         event.getGuild().addRoleToMember(event.getMember(),event.getGuild().getRoleById(Token.LERNENDEROLE)).queue();
+        System.out.println("On " + event.getGuild().getName() + " , " + event.getMember().getUser().getName() + " recieved Lernende Role cuz he/she joined!");
+        Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getName() + "` recieved Lernende Role cuz he/she joined!").queue();
     }
 
     @Override
