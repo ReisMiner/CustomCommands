@@ -8,6 +8,7 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Menu {
     static String date = "";
@@ -32,7 +33,7 @@ public class Menu {
     public static void moods(TextChannel channel) {
         if (!LocalDate.now().toString().equals(date)) {
             date = LocalDate.now().toString();
-            System.out.println(date + " localdate -> " + LocalDate.now().toString());
+            System.out.println(date + " localdate -> " + LocalDate.now());
             load();
         }
         //sending the message
@@ -47,7 +48,7 @@ public class Menu {
         int gibz_count = 0;
         gibz_we = false;
         System.out.println(LocalDate.now());
-        String mesg = "```";
+        StringBuilder mesg = new StringBuilder("```");
 
         if (LocalDate.now().getDayOfWeek().equals(DayOfWeek.SATURDAY) || LocalDate.now().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
             channel.sendMessage("```lol. du gasch am wucheend id schuel? xD```").queue();
@@ -62,8 +63,8 @@ public class Menu {
         }
         if (!gibz_we) {
             for (int j = 0; j < gibz_count; j++) {
-                if (GetGIBZ(j).parent().parent().attr("data-date").contains(LocalDate.now().toString())) {
-                    mesg += GetGIBZ(j).text() + "\n=============================================\n";
+                if (Objects.requireNonNull(Objects.requireNonNull(GetGIBZ(j).parent()).parent()).attr("data-date").contains(LocalDate.now().toString())) {
+                    mesg.append(GetGIBZ(j).text()).append("\n=============================================\n");
                 }
             }
             channel.sendMessage(mesg + "```").queue();
