@@ -73,7 +73,7 @@ public class Menu {
     public static void trattoria(TextChannel channel) {
         if (!LocalDate.now().toString().equals(date)) {
             date = LocalDate.now().toString();
-            System.out.println(date + " localdate -> " + LocalDate.now().toString());
+            System.out.println(date + " localdate -> " + LocalDate.now());
             load();
         }
         //sending the message
@@ -96,8 +96,7 @@ public class Menu {
     public static Element GetGIBZ(int number) {
         Element body = documentGibz.select("body").get(0);
         documentGibz.select(".txt-slide").remove();
-        Element menuline = body.select(".menu .txt-hold").get(number);
-        return menuline;
+        return body.select(".menu .txt-hold").get(number);
     }
 
     public static String getTrattoria(int number) {

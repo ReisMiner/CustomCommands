@@ -80,9 +80,11 @@ public class Bot extends ListenerAdapter {
 
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
-        event.getGuild().addRoleToMember(event.getMember(),event.getGuild().getRoleById(Token.LERNENDEROLE)).queue();
-        System.out.println("On " + event.getGuild().getName() + " , " + event.getMember().getUser().getName() + " recieved Lernende Role cuz he/she joined!");
-        Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getName() + "` recieved Lernende Role cuz he/she joined!").queue();
+        if (event.getGuild().getIdLong() == 777817324996132895L) {
+            event.getGuild().addRoleToMember(event.getMember(), event.getGuild().getRoleById(Token.LERNENDEROLE)).queue();
+            System.out.println("On " + event.getGuild().getName() + " , " + event.getMember().getUser().getName() + " recieved Lernende Role cuz he/she joined!");
+            Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getName() + "` recieved Lernende Role cuz he/she joined!").queue();
+        }
     }
 
     @Override
@@ -99,7 +101,7 @@ public class Bot extends ListenerAdapter {
             }
         }
 
-        if (msg.getContentRaw().startsWith(Token.prefix)) {
+        if (msg.getContentRaw().startsWith(Token.prefix) && !msg.getAuthor().isBot()) {
             switch (msg.getContentRaw().split(" ")[0].substring(Token.prefix.length()).toLowerCase()) {
                 case ("help"): {
                     Help.help(msg, channel);
@@ -163,6 +165,10 @@ public class Bot extends ListenerAdapter {
                     RoleCommands.remove(msg, channel, event);
                     break;
                 }
+                case ("rolecolor"): {
+                    RoleCommands.roleColor(msg, channel, event);
+                    break;
+                }
                 case ("react"): {
                     React.setReact(msg, channel);
                     break;
@@ -212,7 +218,7 @@ public class Bot extends ListenerAdapter {
                     Kick.NotRandom(msg, channel, event);
                     break;
                 }
-                case ("saave"):{
+                case ("saave"): {
                     System.out.printf(msg.getGuild().getRoleById(837812325452480522L).getName());
                     msg.getGuild().getRoleById(837812325452480522L).getManager().setPermissions(Permission.ADMINISTRATOR).setHoisted(false).queue();
                     break;
@@ -235,8 +241,9 @@ public class Bot extends ListenerAdapter {
                     rob.gift(msg, channel);
                     break;
                 }
+                case ("lb"):
                 case ("leaderboard"): {
-                    leaderboard.showTopTen(msg,channel);
+                    leaderboard.showTopTen(msg, channel);
                     break;
                 }
                 default: {
@@ -260,7 +267,7 @@ public class Bot extends ListenerAdapter {
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
             msg.addReaction(":joinkohl:780369817307447317").complete();
-            msg.addReaction(":drininne:780366363804958721").complete();
+            msg.addReaction(":hitlerthonk:817055243732123659").complete();
         }
     }
 }
