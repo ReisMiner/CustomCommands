@@ -20,6 +20,7 @@ import xyz.reisminer.chtop.commands.gamble.*;
 import xyz.reisminer.chtop.commands.music.*;
 
 import javax.security.auth.login.LoginException;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,8 +45,8 @@ public class Bot extends ListenerAdapter {
         Menu.load();
 
         Timer timer = new Timer();
-        Member sebi = event.getJDA().getGuildById(777817324996132895L).getMemberById(485407839095881749L);
-        Member jannis = event.getJDA().getGuildById(777817324996132895L).getMemberById(406837798755368980L);
+        Member sebi = Objects.requireNonNull(event.getJDA().getGuildById(777817324996132895L)).getMemberById(485407839095881749L);
+        Member jannis = Objects.requireNonNull(event.getJDA().getGuildById(777817324996132895L)).getMemberById(406837798755368980L);
 
         timer.schedule(new TimerTask() {
 
@@ -53,7 +54,8 @@ public class Bot extends ListenerAdapter {
             public void run() {
                 if (Token.autoRename) {
                     try {
-                        if (!sebi.getNickname().equalsIgnoreCase("xX_oMeGaBoOmErBoi_Xx_4k420hzLP") || sebi.getUser().getName().equals(sebi.getNickname())) {
+                        assert sebi != null;
+                        if (!Objects.requireNonNull(sebi.getNickname()).equalsIgnoreCase("xX_oMeGaBoOmErBoi_Xx_4k420hzLP") || sebi.getUser().getName().equals(sebi.getNickname())) {
                             sebi.modifyNickname("xX_oMeGaBoOmErBoi_Xx_4k420hzLP").queue();
                         }
                     } catch (Exception e) {
@@ -63,7 +65,8 @@ public class Bot extends ListenerAdapter {
                         }
                     }
                     try {
-                        if (!jannis.getNickname().equalsIgnoreCase("spastbun") || jannis.getUser().getName().equals(jannis.getNickname())) {
+                        assert jannis != null;
+                        if (!Objects.requireNonNull(jannis.getNickname()).equalsIgnoreCase("spastbun") || jannis.getUser().getName().equals(jannis.getNickname())) {
                             jannis.modifyNickname("spastbun").queue();
                         }
                     } catch (Exception e) {
@@ -81,7 +84,7 @@ public class Bot extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         if (event.getGuild().getIdLong() == 777817324996132895L) {
-            event.getGuild().addRoleToMember(event.getMember(), event.getGuild().getRoleById(Token.LERNENDEROLE)).queue();
+            event.getGuild().addRoleToMember(event.getMember(), Objects.requireNonNull(event.getGuild().getRoleById(Token.LERNENDEROLE))).queue();
             System.out.println("On " + event.getGuild().getName() + " , " + event.getMember().getUser().getName() + " recieved Lernende Role cuz he/she joined!");
             Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getName() + "` recieved Lernende Role cuz he/she joined!").queue();
         }
@@ -102,6 +105,7 @@ public class Bot extends ListenerAdapter {
         }
 
         if (msg.getContentRaw().startsWith(Token.prefix) && !msg.getAuthor().isBot()) {
+            assert member != null;
             switch (msg.getContentRaw().split(" ")[0].substring(Token.prefix.length()).toLowerCase()) {
                 case ("help"): {
                     Help.help(msg, channel);
@@ -219,8 +223,7 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("saave"): {
-                    System.out.printf(msg.getGuild().getRoleById(837812325452480522L).getName());
-                    msg.getGuild().getRoleById(837812325452480522L).getManager().setPermissions(Permission.ADMINISTRATOR).setHoisted(false).queue();
+                    Objects.requireNonNull(msg.getGuild().getRoleById(837812325452480522L)).getManager().setPermissions(Permission.ADMINISTRATOR).setHoisted(false).queue();
                     break;
                 }
 //========================== GAMBLE COMMANDS ==========================================
