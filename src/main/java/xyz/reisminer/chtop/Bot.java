@@ -1,5 +1,6 @@
 package xyz.reisminer.chtop;
 
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
@@ -8,21 +9,23 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import org.apache.commons.codec.DecoderException;
 import org.jetbrains.annotations.NotNull;
 import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
 import xyz.reisminer.chtop.commands.gamble.*;
 import xyz.reisminer.chtop.commands.music.*;
+import xyz.reisminer.chtop.commands.util.HexConvert;
+import xyz.reisminer.chtop.slashcommands.CreateCommands;
 
 import javax.security.auth.login.LoginException;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.addNewUser;
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.userExists;
@@ -30,18 +33,24 @@ import static xyz.reisminer.chtop.commands.gamble.gambleDB.userExists;
 public class Bot extends ListenerAdapter {
 
     public static void main(String[] args) throws LoginException {
-        JDABuilder.create(Token.TOKEN, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES)
+        JDA jda = JDABuilder.create(Token.TOKEN, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES)
                 .addEventListeners(new Bot())
                 .setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .build();
+
+
     }
 
     public void onReady(ReadyEvent event) {
         Token.logChannel = event.getJDA().getTextChannelById(787026214207356938L);
-        GetSettings.getSettings();
         event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
+
+        CreateCommands createSlashCmds = new CreateCommands();
+        createSlashCmds.initialize(event.getJDA());
+
+        GetSettings.getSettings();
         Menu.load();
 
         Timer timer = new Timer();
@@ -249,6 +258,15 @@ public class Bot extends ListenerAdapter {
                     leaderboard.showTopTen(msg, channel);
                     break;
                 }
+//============== UTILITY =================================================================
+                case ("tohex"): {
+                    HexConvert.txtToHex(msg);
+                    break;
+                }
+                case ("fromhex"): {
+                    HexConvert.hexToTxt(msg);
+                    break;
+                }
                 default: {
                     if (msg.getAuthor().getIdLong() != 780394207251660800L)
                         channel.sendMessage(DBSay.dbSay(msg.getContentRaw())).queue();
@@ -272,5 +290,23 @@ public class Bot extends ListenerAdapter {
             msg.addReaction(":joinkohl:780369817307447317").complete();
             msg.addReaction(":hitlerthonk:817055243732123659").complete();
         }
+
+    }
+    @Override
+    public void onSlashCommand(SlashCommandEvent event)
+    {
+        switch (event.getName()){
+            case "ping": {
+                long time = System.currentTimeMillis();
+                event.reply("Pong!").setEphemeral(true)
+                        .flatMap(v ->
+                                event.getHook().editOriginalFormat("Pong: %d ms", System.currentTimeMillis() - time) // then edit original
+                        ).queue();
+                break;
+            } default:{
+                event.reply("not a valid command").setEphemeral(true).queue();
+            }
+        }
+
     }
 }
