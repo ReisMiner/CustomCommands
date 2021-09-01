@@ -1,5 +1,10 @@
 # CustomCommands
-Funny Discord Bot :)
+Funny Discord Bot Written in Java with the Help of the JDA - Java Discord API.
+
+Take a look at the source code if you need something for your own bot :)
+Note: Music commands ain't working on Raspberry Pi.
+
+For self-hosting follow the steps below. i know it is confusing. might update later idk.
 
 # How To use it for ur own server?
 0. Make a new App on the Discord dev portal (Google it), make it a bot and invite it with admin privileges to your server.
