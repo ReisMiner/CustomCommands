@@ -1,9 +1,10 @@
 name: Java CI
 
-on: [push]
+on: [ push ]
 
 jobs:
   build:
+    environment: main
     runs-on: ubuntu-latest
 
     steps:
@@ -16,5 +17,15 @@ jobs:
           cache: gradle
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+      - shell: bash
+        env:
+          host: ${{ secrets.FTP_HOST }}
+          pw: ${{ secrets.FTP_PW }}
+          user: ${{ secrets.FTP_USER }}
+        run: |
+          sudo apt-get install wget -y
+          cd ./src/main/java/xyz/reisminer/chtop
+          wget --mirror --continue --no-host-directories --user=$env:user --password=$env:pw ftp://$env:host/httpdocs/secret/Token.java
+          cd ../../../../../../
       - name: Build with Gradle
         run: ./gradlew build
