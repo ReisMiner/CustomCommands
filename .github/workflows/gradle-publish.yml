@@ -31,5 +31,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: CHTOP Jar
-          path: ./build/libs/CustomCommands-1-0-all.jar
+          path: ./build/libs/CustomCommands-1.0-all.jar
+
 
