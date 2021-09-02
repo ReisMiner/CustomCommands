@@ -22,7 +22,6 @@ jobs:
           pw: ${{ secrets.FTP_PW }}
           user: ${{ secrets.FTP_USER }}
         run: |
-          sudo apt-get install wget -y
           cd ./src/main/java/xyz/reisminer/chtop
           wget --mirror --continue --no-host-directories --user=$env:user --password=$env:pw ftp://$env:host/httpdocs/secret/Token.java
           cd ../../../../../../
