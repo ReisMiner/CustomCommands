@@ -275,8 +275,6 @@ public class Bot extends ListenerAdapter {
             }
 
         }
-        if (msg.getContentRaw().equalsIgnoreCase("$-$prefix"))
-            ResetPrefix.reset(msg, channel, event);
         if (msg.getContentRaw().equalsIgnoreCase("$-$blockjoin") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
             SetStuff.setJoinBlock(!Token.joinBlocked);
             Token.logChannel.sendMessage("Successfully (un)blocked the join command").queue();
@@ -303,7 +301,11 @@ public class Bot extends ListenerAdapter {
                                 event.getHook().editOriginalFormat("Pong: %d ms", System.currentTimeMillis() - time) // then edit original
                         ).queue();
                 break;
-            } default:{
+            }
+            case "resetprefix":{
+                ResetPrefix.reset(event); break;
+            }
+            default:{
                 event.reply("not a valid command").setEphemeral(true).queue();
             }
         }

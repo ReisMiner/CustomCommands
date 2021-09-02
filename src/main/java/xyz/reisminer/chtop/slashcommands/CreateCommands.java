@@ -8,10 +8,12 @@ public class CreateCommands {
 
     public void initialize(JDA jda){
         jda.upsertCommand("ping","Calculate Ping of the bot!").queue();
+        jda.upsertCommand("resetprefix","Resets the Bot prefix").queue();
     }
 
     public void initialize(JDA jda, Long guildID){
         Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand("ping","Calculate Ping of the bot!").queue();
+        Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand("resetprefix","Resets the Bot prefix").queue();
     }
 
     public void removeAll(JDA jda){

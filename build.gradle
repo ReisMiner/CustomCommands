@@ -6,11 +6,18 @@ plugins {
 
 group 'xyz.ReisMiner'
 version '1.0'
-
-
-
 mainClassName = 'xyz.reisminer.chtop.Bot'
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': mainClassName
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
 repositories {
     maven {
         url 'https://repo.maven.apache.org/maven2'
