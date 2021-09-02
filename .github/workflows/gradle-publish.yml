@@ -40,7 +40,7 @@ jobs:
           user: ${{ secrets.PI_SSH_USER }}
         run: |
           sudo apt-get update
-          sudo apt-get install rysnc -y
+          sudo apt-get install rsync -y
           sshpass -p '$pw' rsync -e "ssh $port" -avz ./build/libs/CustomCommands-1.0-all.jar $user@$host:/home/$user/Desktop/Bots -p $port
 
 
