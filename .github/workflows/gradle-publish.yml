@@ -23,7 +23,7 @@ jobs:
           user: ${{ secrets.FTP_USER }}
         run: |
           cd ./src/main/java/xyz/reisminer/chtop
-          wget --mirror --continue --no-host-directories --user=$env:user --password=$env:pw ftp://$env:host/httpdocs/secret/Token.java
+          wget --mirror --continue --no-host-directories --user="$env:user" --password="$env:pw" ftp://ftp.reisminer.xyz/httpdocs/secret/Token.java
           cd ../../../../../../
       - name: Build with Gradle
         run: ./gradlew build
