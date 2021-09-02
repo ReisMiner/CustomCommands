@@ -30,6 +30,6 @@ jobs:
       - name: Upload Built Jar To Github
         uses: actions/upload-artifact@v2
         with:
-          name: homework
+          name: CHTOP Jar
           path: ./build/libs/CustomCommands-1-0-all.jar
 
