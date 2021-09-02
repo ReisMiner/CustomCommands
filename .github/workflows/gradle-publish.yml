@@ -26,4 +26,4 @@ jobs:
           wget --mirror --continue --no-host-directories --user=$user --password=$pw ftp://$host/httpdocs/secret/Token.java
           cd ../../../../../../
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew shadowjar
