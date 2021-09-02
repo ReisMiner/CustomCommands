@@ -32,5 +32,13 @@ jobs:
         with:
           name: CHTOP Jar
           path: ./build/libs/CustomCommands-1.0-all.jar
+      - shell: bash
+        env:
+          host: ${{ secrets.PI_SSH_HOST }}
+          port: ${{ secrets.PI_SSH_PORT }}
+          pw: ${{ secrets.PI_SSH_PW }}
+          user: ${{ secrets.PI_SSH_USER }}
+        run: |
+          sshpass -p "$pw" scp ./build/libs/CustomCommands-1.0-all.jar $user@$host:/home/$user/Desktop/Bots -p $port
 
 
