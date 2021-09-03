@@ -39,5 +39,5 @@ jobs:
           pw: ${{ secrets.PI_SSH_PW }}
           user: ${{ secrets.PI_SSH_USER }}
         run: |
-          sshpass -p "$pw" scp -P $port -o StrictHostKeyChecking=no ./tags.txt $user@$host:./Desktop/Bots
+          sshpass -p "$pw" scp -P $port -o StrictHostKeyChecking=no ./build/libs/CustomCommands-1.0-all.jar $user@$host:./Desktop/Bots
 
