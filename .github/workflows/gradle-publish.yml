@@ -39,11 +39,7 @@ jobs:
           pw: ${{ secrets.PI_SSH_PW }}
           user: ${{ secrets.PI_SSH_USER }}
         run: |
-          sshpass -p "$pw" ssh -p $port -o StrictHostKeyChecking=no $user@$host
-          kill $(ps -e | pidof -x java)
-          exit
+          sshpass -p "$pw" ssh -p $port -o StrictHostKeyChecking=no -t $user@$host "kill $(ps -e | pidof -x java)"
           sshpass -p "$pw" scp -P $port -o StrictHostKeyChecking=no ./build/libs/CustomCommands-1.0-all.jar $user@$host:./Desktop/Bots
-          sshpass -p "$pw" ssh -p $port -o StrictHostKeyChecking=no $user@$host
-          nohup ./Desktop/Bots/start.sh &
-          exit
+          sshpass -p "$pw" ssh -p $port -o StrictHostKeyChecking=no -t $user@$host "nohup ./Desktop/Bots/start.sh &"
 
