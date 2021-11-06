@@ -28,13 +28,13 @@ public class Join extends Thread{
                     for (int i = 0; i < j; i++) {
                         guild.getAudioManager().openAudioConnection(tmpmsg.getMentionedMembers().get(0).getVoiceState().getChannel());
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(800);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                         guild.getAudioManager().closeAudioConnection();
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(800);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

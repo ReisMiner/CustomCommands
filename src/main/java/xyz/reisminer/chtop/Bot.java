@@ -2,6 +2,7 @@ package xyz.reisminer.chtop;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
@@ -15,7 +16,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
-import org.apache.commons.codec.DecoderException;
 import org.jetbrains.annotations.NotNull;
 import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
@@ -45,7 +45,8 @@ public class Bot extends ListenerAdapter {
 
     public void onReady(ReadyEvent event) {
         Token.logChannel = event.getJDA().getTextChannelById(787026214207356938L);
-        event.getJDA().getPresence().setActivity(Activity.playing(Token.prefix + "help | reisminer.xyz/dc"));
+        event.getJDA().getPresence().setActivity(Activity.streaming(Token.prefix + "help | reisminer.xyz/dc", "https://twitch.tv/reisminer"));
+        event.getJDA().getPresence().setStatus(OnlineStatus.IDLE);
 
         CreateCommands createSlashCmds = new CreateCommands();
         createSlashCmds.initialize(event.getJDA());
