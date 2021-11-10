@@ -21,6 +21,7 @@ import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
 import xyz.reisminer.chtop.commands.gamble.*;
 import xyz.reisminer.chtop.commands.music.*;
+import xyz.reisminer.chtop.commands.util.Base64Convert;
 import xyz.reisminer.chtop.commands.util.HexConvert;
 import xyz.reisminer.chtop.slashcommands.CreateCommands;
 
@@ -266,6 +267,10 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("fromhex"): {
                     HexConvert.hexToTxt(msg);
+                    break;
+                }
+                case ("base64"): {
+                    Base64Convert.Base64Cmd(msg);
                     break;
                 }
                 default: {

@@ -16,6 +16,7 @@ public class Help {
                     Token.prefix + "help music\n" +
                     Token.prefix + "help annoying\n" +
                     Token.prefix + "help text\n" +
+                    Token.prefix + "help util\n" +
                     Token.prefix + "help gambling\n" +
                     Token.prefix + "help menu\n" +
                     Token.prefix + "help moderator\n" +
@@ -54,6 +55,13 @@ public class Help {
                     " \n " + Token.prefix + "b0ld```"
             ).queue();
         }
+        if (splitMessage[1].equalsIgnoreCase("util")) {
+            channel.sendMessage("```Text Commands: " +
+                    " \n " + Token.prefix + "fromhex" +
+                    " \n " + Token.prefix + "tohex" +
+                    " \n " + Token.prefix + "base64```"
+            ).queue();
+        }
         if (splitMessage[1].equalsIgnoreCase("gambling")) {
             channel.sendMessage("```Gambling Commands: " +
                     " \n " + Token.prefix + "wallet" +
@@ -74,6 +82,7 @@ public class Help {
         if (splitMessage[1].equalsIgnoreCase("moderator")) {
             channel.sendMessage("```Moderator Commands: " +
                     " \n " + Token.prefix + "give" +
+                    " \n " + Token.prefix + "remove" +
                     " \n " + Token.prefix + "rename" +
                     " \n " + Token.prefix + "renameall" +
                     " \n " + Token.prefix + "renamereset" +
