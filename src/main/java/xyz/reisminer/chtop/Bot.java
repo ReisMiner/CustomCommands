@@ -51,7 +51,7 @@ public class Bot extends ListenerAdapter {
         event.getJDA().getPresence().setStatus(OnlineStatus.IDLE);
 
         CreateCommands createSlashCmds = new CreateCommands();
-        createSlashCmds.initialize(event.getJDA(), Token.TESTSERVERGUILDID);
+        createSlashCmds.initialize(event.getJDA());
 
         GetSettings.getSettings();
         Menu.load();
