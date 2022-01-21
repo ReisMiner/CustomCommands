@@ -20,7 +20,8 @@ public class Help {
                     Token.prefix + "help gambling\n" +
                     Token.prefix + "help menu\n" +
                     Token.prefix + "help moderator\n" +
-                    Token.prefix + "help settings```\n"
+                    Token.prefix + "help settings\n\n"+
+                    "Send Mails from any email with /mail```"
             ).queue();
             return;
         }

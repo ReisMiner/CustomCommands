@@ -61,7 +61,7 @@ public class MailSpoof {
 
             }
             eb.setTitle("Email Sender Error");
-            eb.setColor(Color.decode("#22AE43"));
+            eb.setColor(Color.decode("#AF245E"));
         }
 
         Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getAsTag() + "` sent a mail with sender `" + mail.sender + "` to `" + mail.receiver
