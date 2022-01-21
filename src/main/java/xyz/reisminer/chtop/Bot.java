@@ -24,6 +24,7 @@ import xyz.reisminer.chtop.commands.music.*;
 import xyz.reisminer.chtop.commands.util.Base64Convert;
 import xyz.reisminer.chtop.commands.util.HexConvert;
 import xyz.reisminer.chtop.slashcommands.CreateCommands;
+import xyz.reisminer.chtop.slashcommands.MailSpoof;
 
 import javax.security.auth.login.LoginException;
 import java.util.*;
@@ -296,10 +297,10 @@ public class Bot extends ListenerAdapter {
         }
 
     }
+
     @Override
-    public void onSlashCommand(SlashCommandEvent event)
-    {
-        switch (event.getName()){
+    public void onSlashCommand(SlashCommandEvent event) {
+        switch (event.getName()) {
             case "ping": {
                 long time = System.currentTimeMillis();
                 event.reply("Pong!").setEphemeral(true)
@@ -308,10 +309,15 @@ public class Bot extends ListenerAdapter {
                         ).queue();
                 break;
             }
-            case "resetprefix":{
-                ResetPrefix.reset(event); break;
+            case "resetprefix": {
+                ResetPrefix.reset(event);
+                break;
             }
-            default:{
+            case "mail": {
+                MailSpoof.send(event);
+                break;
+            }
+            default: {
                 event.reply("not a valid command").setEphemeral(true).queue();
             }
         }

@@ -19,20 +19,17 @@ public class Rename {
                 for (Member member : event.getJDA().getGuildById(msg.getGuild().getId()).getMembers()) {
                     try {
                         member.modifyNickname(tmp.toString()).complete();
-
-                        Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` changed everyone's name to `"+tmp+"`").queue();
-
                     } catch (Exception ignored) {
                         channel.sendMessage("No perms to edit `" + member.getNickname() + "`").queue();
                     }
                 }
-
+                Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` changed everyone's name to `" + tmp + "`").queue();
 
             } else {
                 channel.sendMessage("Use this command like this: [PREFIX]renameall [New NAME]").queue();
             }
         } else {
-            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` tried to change everyone's name").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to change everyone's name").queue();
             channel.sendMessage("You got no permissions to do so :)").queue();
         }
     }
@@ -49,7 +46,7 @@ public class Rename {
                 }
                 try {
                     msg.getMentionedMembers().get(0).modifyNickname(String.valueOf(tmp)).complete();
-                    Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` changed the name of `"+ msg.getMentionedMembers().get(0).getUser().getName()+"` to `"+tmp+"`").queue();
+                    Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` changed the name of `" + msg.getMentionedMembers().get(0).getUser().getName() + "` to `" + tmp + "`").queue();
                 } catch (Exception ignored) {
                     channel.sendMessage("No perms to edit `" + msg.getMentionedMembers().get(0).getNickname() + "`").queue();
                 }
@@ -57,7 +54,7 @@ public class Rename {
                 channel.sendMessage("Use this command like this: [PREFIX]renameall [New NAME]").queue();
             }
         } else {
-            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` tried to change the name of `"+ msg.getMentionedMembers().get(0).getUser().getName()+"`").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to change the name of `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
             channel.sendMessage("You got no permissions to do so :)").queue();
         }
     }
@@ -68,13 +65,13 @@ public class Rename {
             for (Member member : event.getJDA().getGuildById(msg.getGuild().getId()).getMembers()) {
                 try {
                     member.modifyNickname("").complete();
-                    Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` reset everyone's name").queue();
+                    Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` reset everyone's name").queue();
                 } catch (Exception ignored) {
                     channel.sendMessage("No perms to edit `" + member.getNickname() + "`").queue();
                 }
             }
         } else {
-            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` tried to reset everyone's name").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to reset everyone's name").queue();
             channel.sendMessage("You got no permissions to do so :)").queue();
         }
     }

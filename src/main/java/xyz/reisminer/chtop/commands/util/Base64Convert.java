@@ -2,7 +2,6 @@ package xyz.reisminer.chtop.commands.util;
 
 import net.dv8tion.jda.api.entities.Message;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.binary.Hex;
 import xyz.reisminer.chtop.Token;
 
 
