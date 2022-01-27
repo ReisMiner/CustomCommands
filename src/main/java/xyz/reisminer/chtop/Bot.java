@@ -218,6 +218,10 @@ public class Bot extends ListenerAdapter {
                     Skip.skip(channel, member, event);
                     break;
                 }
+                case ("playlist"): {
+                   Playlist.getPlaylist(msg);
+                   break;
+                }
                 case ("stop"): {
                     Stop.stop(msg, channel, member);
                     break;
