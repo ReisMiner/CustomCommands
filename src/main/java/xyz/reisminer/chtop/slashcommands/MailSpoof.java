@@ -21,7 +21,6 @@ import xyz.reisminer.chtop.Token;
 
 import java.awt.*;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 public class MailSpoof {
     public static void send(SlashCommandEvent event) {
@@ -31,7 +30,7 @@ public class MailSpoof {
         eb.setTitle("Email Sent");
         eb.setDescription("Email Successfully sent!");
         eb.setColor(Color.decode("#22AE43"));
-        eb.setFooter("Query performed by " + event.getMember().getUser().getAsTag());
+        eb.setFooter("Query performed by " + event.getMember().getUser().getAsTag(), event.getMember().getUser().getAvatarUrl());
 
         EmailModel mail = new EmailModel(event.getOption("receiver").getAsString(), event.getOption("sender").getAsString(), event.getOption("subject").getAsString(), event.getOption("message").getAsString());
 
@@ -39,7 +38,7 @@ public class MailSpoof {
         Gson gson = new Gson();
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost("https://ramon.cc/mailspoof/");
+        HttpPost httpPost = new HttpPost("https://ramon.cc/mailspoof/send/");
         HttpEntity stringEntity = new StringEntity(gson.toJson(mail), ContentType.APPLICATION_JSON);
         httpPost.setEntity(stringEntity);
         CloseableHttpResponse response = null;
