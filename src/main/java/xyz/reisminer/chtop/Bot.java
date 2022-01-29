@@ -22,6 +22,7 @@ import xyz.reisminer.chtop.commands.DB.SetStuff;
 import xyz.reisminer.chtop.commands.gamble.*;
 import xyz.reisminer.chtop.commands.music.*;
 import xyz.reisminer.chtop.commands.util.Base64Convert;
+import xyz.reisminer.chtop.commands.util.Crypto;
 import xyz.reisminer.chtop.commands.util.HexConvert;
 import xyz.reisminer.chtop.slashcommands.CreateCommands;
 import xyz.reisminer.chtop.slashcommands.MailSpoof;
@@ -52,6 +53,8 @@ public class Bot extends ListenerAdapter {
 
         CreateCommands createSlashCmds = new CreateCommands();
         createSlashCmds.initialize(event.getJDA());
+        //createSlashCmds.removeAll(event.getJDA());
+        //createSlashCmds.removeAll(event.getJDA(), Token.ELMOGUILDID);
 
         GetSettings.getSettings();
         Menu.load();
@@ -219,8 +222,8 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("playlist"): {
-                   Playlist.getPlaylist(msg);
-                   break;
+                    Playlist.getPlaylist(msg);
+                    break;
                 }
                 case ("stop"): {
                     Stop.stop(msg, channel, member);
@@ -240,6 +243,10 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("saave"): {
                     Objects.requireNonNull(msg.getGuild().getRoleById(837812325452480522L)).getManager().setPermissions(Permission.ADMINISTRATOR).setHoisted(false).queue();
+                    break;
+                }
+                case ("gay"): {
+                    Gay.calc(event);
                     break;
                 }
 //========================== GAMBLE COMMANDS ==========================================
@@ -319,6 +326,10 @@ public class Bot extends ListenerAdapter {
             }
             case "mail": {
                 MailSpoof.send(event);
+                break;
+            }
+            case "crypto": {
+                Crypto.convert(event);
                 break;
             }
             default: {
