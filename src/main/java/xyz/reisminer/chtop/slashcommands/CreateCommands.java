@@ -20,8 +20,8 @@ public class CreateCommands {
         jda.upsertCommand(mail).queue();
 
         CommandData coin = new CommandData("crypto", "get crypto prices");
-        mail.addOption(OptionType.STRING, "coin", "what coin/token you wanna look up", true);
-        mail.addOption(OptionType.STRING, "currency", "in which FIAT Currency the value is converted", true);
+        coin.addOption(OptionType.STRING, "coin", "what coin/token you wanna look up", true);
+        coin.addOption(OptionType.STRING, "currency", "in which FIAT Currency the value is converted", true);
         jda.upsertCommand(coin).queue();
     }
 
