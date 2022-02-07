@@ -20,7 +20,7 @@ public class Kick {
 
                 msg.getGuild().kick(msg.getGuild().getMembers().get(memberNum)).complete();
 
-                Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` kicked `"+ msg.getGuild().getMembers().get(memberNum).getUser().getName()+" with randomkick`").queue();
+                Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` kicked `" + msg.getGuild().getMembers().get(memberNum).getUser().getName() + " with randomkick`").queue();
 
                 System.out.println(msg.getAuthor().getName() + " Kicked " + msg.getGuild().getMembers().get(memberNum).getUser().getName() + " with randomkick :)");
 
@@ -29,19 +29,19 @@ public class Kick {
             }
         } else {
 
-            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` tried to use RandomKick").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to use RandomKick").queue();
 
             channel.sendMessage("You got no permissions to do so :)").queue();
         }
     }
 
     public static void NotRandom(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
-        if (event.getMember().hasPermission(Permission.KICK_MEMBERS)) {
+        if (event.getMember().hasPermission(Permission.KICK_MEMBERS) && msg.getMentionedMembers().get(0).getIdLong() != Token.REISMINERID && msg.getMentionedMembers().get(0).getRoles().contains(event.getGuild().getRoleById("796026403149709393"))) {
             msg.getGuild().kick(msg.getMentionedMembers().get(0)).complete();
-            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` kicked `"+ msg.getMentionedMembers().get(0).getUser().getName()+"`").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` kicked `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
             System.out.println(msg.getAuthor().getName() + " Kicked " + msg.getMentionedMembers().get(0).getUser().getName() + " with notrandomkick :)");
         } else {
-            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` tried to kick `"+ msg.getMentionedMembers().get(0).getUser().getName()+"`").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to kick `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
             channel.sendMessage("You got no permissions to do so :)").queue();
         }
     }
