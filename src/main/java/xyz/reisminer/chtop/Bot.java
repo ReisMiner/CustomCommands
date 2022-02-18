@@ -249,6 +249,10 @@ public class Bot extends ListenerAdapter {
                     Gay.calc(event);
                     break;
                 }
+                case ("tauf"): {
+                    Taufe.doTaufi(event);
+                    break;
+                }
 //========================== GAMBLE COMMANDS ==========================================
                 case ("wallet"): {
                     getPeterZ.getWallet(msg, channel);

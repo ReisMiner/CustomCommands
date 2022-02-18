@@ -20,13 +20,14 @@ import xyz.reisminer.chtop.Token;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Currency;
+import java.util.Locale;
 import java.util.Map;
 
 
 public class Crypto {
     public static void convert(SlashCommandEvent event) {
         event.deferReply().queue();
-        String crypto = event.getOption("coin").getAsString();
+        String crypto = event.getOption("coin").getAsString().toLowerCase(Locale.ROOT);
         String fiat = event.getOption("currency").getAsString();
 
         EmbedBuilder eb = new EmbedBuilder();

@@ -47,6 +47,7 @@ public class Help {
                     " \n " + Token.prefix + "dm" +
                     " \n " + Token.prefix + "anondm" +
                     " \n " + Token.prefix + "spam" +
+                    " \n " + Token.prefix + "tauf [@user]" +
                     " \n " + Token.prefix + "spamdm```"
             ).queue();
         }
