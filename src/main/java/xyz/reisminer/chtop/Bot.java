@@ -250,7 +250,7 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("tauf"): {
-                    Taufe.doTaufi(event);
+                    new Thread(() -> Taufe.doTaufi(event));
                     break;
                 }
 //========================== GAMBLE COMMANDS ==========================================
@@ -295,7 +295,7 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
             }
-
+            System.gc();
         }
         if (msg.getContentRaw().equalsIgnoreCase("$-$blockjoin") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
             SetStuff.setJoinBlock(!Token.joinBlocked);

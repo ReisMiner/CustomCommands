@@ -1,25 +1,11 @@
 package xyz.reisminer.chtop.commands.util;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.litesoftwares.coingecko.CoinGeckoApiClient;
 import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import xyz.reisminer.chtop.EmailModel;
-import xyz.reisminer.chtop.Token;
 
 import java.awt.*;
-import java.io.IOException;
-import java.util.Currency;
 import java.util.Locale;
 import java.util.Map;
 
