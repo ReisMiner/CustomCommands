@@ -118,8 +118,11 @@ public class Bot extends ListenerAdapter {
                 gambleDB.changeBalance(msg.getAuthor(), 5);
             }
         }
-
         if (msg.getContentRaw().startsWith(Token.prefix) && !msg.getAuthor().isBot()) {
+            if (Token.blocked.contains(msg.getAuthor().getIdLong())) {
+                msg.reply("You cant use that right now!").queue();
+                return;
+            }
             assert member != null;
             switch (msg.getContentRaw().split(" ")[0].substring(Token.prefix.length()).toLowerCase()) {
                 case ("help"): {
@@ -250,7 +253,7 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("tauf"): {
-                    new Thread(() -> Taufe.doTaufi(event));
+                    Taufe.doTaufi(event);
                     break;
                 }
 //========================== GAMBLE COMMANDS ==========================================
@@ -304,6 +307,15 @@ public class Bot extends ListenerAdapter {
         if (msg.getContentRaw().equalsIgnoreCase("$-$autorename") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
             SetStuff.setAutoRename(!Token.autoRename);
             Token.logChannel.sendMessage("Successfully toggled auto rename").queue();
+        }
+        if (msg.getContentRaw().split(" ")[0].equalsIgnoreCase("$-$block") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
+            if (Token.blocked.contains(msg.getMentionedMembers().get(0).getIdLong())) {
+                Token.blocked.remove(msg.getMentionedMembers().get(0).getIdLong());
+                msg.addReaction("\uD83D\uDC4E").queue();
+            } else {
+                Token.blocked.add(msg.getMentionedMembers().get(0).getIdLong());
+                msg.addReaction("\uD83D\uDC4D").queue();
+            }
         }
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
