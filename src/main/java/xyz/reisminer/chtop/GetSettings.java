@@ -16,6 +16,7 @@ public class GetSettings {
                 Token.sendReacts = resultSet.getBoolean("react");
                 Token.autoRename = resultSet.getBoolean("rename");
                 Token.joinBlocked= resultSet.getBoolean("join");
+                Token.boostOnly= resultSet.getBoolean("boost_only");
                 System.out.println("Prefix: " + Token.prefix);
                 System.out.println("Reacts: " + Token.sendReacts);
                 System.out.println("AutoRename: " + Token.autoRename);

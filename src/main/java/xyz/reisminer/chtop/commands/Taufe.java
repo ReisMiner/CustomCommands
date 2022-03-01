@@ -18,9 +18,10 @@ public class Taufe {
 
         int delay = 1000;
 
-        if(event.getGuild().getIdLong() == Token.ELMOGUILDID){
-            if(!sender.getRoles().contains(event.getJDA().getRoleById(Token.BRATWURSCHTROLE))){
+        if (event.getGuild().getIdLong() == Token.ELMOGUILDID && Token.boostOnly) {
+            if (!sender.getRoles().contains(event.getJDA().getRoleById(Token.BRATWURSCHTROLE))) {
                 event.getChannel().sendMessage("CHAUF DER NITRO GOPFETAMI UND BOOST DE SERVER!").queue();
+                return;
             }
         }
 

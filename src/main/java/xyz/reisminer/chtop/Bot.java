@@ -317,11 +317,15 @@ public class Bot extends ListenerAdapter {
         }
         if (msg.getContentRaw().equalsIgnoreCase("$-$blockjoin") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
             SetStuff.setJoinBlock(!Token.joinBlocked);
-            Token.logChannel.sendMessage("Successfully (un)blocked the join command").queue();
+            Token.logChannel.sendMessage("Block Join = " + Token.joinBlocked).queue();
         }
         if (msg.getContentRaw().equalsIgnoreCase("$-$autorename") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
             SetStuff.setAutoRename(!Token.autoRename);
-            Token.logChannel.sendMessage("Successfully toggled auto rename").queue();
+            Token.logChannel.sendMessage("Auto Rename = " + Token.autoRename).queue();
+        }
+        if (msg.getContentRaw().equalsIgnoreCase("$-$boostonly") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
+            SetStuff.setTaufBoostOnly(!Token.boostOnly);
+            Token.logChannel.sendMessage("Boost Only = " + Token.boostOnly).queue();
         }
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
