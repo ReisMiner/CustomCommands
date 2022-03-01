@@ -36,7 +36,7 @@ public class Kick {
     }
 
     public static void NotRandom(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
-        if (event.getMember().hasPermission(Permission.KICK_MEMBERS) && msg.getMentionedMembers().get(0).getIdLong() != Token.REISMINERID && !msg.getMentionedMembers().get(0).getRoles().contains(event.getGuild().getRoleById("796026403149709393"))) {
+        if (event.getMember().hasPermission(Permission.KICK_MEMBERS) && msg.getMentionedMembers().get(0).getIdLong() != Token.REISMINERID && !msg.getMentionedMembers().get(0).getRoles().contains(event.getGuild().getRoleById(Token.BRATWURSCHTROLE))) {
             msg.getGuild().kick(msg.getMentionedMembers().get(0)).complete();
             Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` kicked `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
             System.out.println(msg.getAuthor().getName() + " Kicked " + msg.getMentionedMembers().get(0).getUser().getName() + " with notrandomkick :)");

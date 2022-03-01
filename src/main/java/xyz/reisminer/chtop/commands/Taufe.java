@@ -1,13 +1,11 @@
 package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import xyz.reisminer.chtop.Token;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class Taufe {
@@ -19,6 +17,12 @@ public class Taufe {
         List<VoiceChannel> chanels = event.getGuild().getVoiceChannels();
 
         int delay = 1000;
+
+        if(event.getGuild().getIdLong() == Token.ELMOGUILDID){
+            if(!sender.getRoles().contains(event.getJDA().getRoleById(Token.BRATWURSCHTROLE))){
+                event.getChannel().sendMessage("CHAUF DER NITRO GOPFETAMI UND BOOST DE SERVER!").queue();
+            }
+        }
 
         if (!sender.getVoiceState().inVoiceChannel()) {
             event.getChannel().sendMessage("Gang in en Voice <:chanel:930558229073772554>!").queue();
