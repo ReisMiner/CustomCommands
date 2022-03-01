@@ -235,6 +235,10 @@ public class Bot extends ListenerAdapter {
                     Skip.skip(channel, member, event);
                     break;
                 }
+                case ("shuffle"): {
+                    Shuffle.mixQueue(event);
+                    break;
+                }
                 case ("playlist"): {
                     Playlist.getPlaylist(msg);
                     break;
