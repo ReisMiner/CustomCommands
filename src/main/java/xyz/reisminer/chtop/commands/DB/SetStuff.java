@@ -74,7 +74,7 @@ public class SetStuff {
             Statement statement = connection.createStatement();
             // Result set get the result of the SQL query
             statement.executeUpdate("UPDATE prefixTable SET `boost_only`=" + boostOnly + "");
-            Token.joinBlocked = boostOnly;
+            Token.boostOnly = boostOnly;
             System.out.println("Boost Only set to: " + Token.boostOnly);
         } catch (SQLException e) {
             System.out.println("Boost Only stays: " + Token.boostOnly);
