@@ -27,11 +27,11 @@ jobs:
           cd ../../../../../../
       - name: Build with Gradle
         run: ./gradlew shadowjar
-      - name: Upload Built Jar To Github
-        uses: actions/upload-artifact@v2
-        with:
-          name: CHTOP Jar
-          path: ./build/libs/CustomCommands-1.0-all.jar
+#     - name: Upload Built Jar To Github
+#       uses: actions/upload-artifact@v2
+#       with:
+#         name: CHTOP Jar
+#         path: ./build/libs/CustomCommands-1.0-all.jar
       - shell: bash
         env:
           host: ${{ secrets.PI_SSH_HOST }}
