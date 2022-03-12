@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'xyz.ReisMiner'
-version '1.1'
+version '1.0'
 mainClassName = 'xyz.reisminer.chtop.Bot'
 
 jar {
