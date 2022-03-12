@@ -169,7 +169,7 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("renamereset"): {
-                    Rename.reset(msg, channel, event);
+                    //Rename.reset(msg, channel, event);
                     break;
                 }
                 case ("say"): {
