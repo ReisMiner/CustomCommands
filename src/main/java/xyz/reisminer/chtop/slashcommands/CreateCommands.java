@@ -29,6 +29,10 @@ public class CreateCommands {
         Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand("ping", "Calculate Ping of the bot!").queue();
         Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand("resetprefix", "Resets the Bot prefix").queue();
 
+        CommandData notion = new CommandData("calendar","Get the notion calendar lool");
+        notion.addOption(OptionType.BOOLEAN, "tests", "do you wanna see tests (true) or husi (false)", true);
+        Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand(notion).queue();
+
         CommandData mail = new CommandData("mail", "send emails with every email address you want");
         mail.addOption(OptionType.STRING, "receiver", "to whom you send the email", true);
         mail.addOption(OptionType.STRING, "sender", "the sender email. Optional: Separate the display name with a pipe | Example: Pete|pete@example.com", true);

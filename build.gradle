@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'xyz.ReisMiner'
-version '1.0'
+version '1.1'
 mainClassName = 'xyz.reisminer.chtop.Bot'
 
 jar {
@@ -32,11 +32,13 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.jraf:klibnotion:1.11.0'
     implementation 'com.github.Philipinho:CoinGecko-Java:-SNAPSHOT'
     implementation "net.dv8tion:JDA:4.3.0_314"
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'org.jsoup:jsoup:1.14.3'
     implementation 'com.sedmelluq:lavaplayer:1.3.77'
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
-    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'org.jetbrains:annotations:23.0.0'
 }

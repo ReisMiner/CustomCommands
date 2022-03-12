@@ -17,8 +17,8 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.jetbrains.annotations.NotNull;
-import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
+import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.gamble.*;
 import xyz.reisminer.chtop.commands.music.*;
 import xyz.reisminer.chtop.commands.util.Base64Convert;
@@ -28,7 +28,9 @@ import xyz.reisminer.chtop.slashcommands.CreateCommands;
 import xyz.reisminer.chtop.slashcommands.MailSpoof;
 
 import javax.security.auth.login.LoginException;
-import java.util.*;
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.addNewUser;
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.userExists;
@@ -356,6 +358,10 @@ public class Bot extends ListenerAdapter {
             }
             case "crypto": {
                 Crypto.convert(event);
+                break;
+            }
+            case "calendar": {
+                xyz.reisminer.chtop.slashcommands.Notion.readCalendar(event);
                 break;
             }
             default: {
