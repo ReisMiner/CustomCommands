@@ -23,6 +23,10 @@ public class CreateCommands {
         coin.addOption(OptionType.STRING, "coin", "what coin/token you wanna look up", true);
         coin.addOption(OptionType.STRING, "currency", "in which FIAT Currency the value is converted", true);
         jda.upsertCommand(coin).queue();
+
+        CommandData notion = new CommandData("calendar","Get the notion calendar lool");
+        notion.addOption(OptionType.BOOLEAN, "tests", "do you wanna see tests (true) or husi (false)", true);
+        jda.upsertCommand(notion).queue();
     }
 
     public void initialize(JDA jda, Long guildID) {
