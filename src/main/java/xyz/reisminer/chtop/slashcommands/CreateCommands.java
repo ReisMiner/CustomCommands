@@ -24,16 +24,24 @@ public class CreateCommands {
         coin.addOption(OptionType.STRING, "currency", "in which FIAT Currency the value is converted", true);
         jda.upsertCommand(coin).queue();
 
-        CommandData notion = new CommandData("calendar","Get the notion calendar lool");
+        CommandData notion = new CommandData("calendar-view","Get the notion calendar lool");
         notion.addOption(OptionType.BOOLEAN, "tests", "do you wanna see tests (true) or husi (false)", true);
         jda.upsertCommand(notion).queue();
+
+        CommandData notion2 = new CommandData("calendar-add","Add a new entry to the calendar");
+        notion2.addOption(OptionType.STRING, "title", "title of the entry", true);
+        notion2.addOption(OptionType.BOOLEAN, "test", "is it a test?", true);
+        notion2.addOption(OptionType.STRING, "subjects", "what subjects does the entry belong to? separate with , E.G: mati,dütsch", true);
+        notion2.addOption(OptionType.STRING, "date", "what date does it take place? Format: DD.MM.YYYY", true);
+        notion2.addOption(OptionType.STRING, "content", "additional information. Split individual lines with \\n", false);
+        jda.upsertCommand(notion2).queue();
     }
 
     public void initialize(JDA jda, Long guildID) {
         Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand("ping", "Calculate Ping of the bot!").queue();
         Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand("resetprefix", "Resets the Bot prefix").queue();
 
-        CommandData notion = new CommandData("calendar","Get the notion calendar lool");
+        CommandData notion = new CommandData("calendar-view","Get the notion calendar lool");
         notion.addOption(OptionType.BOOLEAN, "tests", "do you wanna see tests (true) or husi (false)", true);
         Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand(notion).queue();
 
@@ -48,6 +56,14 @@ public class CreateCommands {
         coin.addOption(OptionType.STRING, "coin", "what coin/token you wanna look up", true);
         coin.addOption(OptionType.STRING, "currency", "in which FIAT Currency the value is converted", true);
         jda.getGuildById(guildID).upsertCommand(coin).queue();
+
+        CommandData notion2 = new CommandData("calendar-add","Add a new entry to the calendar");
+        notion2.addOption(OptionType.STRING, "title", "title of the entry", true);
+        notion2.addOption(OptionType.BOOLEAN, "test", "is it a test?", true);
+        notion2.addOption(OptionType.STRING, "subjects", "what subjects does the entry belong to? separate with , E.G: mathi,Finanz", true);
+        notion2.addOption(OptionType.STRING, "date", "what date does it take place? Format: DD.MM.YYYY", true);
+        notion2.addOption(OptionType.STRING, "content", "additional information. Split individual lines with ;;", false);
+        jda.getGuildById(guildID).upsertCommand(notion2).queue();
     }
 
     public void removeAll(JDA jda) {

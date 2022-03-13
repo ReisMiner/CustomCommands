@@ -26,6 +26,7 @@ import xyz.reisminer.chtop.commands.util.Crypto;
 import xyz.reisminer.chtop.commands.util.HexConvert;
 import xyz.reisminer.chtop.slashcommands.CreateCommands;
 import xyz.reisminer.chtop.slashcommands.MailSpoof;
+import xyz.reisminer.chtop.slashcommands.Notion;
 
 import javax.security.auth.login.LoginException;
 import java.util.Objects;
@@ -44,8 +45,6 @@ public class Bot extends ListenerAdapter {
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .build();
-
-
     }
 
     public void onReady(ReadyEvent event) {
@@ -55,6 +54,7 @@ public class Bot extends ListenerAdapter {
 
         CreateCommands createSlashCmds = new CreateCommands();
         createSlashCmds.initialize(event.getJDA());
+        //createSlashCmds.initialize(event.getJDA(), Token.ELMOGUILDID);
         //createSlashCmds.removeAll(event.getJDA());
         //createSlashCmds.removeAll(event.getJDA(), Token.ELMOGUILDID);
 
@@ -360,8 +360,12 @@ public class Bot extends ListenerAdapter {
                 Crypto.convert(event);
                 break;
             }
-            case "calendar": {
-                xyz.reisminer.chtop.slashcommands.Notion.readCalendar(event);
+            case "calendar-view": {
+                Notion.readCalendar(event);
+                break;
+            }
+            case "calendar-add": {
+                Notion.addToCalendar(event);
                 break;
             }
             default: {
