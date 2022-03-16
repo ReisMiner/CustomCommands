@@ -102,7 +102,7 @@ public class Bot extends ListenerAdapter {
 
     @Override
     public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
-        if (Token.shamoun && event.getMember().getIdLong() == Token.REISMINERID) {
+        if (Token.shamoun && event.getMember().getIdLong() == 397853005627523073L) {
             new Thread(() ->{
                 try {
                     Thread.sleep(15*1000);
