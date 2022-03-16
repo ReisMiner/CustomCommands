@@ -349,7 +349,7 @@ public class Bot extends ListenerAdapter {
             SetStuff.setTaufBoostOnly(!Token.boostOnly);
             Token.logChannel.sendMessage("Boost Only = " + Token.boostOnly).queue();
         }
-        if (msg.getContentRaw().equalsIgnoreCase("$-$shmoun") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
+        if (msg.getContentRaw().equalsIgnoreCase("$-$shmoun") && msg.getAuthor().getIdLong() != 397853005627523073L) {
             Token.shamoun = !Token.shamoun;
             Token.logChannel.sendMessage("Anti Shamoun = " + Token.shamoun).queue();
         }
