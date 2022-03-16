@@ -102,8 +102,15 @@ public class Bot extends ListenerAdapter {
 
     @Override
     public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
-        if (Token.shamoun && event.getMember().getIdLong() == 397853005627523073L) {
-            event.getMember().timeoutFor(1, TimeUnit.MINUTES).queue();
+        if (Token.shamoun && event.getMember().getIdLong() == Token.REISMINERID) {
+            new Thread(() ->{
+                try {
+                    Thread.sleep(15*1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                event.getMember().timeoutFor(1, TimeUnit.MINUTES).queue();
+            }).start();
         }
     }
 
