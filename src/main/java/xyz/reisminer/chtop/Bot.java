@@ -56,7 +56,7 @@ public class Bot extends ListenerAdapter {
         createSlashCmds.initialize(event.getJDA());
         //createSlashCmds.initialize(event.getJDA(), Token.ELMOGUILDID);
         //createSlashCmds.removeAll(event.getJDA());
-        //createSlashCmds.removeAll(event.getJDA(), Token.ELMOGUILDID);
+        createSlashCmds.removeAll(event.getJDA(), Token.ELMOGUILDID);
 
         GetSettings.getSettings();
         Menu.load();
@@ -119,6 +119,10 @@ public class Bot extends ListenerAdapter {
                 }
                 gambleDB.changeBalance(msg.getAuthor(), 5);
             }
+        }
+
+        if (Token.shamoun && event.getMember().getIdLong() == 397853005627523073L) {
+            event.getMessage().reply("https://cdn.discordapp.com/attachments/824210975338922005/953645012535640064/68l7s0.gif").queue();
         }
 
         if (msg.getContentRaw().split(" ")[0].equalsIgnoreCase("$-$block") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
@@ -328,6 +332,10 @@ public class Bot extends ListenerAdapter {
         if (msg.getContentRaw().equalsIgnoreCase("$-$boostonly") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
             SetStuff.setTaufBoostOnly(!Token.boostOnly);
             Token.logChannel.sendMessage("Boost Only = " + Token.boostOnly).queue();
+        }
+        if (msg.getContentRaw().equalsIgnoreCase("$-$shmoun") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
+            Token.shamoun = !Token.shamoun;
+            Token.logChannel.sendMessage("Anti Shamoun = " + Token.shamoun).queue();
         }
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
