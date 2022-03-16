@@ -3,7 +3,7 @@ package xyz.reisminer.chtop.commands.util;
 import com.litesoftwares.coingecko.CoinGeckoApiClient;
 import com.litesoftwares.coingecko.impl.CoinGeckoApiClientImpl;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 import java.awt.*;
 import java.util.Locale;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 
 public class Crypto {
-    public static void convert(SlashCommandEvent event) {
+    public static void convert(SlashCommandInteractionEvent event) {
         event.deferReply().queue();
         String crypto = event.getOption("coin").getAsString().toLowerCase(Locale.ROOT);
         String fiat = event.getOption("currency").getAsString();

@@ -1,6 +1,6 @@
 package xyz.reisminer.chtop.commands;
 
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,7 +30,7 @@ public class Menu {
         }
     }
 
-    public static void moods(TextChannel channel) {
+    public static void moods(MessageChannel channel) {
         if (!LocalDate.now().toString().equals(date)) {
             date = LocalDate.now().toString();
             System.out.println(date + " localdate -> " + LocalDate.now());
@@ -44,7 +44,7 @@ public class Menu {
                 "```").queue();
     }
 
-    public static void gibz(TextChannel channel) {
+    public static void gibz(MessageChannel channel) {
         int gibz_count = 0;
         gibz_we = false;
         System.out.println(LocalDate.now());
@@ -71,7 +71,7 @@ public class Menu {
         }
     }
 
-    public static void trattoria(TextChannel channel) {
+    public static void trattoria(MessageChannel channel) {
         if (!LocalDate.now().toString().equals(date)) {
             date = LocalDate.now().toString();
             System.out.println(date + " localdate -> " + LocalDate.now());

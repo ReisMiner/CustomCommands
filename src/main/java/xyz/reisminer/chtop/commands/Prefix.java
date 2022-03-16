@@ -2,13 +2,13 @@ package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.Event;
 import xyz.reisminer.chtop.Token;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
 
 public class Prefix {
-    public static void setPrefix(Message msg, TextChannel channel, Event event) {
+    public static void setPrefix(Message msg, MessageChannel channel, Event event) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         if (splitMessage.length == 2) {
             SetStuff.setPrefix(splitMessage[1]);

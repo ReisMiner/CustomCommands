@@ -1,7 +1,7 @@
 package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import xyz.reisminer.chtop.Token;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
 
@@ -9,7 +9,7 @@ import java.util.Objects;
 
 
 public class ResetPrefix {
-    public static void reset(SlashCommandEvent event){
+    public static void reset(SlashCommandInteractionEvent event){
 
         if (Objects.requireNonNull(event.getMember()).getIdLong() == 215136536260378624L) {
             SetStuff.setPrefix("$");

@@ -1,12 +1,11 @@
 package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
-import org.apache.commons.lang3.math.NumberUtils;
+import net.dv8tion.jda.api.entities.MessageChannel;
 
 public class Say{
 
-    public static void sayMsg(Message msg, TextChannel channel) {
+    public static void sayMsg(Message msg, MessageChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         StringBuilder tmp = new StringBuilder();
         msg.delete().complete();
@@ -18,7 +17,7 @@ public class Say{
         }
     }
 
-    public static void sayMsgBold(Message msg, TextChannel channel) {
+    public static void sayMsgBold(Message msg, MessageChannel channel) {
         msg.delete().complete();
         String[] splitMessage = msg.getContentRaw().split(" ");
         StringBuilder tmp = new StringBuilder();

@@ -7,11 +7,12 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
@@ -32,6 +33,7 @@ import javax.security.auth.login.LoginException;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.addNewUser;
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.userExists;
@@ -99,6 +101,13 @@ public class Bot extends ListenerAdapter {
     }
 
     @Override
+    public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
+        if (Token.shamoun && event.getMember().getIdLong() == 397853005627523073L) {
+            event.getMember().timeoutFor(1, TimeUnit.MINUTES).queue();
+        }
+    }
+
+    @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         if (event.getGuild().getIdLong() == 777817324996132895L) {
             event.getGuild().addRoleToMember(event.getMember(), Objects.requireNonNull(event.getGuild().getRoleById(Token.LERNENDEROLE))).queue();
@@ -108,9 +117,9 @@ public class Bot extends ListenerAdapter {
     }
 
     @Override
-    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
+    public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         Message msg = event.getMessage();
-        TextChannel channel = event.getChannel();
+        MessageChannel channel = event.getChannel();
         Member member = event.getMember();
         if (!msg.getMentionedMembers().isEmpty()) {
             if (msg.getMentionedMembers().get(0).getIdLong() == Token.BOTID) {
@@ -346,7 +355,7 @@ public class Bot extends ListenerAdapter {
     }
 
     @Override
-    public void onSlashCommand(SlashCommandEvent event) {
+    public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         switch (event.getName()) {
             case "ping": {
                 long time = System.currentTimeMillis();

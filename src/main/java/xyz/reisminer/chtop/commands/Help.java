@@ -2,12 +2,12 @@ package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import xyz.reisminer.chtop.Token;
 import xyz.reisminer.chtop.commands.DB.OpenDB;
 
 public class Help {
-    public static void help(Message msg, TextChannel channel) {
+    public static void help(Message msg, MessageChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         try {
             splitMessage[1].getBytes();
@@ -30,7 +30,7 @@ public class Help {
             channel.sendMessage("DB Commands: \n" + OpenDB.openDB()).queue();
             eb.setTitle("Add Commands here", "http://reisminer.xyz/dc");
             eb.setDescription("PW: freddy");
-            channel.sendMessage(eb.build()).queue();
+            channel.sendMessageEmbeds(eb.build()).queue();
         }
         if (splitMessage[1].equalsIgnoreCase("music")) {
             channel.sendMessage("```Music Commands: " +

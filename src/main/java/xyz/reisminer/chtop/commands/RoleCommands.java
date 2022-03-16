@@ -2,15 +2,15 @@ package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import xyz.reisminer.chtop.Token;
 
 import java.awt.*;
 
 public class RoleCommands {
-    public static void give(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
+    public static void give(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         String tmp = "";
         if (event.getMember().hasPermission(Permission.MANAGE_ROLES) || msg.getAuthor().getIdLong() == 215136536260378624L) {
@@ -35,7 +35,7 @@ public class RoleCommands {
         }
     }
 
-    public static void remove(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
+    public static void remove(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         String tmp = "";
         if (event.getMember().hasPermission(Permission.MANAGE_ROLES)) {
@@ -62,7 +62,7 @@ public class RoleCommands {
         }
     }
 
-    public static void roleColor(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
+    public static void roleColor(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         String tmp = "";
         if (event.getMember().hasPermission(Permission.MANAGE_ROLES)) {

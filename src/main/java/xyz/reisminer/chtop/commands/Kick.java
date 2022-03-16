@@ -1,17 +1,15 @@
 package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.Event;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import xyz.reisminer.chtop.Token;
 
 import java.util.Random;
 
 public class Kick {
-    public static void Random(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
+    public static void Random(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         if (event.getMember().hasPermission(Permission.KICK_MEMBERS)) {
             System.out.println((long) msg.getJDA().getGuildById(msg.getGuild().getId()).getMembers().size());
             Random rand = new Random();
@@ -35,7 +33,7 @@ public class Kick {
         }
     }
 
-    public static void NotRandom(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
+    public static void NotRandom(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         if (event.getMember().hasPermission(Permission.KICK_MEMBERS) && msg.getMentionedMembers().get(0).getIdLong() != Token.REISMINERID && !msg.getMentionedMembers().get(0).getRoles().contains(event.getGuild().getRoleById(Token.BRATWURSCHTROLE))) {
             msg.getGuild().kick(msg.getMentionedMembers().get(0)).complete();
             Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` kicked `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();

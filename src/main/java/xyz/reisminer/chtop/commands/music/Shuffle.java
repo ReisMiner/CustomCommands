@@ -2,7 +2,7 @@ package xyz.reisminer.chtop.commands.music;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import xyz.reisminer.chtop.music.GuildMusicManager;
 import xyz.reisminer.chtop.music.PlayerManager;
 
@@ -12,16 +12,16 @@ import java.util.concurrent.BlockingQueue;
 
 
 public class Shuffle {
-    public static void mixQueue(GuildMessageReceivedEvent event) {
+    public static void mixQueue(MessageReceivedEvent event) {
 
         Member sender = event.getMember();
 
-        if (!sender.getVoiceState().inVoiceChannel()) {
+        if (!sender.getVoiceState().inAudioChannel()) {
             event.getChannel().sendMessageFormat("Not in a Voice Channel!").queue();
             return;
         }
 
-        final GuildMusicManager musicManager = PlayerManager.getInstance().getMusicManager(event.getChannel().getGuild());
+        final GuildMusicManager musicManager = PlayerManager.getInstance().getMusicManager(sender.getGuild());
         BlockingQueue<AudioTrack> trackQueue = musicManager.scheduler.queue;
 
         if (trackQueue.size() < 2) {

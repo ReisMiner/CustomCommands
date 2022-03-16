@@ -1,7 +1,7 @@
 package xyz.reisminer.chtop.commands.gamble;
 
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 
 import java.security.SecureRandom;
@@ -10,7 +10,7 @@ import static xyz.reisminer.chtop.commands.gamble.gambleDB.*;
 
 public class gamble {
 
-    public static void roulette(Message msg, TextChannel channel) {
+    public static void roulette(Message msg, MessageChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         if (splitMessage.length == 2) {
 

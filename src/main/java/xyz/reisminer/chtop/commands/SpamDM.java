@@ -2,7 +2,7 @@ package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import org.apache.commons.lang3.math.NumberUtils;
 import xyz.reisminer.chtop.Token;
 
@@ -11,7 +11,7 @@ import java.awt.*;
 public class SpamDM {
     static EmbedBuilder eb = new EmbedBuilder();
 
-    public static void sendDM(Message msg, TextChannel channel, int count) {
+    public static void sendDM(Message msg, MessageChannel channel, int count) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         StringBuilder tmp = new StringBuilder();
         if ((msg.getMentionedUsers().get(0).getIdLong() != 215136536260378624L) && (msg.getMentionedUsers().get(0).getIdLong() != 286888695879958530L) && (msg.getMentionedUsers().get(0).getIdLong() != 84396707305357313L)) {
@@ -35,7 +35,7 @@ public class SpamDM {
                 eb.setImage(Token.shutImg);
                 for (int i = 0; i < finalCount; i++){
                     if(!error)
-                        channnel.sendMessage(eb.build()).queue();
+                        channnel.sendMessageEmbeds(eb.build()).queue();
                 }
             });
             channel.sendMessage("Sending DMs").queue();

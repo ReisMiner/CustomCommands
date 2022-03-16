@@ -1,14 +1,13 @@
 package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.Event;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.Random;
 
 public class Gay {
-    public static void calc(GuildMessageReceivedEvent event) {
+    public static void calc(MessageReceivedEvent event) {
         Random rand = new Random();
         EmbedBuilder eb = new EmbedBuilder();
         String[] splitt = event.getMessage().getContentRaw().split(" ");

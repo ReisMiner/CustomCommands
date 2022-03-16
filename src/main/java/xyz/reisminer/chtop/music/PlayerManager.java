@@ -8,7 +8,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,15 +38,15 @@ public class PlayerManager {
         });
     }
 
-    public void loadAndPlay(TextChannel channel, String trackUrl) {
-        final GuildMusicManager musicManager = this.getMusicManager(channel.getGuild());
+    public void loadAndPlay(MessageReceivedEvent event, String trackUrl) {
+        final GuildMusicManager musicManager = this.getMusicManager(event.getMember().getGuild());
 
         this.audioPlayerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
                 musicManager.scheduler.queue(track);
 
-                channel.sendMessage("Adding to queue: ")
+                event.getChannel().sendMessage("Adding to queue: ")
                         .append(track.getInfo().title)
                         .append(" by ")
                         .append(track.getInfo().author)
@@ -59,7 +59,7 @@ public class PlayerManager {
                 for (AudioTrack t : tracks) {
                     musicManager.scheduler.queue(t);
                 }
-                channel.sendMessage("Added the Playlist and its content to the queue!").queue();
+                event.getChannel().sendMessage("Added the Playlist and its content to the queue!").queue();
             }
 
             @Override

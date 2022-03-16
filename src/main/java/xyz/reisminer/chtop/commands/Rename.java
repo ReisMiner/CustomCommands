@@ -3,12 +3,12 @@ package xyz.reisminer.chtop.commands;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import xyz.reisminer.chtop.Token;
 
 public class Rename {
-    public static void all(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
+    public static void all(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         if (event.getMember().hasPermission(Permission.NICKNAME_MANAGE)) {
             String[] splitMessage = msg.getContentRaw().split(" ");
             StringBuilder tmp = new StringBuilder(" ");
@@ -34,7 +34,7 @@ public class Rename {
         }
     }
 
-    public static void single(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
+    public static void single(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         if (event.getMember().hasPermission(Permission.NICKNAME_MANAGE)) {
             String[] splitMessage = msg.getContentRaw().split(" ");
             msg.delete().complete();
@@ -59,7 +59,7 @@ public class Rename {
         }
     }
 
-    public static void reset(Message msg, TextChannel channel, GuildMessageReceivedEvent event) {
+    public static void reset(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         if (event.getMember().hasPermission(Permission.NICKNAME_MANAGE)) {
             Token.logChannel.sendMessage(msg.getAuthor().getName() + " reset everyone's name").queue();
             for (Member member : event.getJDA().getGuildById(msg.getGuild().getId()).getMembers()) {

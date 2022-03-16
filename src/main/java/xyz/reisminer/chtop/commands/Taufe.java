@@ -2,7 +2,7 @@ package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import xyz.reisminer.chtop.Token;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Taufe {
 
-    public static void doTaufi(GuildMessageReceivedEvent event) {
+    public static void doTaufi(MessageReceivedEvent event) {
         Member baby = event.getMessage().getMentionedMembers().get(0);
         Member sender = event.getGuild().getMemberById(event.getAuthor().getIdLong());
         Long targetID = null;
@@ -25,14 +25,14 @@ public class Taufe {
             }
         }
 
-        if (!sender.getVoiceState().inVoiceChannel()) {
+        if (!sender.getVoiceState().inAudioChannel()) {
             event.getChannel().sendMessage("Gang in en Voice <:chanel:930558229073772554>!").queue();
             return;
         }
 
         targetID = sender.getVoiceState().getChannel().getIdLong();
 
-        if (!baby.getVoiceState().inVoiceChannel()) {
+        if (!baby.getVoiceState().inAudioChannel()) {
             event.getChannel().sendMessage("S Baby isch ned imne Voice <:chanel:930558229073772554>!").queue();
             return;
         }

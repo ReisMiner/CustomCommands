@@ -44,7 +44,7 @@ public class Join extends Thread{
                 guild.getAudioManager().openAudioConnection(tmpmsg.getMentionedMembers().get(0).getVoiceState().getChannel());
 
             }
-        else if (member.getVoiceState().inVoiceChannel()) {
+        else if (member.getVoiceState().inAudioChannel()) {
             guild.getAudioManager().openAudioConnection(member.getVoiceState().getChannel());
         }
     }

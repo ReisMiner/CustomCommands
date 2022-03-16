@@ -1,17 +1,16 @@
 package xyz.reisminer.chtop.commands.gamble;
 
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import xyz.reisminer.chtop.Token;
 
 import java.security.SecureRandom;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.*;
-import static xyz.reisminer.chtop.commands.gamble.gambleDB.getCurrencyOfUser;
 
 public class rob {
-    public static void steal(Message msg, TextChannel channel) {
+    public static void steal(Message msg, MessageChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         if (splitMessage.length == 3) {
             User victim;
@@ -74,7 +73,7 @@ public class rob {
         }
     }
 
-    public static void gift(Message msg, TextChannel channel) {
+    public static void gift(Message msg, MessageChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         if (splitMessage.length == 3 && !msg.getMentionedMembers().isEmpty()) {
             User author = msg.getAuthor();

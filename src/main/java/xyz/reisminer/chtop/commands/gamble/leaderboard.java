@@ -1,10 +1,10 @@
 package xyz.reisminer.chtop.commands.gamble;
 
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageChannel;
 
 public class leaderboard {
-    public static void showTopTen(Message msg, TextChannel channel) {
+    public static void showTopTen(Message msg, MessageChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         if (splitMessage.length == 2) {
             int count = Integer.parseInt(splitMessage[1]);

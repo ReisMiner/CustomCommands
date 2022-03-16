@@ -2,14 +2,14 @@ package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import xyz.reisminer.chtop.Token;
 
 import java.awt.*;
 
 public class DM {
     static EmbedBuilder eb = new EmbedBuilder();
-    public static void sendDM(Message msg, TextChannel channel, boolean deleteAuthorMsg){
+    public static void sendDM(Message msg, MessageChannel channel, boolean deleteAuthorMsg){
         String[] splitMessage = msg.getContentRaw().split(" ");
         String tmp = "";
         if(deleteAuthorMsg){
@@ -26,7 +26,7 @@ public class DM {
                 eb.setDescription(finalTmp);
                 eb.setColor(Color.red);
                 eb.setImage(Token.shutImg);
-                channnel.sendMessage(eb.build()).queue();
+                channnel.sendMessageEmbeds(eb.build()).queue();
             });
         }
 

@@ -3,7 +3,7 @@ package xyz.reisminer.chtop.slashcommands;
 import kotlin.Unit;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.jraf.klibnotion.client.Authentication;
 import org.jraf.klibnotion.client.ClientConfiguration;
 import org.jraf.klibnotion.client.NotionClient;
@@ -42,7 +42,7 @@ import static org.jraf.klibnotion.model.file.FileKt.File;
 
 public class Notion {
 
-    public static void readCalendar(SlashCommandEvent event) {
+    public static void readCalendar(SlashCommandInteractionEvent event) {
 
         if (!Arrays.asList(Token.allowed_notion).contains(event.getMember().getIdLong())) {
             event.reply("You have no permissions to use this cmd cuz u are not in da notion group :))").setEphemeral(true).queue();
@@ -116,7 +116,7 @@ public class Notion {
 
     }
 
-    public static void addToCalendar(SlashCommandEvent event) {
+    public static void addToCalendar(SlashCommandInteractionEvent event) {
 
         if (!Arrays.asList(Token.allowed_notion).contains(event.getMember().getIdLong())) {
             event.reply("You have no permissions to use this cmd cuz u are not in da notion group :))").setEphemeral(true).queue();
