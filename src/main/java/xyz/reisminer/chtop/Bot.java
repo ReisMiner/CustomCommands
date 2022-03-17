@@ -352,6 +352,10 @@ public class Bot extends ListenerAdapter {
         if (msg.getContentRaw().equalsIgnoreCase("$-$shmoun") && msg.getAuthor().getIdLong() != 397853005627523073L) {
             Token.shamoun = !Token.shamoun;
             Token.logChannel.sendMessage("Anti Shamoun = " + Token.shamoun).queue();
+            if(Token.shamoun == true)
+                msg.addReaction("\uD83D\uDC4D").queue();
+            else
+                 msg.addReaction("\uD83D\uDC4E").queue();
         }
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
