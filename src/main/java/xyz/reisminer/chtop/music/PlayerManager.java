@@ -44,7 +44,7 @@ public class PlayerManager {
         this.audioPlayerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
-                musicManager.scheduler.queue(track);
+                musicManager.scheduler.queue(track, event.getGuild().getIdLong());
 
                 event.getChannel().sendMessage("Adding to queue: ")
                         .append(track.getInfo().title)
@@ -57,7 +57,7 @@ public class PlayerManager {
             public void playlistLoaded(AudioPlaylist playlist) {
                 List<AudioTrack> tracks = playlist.getTracks();
                 for (AudioTrack t : tracks) {
-                    musicManager.scheduler.queue(t);
+                    musicManager.scheduler.queue(t, event.getGuild().getIdLong());
                 }
                 event.getChannel().sendMessage("Added the Playlist and its content to the queue!").queue();
             }

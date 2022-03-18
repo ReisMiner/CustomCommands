@@ -40,8 +40,10 @@ import static xyz.reisminer.chtop.commands.gamble.gambleDB.userExists;
 
 public class Bot extends ListenerAdapter {
 
+    public static JDA jda;
+
     public static void main(String[] args) throws LoginException {
-        JDA jda = JDABuilder.create(Token.TOKEN, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES)
+        jda = JDABuilder.create(Token.TOKEN, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES)
                 .addEventListeners(new Bot())
                 .setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
