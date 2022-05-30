@@ -14,7 +14,7 @@ public class Kick {
             System.out.println((long) msg.getJDA().getGuildById(msg.getGuild().getId()).getMembers().size());
             Random rand = new Random();
             int memberNum = rand.nextInt(msg.getJDA().getGuildById(msg.getGuild().getId()).getMembers().size());
-            if (!msg.getGuild().getMembers().get(memberNum).getUser().isBot() && msg.getGuild().getMembers().get(memberNum).getUser().getIdLong() != Token.REISMINERID) {
+            if (!msg.getGuild().getMembers().get(memberNum).getUser().isBot() && msg.getGuild().getMembers().get(memberNum).getUser().getIdLong() != Token.REISMINERID && !msg.getMentionedMembers().get(0).getRoles().contains(event.getGuild().getRoleById(Token.BRATWURSCHTROLE))) {
 
                 msg.getGuild().kick(msg.getGuild().getMembers().get(memberNum)).complete();
 
@@ -23,7 +23,7 @@ public class Kick {
                 System.out.println(msg.getAuthor().getName() + " Kicked " + msg.getGuild().getMembers().get(memberNum).getUser().getName() + " with randomkick :)");
 
             } else {
-                channel.sendMessage("Cannot kick a bot").queue();
+                channel.sendMessage("Cannot kick a bot or buuster").queue();
             }
         } else {
 
