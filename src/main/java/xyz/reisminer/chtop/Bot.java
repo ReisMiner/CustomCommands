@@ -1,15 +1,10 @@
 package xyz.reisminer.chtop;
 
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.*;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -105,9 +100,9 @@ public class Bot extends ListenerAdapter {
     @Override
     public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
         if (Token.shamoun && event.getMember().getIdLong() == 397853005627523073L) {
-            new Thread(() ->{
+            new Thread(() -> {
                 try {
-                    Thread.sleep(15*1000);
+                    Thread.sleep(15 * 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -123,6 +118,21 @@ public class Bot extends ListenerAdapter {
             System.out.println("On " + event.getGuild().getName() + " , " + event.getMember().getUser().getName() + " recieved Lernende Role cuz he/she joined!");
             Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getName() + "` recieved Lernende Role cuz he/she joined!").queue();
         }
+        if (event.getGuild().getIdLong() == Token.CHEESESERVERID) {
+            event.getGuild().addRoleToMember(event.getMember(), Objects.requireNonNull(event.getGuild().getRoleById(980153801635946546L))).queue();
+            Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getName() + "` recieved Lernende Role cuz he/she joined!").queue();
+        }
+    }
+
+    @Override
+    public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
+        if (event.getGuild().getIdLong() == Token.CHEESESERVERID) {
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setImage(event.getMember().getAvatarUrl());
+            eb.setTitle("Member Left");
+            eb.setDescription("**" + event.getMember().getUser().getAsTag() + "** left the server!");
+            event.getGuild().getChannelById(TextChannel.class, 980157760555581451L).sendMessageEmbeds(eb.build()).queue();
+        }
     }
 
     @Override
@@ -130,6 +140,18 @@ public class Bot extends ListenerAdapter {
         Message msg = event.getMessage();
         MessageChannel channel = event.getChannel();
         Member member = event.getMember();
+
+        if (msg.getGuild().getIdLong() == Token.CHEESESERVERID) {
+            for (String x : Token.blockList) {
+                if (msg.getContentRaw().contains(x)) {
+                    msg.delete().queue();
+                    channel.sendMessage("Don't use words that are against Discord TOS.").queue();
+                    return;
+                }
+            }
+        }
+
+
         if (!msg.getMentionedMembers().isEmpty()) {
             if (msg.getMentionedMembers().get(0).getIdLong() == Token.BOTID) {
                 if (!userExists(msg.getAuthor())) {
@@ -354,10 +376,10 @@ public class Bot extends ListenerAdapter {
         if (msg.getContentRaw().equalsIgnoreCase("$-$shmoun") && msg.getAuthor().getIdLong() != 397853005627523073L) {
             Token.shamoun = !Token.shamoun;
             Token.logChannel.sendMessage("Anti Shamoun = " + Token.shamoun).queue();
-            if(Token.shamoun == true)
+            if (Token.shamoun == true)
                 msg.addReaction("\uD83D\uDC4D").queue();
             else
-                 msg.addReaction("\uD83D\uDC4E").queue();
+                msg.addReaction("\uD83D\uDC4E").queue();
         }
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
