@@ -26,8 +26,6 @@ import xyz.reisminer.chtop.slashcommands.Notion;
 
 import javax.security.auth.login.LoginException;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.addNewUser;
@@ -59,42 +57,6 @@ public class Bot extends ListenerAdapter {
 
         GetSettings.getSettings();
         Menu.load();
-
-        Timer timer = new Timer();
-        Member sebi = Objects.requireNonNull(event.getJDA().getGuildById(777817324996132895L)).getMemberById(485407839095881749L);
-        Member jannis = Objects.requireNonNull(event.getJDA().getGuildById(777817324996132895L)).getMemberById(406837798755368980L);
-
-        timer.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                if (Token.autoRename) {
-                    try {
-                        assert sebi != null;
-                        if (!Objects.requireNonNull(sebi.getNickname()).equalsIgnoreCase("xX_oMeGaBoOmErBoi_Xx_4k420hzLP") || sebi.getUser().getName().equals(sebi.getNickname())) {
-                            sebi.modifyNickname("xX_oMeGaBoOmErBoi_Xx_4k420hzLP").queue();
-                        }
-                    } catch (Exception e) {
-                        try {
-                            sebi.modifyNickname("xX_oMeGaBoOmErBoi_Xx_4k420hzLP").queue();
-                        } catch (Exception ignored) {
-                        }
-                    }
-                    try {
-                        assert jannis != null;
-                        if (!Objects.requireNonNull(jannis.getNickname()).equalsIgnoreCase("spastbun") || jannis.getUser().getName().equals(jannis.getNickname())) {
-                            jannis.modifyNickname("spastbun").queue();
-                        }
-                    } catch (Exception e) {
-                        try {
-                            jannis.modifyNickname("spastbun").queue();
-                        } catch (Exception ignored) {
-                        }
-                    }
-                }
-            }
-        }, 0, 10000);
-
     }
 
     @Override
@@ -120,7 +82,7 @@ public class Bot extends ListenerAdapter {
         }
         if (event.getGuild().getIdLong() == Token.CHEESESERVERID) {
             event.getGuild().addRoleToMember(event.getMember(), Objects.requireNonNull(event.getGuild().getRoleById(980153801635946546L))).queue();
-            Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getName() + "` recieved Lernende Role cuz he/she joined!").queue();
+            Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getName() + "` recieved viewers Role cuz he/she joined!").queue();
         }
     }
 
@@ -146,6 +108,7 @@ public class Bot extends ListenerAdapter {
                 if (msg.getContentRaw().contains(x)) {
                     msg.delete().queue();
                     channel.sendMessage("Don't use words that are against Discord TOS.").queue();
+                    Token.logChannel.sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg).queue();
                     return;
                 }
             }

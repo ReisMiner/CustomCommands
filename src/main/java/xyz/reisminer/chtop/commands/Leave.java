@@ -1,8 +1,6 @@
 package xyz.reisminer.chtop.commands;
 
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.events.Event;
-import xyz.reisminer.chtop.commands.music.Stop;
 import xyz.reisminer.chtop.music.GuildMusicManager;
 import xyz.reisminer.chtop.music.PlayerManager;
 
