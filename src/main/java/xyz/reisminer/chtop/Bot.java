@@ -5,7 +5,6 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
-import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -26,7 +25,6 @@ import xyz.reisminer.chtop.slashcommands.Notion;
 
 import javax.security.auth.login.LoginException;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.addNewUser;
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.userExists;
@@ -57,20 +55,6 @@ public class Bot extends ListenerAdapter {
 
         GetSettings.getSettings();
         Menu.load();
-    }
-
-    @Override
-    public void onGuildVoiceJoin(@NotNull GuildVoiceJoinEvent event) {
-        if (Token.shamoun && event.getMember().getIdLong() == 397853005627523073L) {
-            new Thread(() -> {
-                try {
-                    Thread.sleep(15 * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                event.getMember().timeoutFor(1, TimeUnit.MINUTES).queue();
-            }).start();
-        }
     }
 
     @Override
@@ -122,10 +106,6 @@ public class Bot extends ListenerAdapter {
                 }
                 gambleDB.changeBalance(msg.getAuthor(), 5);
             }
-        }
-
-        if (Token.shamoun && event.getMember().getIdLong() == 397853005627523073L) {
-            event.getMessage().reply("https://cdn.discordapp.com/attachments/824210975338922005/953645012535640064/68l7s0.gif").queue();
         }
 
         if (msg.getContentRaw().split(" ")[0].equalsIgnoreCase("$-$block") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
@@ -335,14 +315,6 @@ public class Bot extends ListenerAdapter {
         if (msg.getContentRaw().equalsIgnoreCase("$-$boostonly") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
             SetStuff.setTaufBoostOnly(!Token.boostOnly);
             Token.logChannel.sendMessage("Boost Only = " + Token.boostOnly).queue();
-        }
-        if (msg.getContentRaw().equalsIgnoreCase("$-$shmoun") && msg.getAuthor().getIdLong() != 397853005627523073L) {
-            Token.shamoun = !Token.shamoun;
-            Token.logChannel.sendMessage("Anti Shamoun = " + Token.shamoun).queue();
-            if (Token.shamoun == true)
-                msg.addReaction("\uD83D\uDC4D").queue();
-            else
-                msg.addReaction("\uD83D\uDC4E").queue();
         }
         if (Token.sendReacts) {
             msg.addReaction(":fredy:780366700415287326").complete();
