@@ -91,8 +91,8 @@ public class Bot extends ListenerAdapter {
             for (String x : Token.blockList) {
                 if (msg.getContentRaw().contains(x)) {
                     msg.delete().queue();
-                    channel.sendMessage("Don't use words that are against Discord TOS.").queue();
-                    Token.logChannel.sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg).queue();
+                    channel.sendMessage("Don't use words that are against Discord TOS. Use Acronyms Cheese and Choofer!").queue();
+                    Token.logChannel.sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg.getContentRaw()).queue();
                     return;
                 }
             }
