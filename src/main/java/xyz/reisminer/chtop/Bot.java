@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
 import xyz.reisminer.chtop.commands.*;
@@ -92,7 +93,7 @@ public class Bot extends ListenerAdapter {
                 if (msg.getContentRaw().contains(x) && !msg.getAuthor().isBot()) {
                     msg.delete().queue();
                     channel.sendMessage("Don't use words that are against Discord TOS. Use Acronyms Cheese and Choofer!").queue();
-                    jda.getTextChannelById(985267292466204763L).sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg.getContentRaw().replaceAll(x,"<bad word>")).queue();
+                    jda.getTextChannelById(985267292466204763L).sendMessage(msg.getAuthor().getAsTag() + " sent: " + StringUtils.replaceEachRepeatedly(msg.getContentRaw(), Token.blockList, new String[]{"<bad word>"})).queue();
                     return;
                 }
             }
