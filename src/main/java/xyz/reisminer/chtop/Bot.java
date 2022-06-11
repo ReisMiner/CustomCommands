@@ -89,10 +89,10 @@ public class Bot extends ListenerAdapter {
 
         if (msg.getGuild().getIdLong() == Token.CHEESESERVERID) {
             for (String x : Token.blockList) {
-                if (msg.getContentRaw().contains(x)) {
+                if (msg.getContentRaw().contains(x) && !msg.getAuthor().isBot()) {
                     msg.delete().queue();
                     channel.sendMessage("Don't use words that are against Discord TOS. Use Acronyms Cheese and Choofer!").queue();
-                    jda.getTextChannelById(985267292466204763L).sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg.getContentRaw().replaceAll("cheat","<bad word>")).queue();
+                    jda.getTextChannelById(985267292466204763L).sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg.getContentRaw().replaceAll(x,"<bad word>")).queue();
                     return;
                 }
             }
