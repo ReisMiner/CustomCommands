@@ -92,7 +92,7 @@ public class Bot extends ListenerAdapter {
                 if (msg.getContentRaw().contains(x)) {
                     msg.delete().queue();
                     channel.sendMessage("Don't use words that are against Discord TOS. Use Acronyms Cheese and Choofer!").queue();
-                    Token.logChannel.sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg.getContentRaw()).queue();
+                    jda.getTextChannelById(985267292466204763L).sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg.getContentRaw().replaceAll("cheat","<bad word>")).queue();
                     return;
                 }
             }
