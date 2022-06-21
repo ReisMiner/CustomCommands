@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.jetbrains.annotations.NotNull;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
 import xyz.reisminer.chtop.commands.*;
+import xyz.reisminer.chtop.commands.Menu;
 import xyz.reisminer.chtop.commands.gamble.*;
 import xyz.reisminer.chtop.commands.music.*;
 import xyz.reisminer.chtop.commands.util.Base64Convert;
@@ -24,6 +25,7 @@ import xyz.reisminer.chtop.slashcommands.MailSpoof;
 import xyz.reisminer.chtop.slashcommands.Notion;
 
 import javax.security.auth.login.LoginException;
+import java.awt.*;
 import java.util.Objects;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.addNewUser;
@@ -67,6 +69,14 @@ public class Bot extends ListenerAdapter {
         if (event.getGuild().getIdLong() == Token.CHEESESERVERID) {
             event.getGuild().addRoleToMember(event.getMember(), Objects.requireNonNull(event.getGuild().getRoleById(980153801635946546L))).queue();
             Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getName() + "` recieved viewers Role cuz he/she joined!").queue();
+
+            EmbedBuilder eb = new EmbedBuilder();
+            event.getMember().getUser().openPrivateChannel().queue(channnel -> {
+                eb.setTitle("Thank you for joining the DBD Cheese server!");
+                eb.setDescription("Keep in mind though that this is not the official milkywaycheese discord server!");
+                eb.setColor(Color.green);
+                channnel.sendMessageEmbeds(eb.build()).queue();
+            });
         }
     }
 
@@ -92,7 +102,7 @@ public class Bot extends ListenerAdapter {
                 if (msg.getContentRaw().contains(x) && !msg.getAuthor().isBot()) {
                     msg.delete().queue();
                     channel.sendMessage("Don't use words that are against Discord TOS. Use Acronyms Cheese and Choofer!").queue();
-                    jda.getTextChannelById(985267292466204763L).sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg.getContentRaw().replaceAll(x,"<bad word>")).queue();
+                    jda.getTextChannelById(985267292466204763L).sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg.getContentRaw().replaceAll(x, "<bad word>")).queue();
                     return;
                 }
             }
