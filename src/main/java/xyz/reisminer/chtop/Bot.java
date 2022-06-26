@@ -13,8 +13,8 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.jetbrains.annotations.NotNull;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
-import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.Menu;
+import xyz.reisminer.chtop.commands.*;
 import xyz.reisminer.chtop.commands.gamble.*;
 import xyz.reisminer.chtop.commands.music.*;
 import xyz.reisminer.chtop.commands.util.Base64Convert;
@@ -26,6 +26,9 @@ import xyz.reisminer.chtop.slashcommands.Notion;
 
 import javax.security.auth.login.LoginException;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Objects;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.addNewUser;
@@ -84,10 +87,17 @@ public class Bot extends ListenerAdapter {
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
         if (event.getGuild().getIdLong() == Token.CHEESESERVERID) {
             EmbedBuilder eb = new EmbedBuilder();
-            eb.setImage(event.getMember().getAvatarUrl());
+            InputStream file = null;
+            try {
+                file = new URL(event.getMember().getAvatarUrl()).openStream();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            eb.setImage("attachment://user.png");
             eb.setTitle("Member Left");
             eb.setDescription("**" + event.getMember().getUser().getAsTag() + "** left the server!");
-            event.getGuild().getChannelById(TextChannel.class, 980157760555581451L).sendMessageEmbeds(eb.build()).queue();
+            event.getGuild().getChannelById(TextChannel.class, 980157760555581451L)
+                    .sendFile(file, "user.png").setEmbeds(eb.build()).queue();
         }
     }
 
