@@ -90,14 +90,15 @@ public class Bot extends ListenerAdapter {
             InputStream file = null;
             try {
                 file = new URL(event.getMember().getAvatarUrl()).openStream();
+                eb.setImage("attachment://user.png");
+                eb.setTitle("Member Left");
+                eb.setDescription("**" + event.getMember().getUser().getAsTag() + "** left the server!");
+                event.getGuild().getTextChannelById(980157760555581451L)
+                        .sendFile(file, "user.png").setEmbeds(eb.build()).queue();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
-            eb.setImage("attachment://user.png");
-            eb.setTitle("Member Left");
-            eb.setDescription("**" + event.getMember().getUser().getAsTag() + "** left the server!");
-            event.getGuild().getChannelById(TextChannel.class, 980157760555581451L)
-                    .sendFile(file, "user.png").setEmbeds(eb.build()).queue();
+
         }
     }
 
