@@ -3,6 +3,7 @@ package xyz.reisminer.chtop.slashcommands;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.internal.interactions.CommandDataImpl;
+import xyz.reisminer.chtop.Token;
 
 import java.util.Objects;
 
@@ -35,6 +36,11 @@ public class CreateCommands {
         notion2.addOption(OptionType.STRING, "date", "what date does it take place? Format: DD.MM.YYYY", true);
         notion2.addOption(OptionType.STRING, "content", "additional information. Split individual lines with \\n", false);
         jda.upsertCommand(notion2).queue();
+
+        CommandDataImpl viewerPlay = new CommandDataImpl("viewer-play","Register Yourself to play with me during a stream!");
+        viewerPlay.addOption(OptionType.STRING, "dbd-name", "Your DBD Ingame Name", true);
+        viewerPlay.addOption(OptionType.STRING, "yt-name", "Your Youtube Chat name", true);
+        jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlay).queue();
     }
 
     public void initialize(JDA jda, Long guildID) {

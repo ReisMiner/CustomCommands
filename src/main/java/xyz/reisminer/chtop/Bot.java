@@ -23,8 +23,10 @@ import xyz.reisminer.chtop.commands.util.HexConvert;
 import xyz.reisminer.chtop.slashcommands.CreateCommands;
 import xyz.reisminer.chtop.slashcommands.MailSpoof;
 import xyz.reisminer.chtop.slashcommands.Notion;
+import xyz.reisminer.chtop.slashcommands.ViewerPlay;
 
 import javax.security.auth.login.LoginException;
+import javax.swing.text.View;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
@@ -374,6 +376,10 @@ public class Bot extends ListenerAdapter {
             }
             case "calendar-add": {
                 Notion.addToCalendar(event);
+                break;
+            }
+            case "viewer-play": {
+                ViewerPlay.register(event);
                 break;
             }
             default: {
