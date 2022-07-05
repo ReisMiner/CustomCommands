@@ -41,6 +41,9 @@ public class CreateCommands {
         viewerPlay.addOption(OptionType.STRING, "dbd-name", "Your DBD Ingame Name", true);
         viewerPlay.addOption(OptionType.STRING, "yt-name", "Your Youtube Chat name", true);
         jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlay).queue();
+
+        CommandDataImpl viewerPlayViewQueue = new CommandDataImpl("viewer-play-view","Get the current queue.");
+        jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlayViewQueue).queue();
     }
 
     public void initialize(JDA jda, Long guildID) {

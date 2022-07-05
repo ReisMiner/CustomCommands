@@ -1,7 +1,10 @@
 package xyz.reisminer.chtop;
 
 import net.dv8tion.jda.api.*;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
@@ -23,10 +26,9 @@ import xyz.reisminer.chtop.commands.util.HexConvert;
 import xyz.reisminer.chtop.slashcommands.CreateCommands;
 import xyz.reisminer.chtop.slashcommands.MailSpoof;
 import xyz.reisminer.chtop.slashcommands.Notion;
-import xyz.reisminer.chtop.slashcommands.ViewerPlay;
+import xyz.reisminer.chtop.slashcommands.cheese.ViewerPlay;
 
 import javax.security.auth.login.LoginException;
-import javax.swing.text.View;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
@@ -379,7 +381,11 @@ public class Bot extends ListenerAdapter {
                 break;
             }
             case "viewer-play": {
-                ViewerPlay.register(event);
+                ViewerPlay.getInstance().register(event);
+                break;
+            }
+            case "viewer-play-view": {
+                ViewerPlay.getInstance().viewQueue(event);
                 break;
             }
             default: {
