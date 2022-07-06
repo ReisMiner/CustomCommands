@@ -44,6 +44,8 @@ public class CreateCommands {
 
         CommandDataImpl viewerPlayViewQueue = new CommandDataImpl("viewer-play-view","Get the current queue.");
         jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlayViewQueue).queue();
+        CommandDataImpl viewerPlayNext = new CommandDataImpl("viewer-play-next","Get new players! Mod Command!");
+        jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlayNext).queue();
     }
 
     public void initialize(JDA jda, Long guildID) {

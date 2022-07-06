@@ -2,7 +2,9 @@ package xyz.reisminer.chtop.slashcommands.cheese;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import xyz.reisminer.chtop.Token;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -53,8 +55,6 @@ public class ViewerPlay {
             _queue.add(new CheeseViewer(dcID, "ccccccccc", "ccccccccccccccccccccccccccccc"));
             _queue.add(new CheeseViewer(dcID, "d", "d"));
             _queue.add(new CheeseViewer(dcID, "e", "e"));
-            _queue.add(new CheeseViewer(dcID, "f", "f"));
-            _queue.add(new CheeseViewer(dcID, "g", "g"));
             eb.setDescription("Successfully added `" + dbd + "` to the queue.");
             eb.setColor(Color.decode("#69FF69"));
         }
@@ -77,6 +77,42 @@ public class ViewerPlay {
         }
 
         eb.setDescription("Listing the Viewers currently queued up!\n\nDiscord - DBD - YouTube - Games Left\n\n" + out);
+
+        event.getHook().editOriginalEmbeds(eb.build()).queue();
+    }
+
+    public void next(SlashCommandInteractionEvent event) {
+        event.deferReply().queue();
+
+        boolean allowed = false;
+        for (Role r : event.getMember().getRoles()) {
+            if (r.getIdLong() == Token.CHEESEMODROLE) {
+                allowed = true;
+            }
+        }
+
+        if (!allowed) {
+            event.getHook().setEphemeral(true).editOriginal("No Permissions!").queue();
+            return;
+        }
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("**Queue Manager**");
+        eb.setFooter("Query performed by " + event.getMember().getUser().getAsTag(), event.getMember().getUser().getAvatarUrl());
+
+        if (_queue != null && _queue.get(0) != null)
+            _queue.removeIf(v -> v.getGamesLeft() == 0);
+
+        StringBuilder out = new StringBuilder();
+        if (_queue != null)
+            for (int i = 0; i < 4; i++) {
+                if (_queue.get(i) != null) {
+                    out.append(String.format("<@%d> - **%s** - **%s** - *%d*\n", _queue.get(i).getDiscordID(), _queue.get(i).getDbdName(), _queue.get(i).getYtName(), _queue.get(i).getGamesLeft()));
+                    _queue.get(i).setGamesLeft(_queue.get(i).getGamesLeft() - 1);
+                }
+            }
+
+        eb.setDescription("The following people are playing in the next round!\n\nDiscord - DBD - YouTube - Games Left\n\n" + out);
 
         event.getHook().editOriginalEmbeds(eb.build()).queue();
     }

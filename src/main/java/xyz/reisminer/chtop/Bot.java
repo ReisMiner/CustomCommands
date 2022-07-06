@@ -388,6 +388,10 @@ public class Bot extends ListenerAdapter {
                 ViewerPlay.getInstance().viewQueue(event);
                 break;
             }
+            case "viewer-play-next": {
+                ViewerPlay.getInstance().next(event);
+                break;
+            }
             default: {
                 event.reply("not a valid command").setEphemeral(true).queue();
             }
