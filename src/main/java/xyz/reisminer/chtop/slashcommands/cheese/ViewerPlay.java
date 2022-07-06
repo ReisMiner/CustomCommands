@@ -13,6 +13,7 @@ public class ViewerPlay {
 
     private static ArrayList<CheeseViewer> _queue;
     private static ViewerPlay _viewerPlay;
+    private static boolean _queueOpen = false;
 
     private ViewerPlay() {
         _queue = new ArrayList<>();
@@ -27,6 +28,12 @@ public class ViewerPlay {
 
     public void register(SlashCommandInteractionEvent event) {
         event.deferReply().queue();
+
+        if (!_queueOpen) {
+            event.getHook().editOriginal("Currently, the queue is not open!").queue();
+            return;
+        }
+
         String dbd = event.getOption("dbd-name").getAsString();
         String yt = event.getOption("yt-name").getAsString();
         long dcID = event.getMember().getIdLong();
@@ -59,6 +66,11 @@ public class ViewerPlay {
 
     public void viewQueue(SlashCommandInteractionEvent event) {
         event.deferReply().queue();
+
+        if (!_queueOpen) {
+            event.getHook().editOriginal("Currently, the queue is not open!").queue();
+            return;
+        }
 
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("**Queue Manager**");
@@ -101,13 +113,44 @@ public class ViewerPlay {
         StringBuilder out = new StringBuilder();
         if ((_queue != null ? _queue.size() : 0) > 0)
             for (int i = 0; i < (Math.min(_queue.size(), 3)); i++) {
-                if (true) {
-                    out.append(String.format("<@%d> - **%s** - **%s** - *%d*\n", _queue.get(i).getDiscordID(), _queue.get(i).getDbdName(), _queue.get(i).getYtName(), _queue.get(i).getGamesLeft()));
-                    _queue.get(i).setGamesLeft(_queue.get(i).getGamesLeft() - 1);
-                }
+                out.append(String.format("<@%d> - **%s** - **%s** - *%d*\n", _queue.get(i).getDiscordID(), _queue.get(i).getDbdName(), _queue.get(i).getYtName(), _queue.get(i).getGamesLeft()));
+                _queue.get(i).setGamesLeft(_queue.get(i).getGamesLeft() - 1);
             }
 
         eb.setDescription("The following people are playing in the next round!\n\nDiscord - DBD - YouTube - Games Left\n\n" + out);
+
+        event.getHook().editOriginalEmbeds(eb.build()).queue();
+    }
+
+    public void toggle(SlashCommandInteractionEvent event) {
+        event.deferReply().queue();
+
+        boolean allowed = false;
+        for (Role r : event.getMember().getRoles()) {
+            if (r.getIdLong() == Token.CHEESEMODROLE) {
+                allowed = true;
+            }
+        }
+
+        if (!allowed) {
+            event.getHook().setEphemeral(true).editOriginal("No Permissions!").queue();
+            return;
+        }
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("**Queue Manager**");
+        eb.setFooter("Query performed by " + event.getMember().getUser().getAsTag(), event.getMember().getUser().getAvatarUrl());
+
+        if (!_queueOpen) {
+            _queueOpen = true;
+            eb.setDescription("Queue Toggled to **Open**");
+            eb.setColor(Color.decode("#69FF69"));
+        } else {
+            _queueOpen = false;
+            _queue.clear();
+            eb.setDescription("Queue Toggled to **Closed**");
+            eb.setColor(Color.decode("#FF6969"));
+        }
 
         event.getHook().editOriginalEmbeds(eb.build()).queue();
     }
