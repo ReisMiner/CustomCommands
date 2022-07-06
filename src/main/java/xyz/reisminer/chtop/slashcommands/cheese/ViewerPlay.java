@@ -35,7 +35,7 @@ public class ViewerPlay {
 
         if (_queue != null)
             for (CheeseViewer c : _queue) {
-                if (/*c.getDiscordID() == dcID || */c.getDbdName().equalsIgnoreCase(dbd) || c.getYtName().equalsIgnoreCase(yt)) {
+                if (c.getDiscordID() == dcID || c.getDbdName().equalsIgnoreCase(dbd) || c.getYtName().equalsIgnoreCase(yt)) {
                     existent = true;
                     break;
                 }
@@ -53,8 +53,6 @@ public class ViewerPlay {
             _queue.add(new CheeseViewer(dcID, "aaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaa"));
             _queue.add(new CheeseViewer(dcID, "bbbbbbbbbbbbbbbb", "bbbbbbbbbbbbbbbbbbbbbbbb"));
             _queue.add(new CheeseViewer(dcID, "ccccccccc", "ccccccccccccccccccccccccccccc"));
-            _queue.add(new CheeseViewer(dcID, "d", "d"));
-            _queue.add(new CheeseViewer(dcID, "e", "e"));
             eb.setDescription("Successfully added `" + dbd + "` to the queue.");
             eb.setColor(Color.decode("#69FF69"));
         }
@@ -100,13 +98,13 @@ public class ViewerPlay {
         eb.setTitle("**Queue Manager**");
         eb.setFooter("Query performed by " + event.getMember().getUser().getAsTag(), event.getMember().getUser().getAvatarUrl());
 
-        if (_queue != null && _queue.get(0) != null)
+        if ((_queue != null ? _queue.size() : 0) > 0)
             _queue.removeIf(v -> v.getGamesLeft() == 0);
 
         StringBuilder out = new StringBuilder();
-        if (_queue != null)
-            for (int i = 0; i < 4; i++) {
-                if (_queue.get(i) != null) {
+        if ((_queue != null ? _queue.size() : 0) > 0)
+            for (int i = 0; i < (Math.min(_queue.size(), 3)); i++) {
+                if (true) {
                     out.append(String.format("<@%d> - **%s** - **%s** - *%d*\n", _queue.get(i).getDiscordID(), _queue.get(i).getDbdName(), _queue.get(i).getYtName(), _queue.get(i).getGamesLeft()));
                     _queue.get(i).setGamesLeft(_queue.get(i).getGamesLeft() - 1);
                 }
