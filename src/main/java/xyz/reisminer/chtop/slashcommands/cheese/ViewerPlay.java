@@ -50,9 +50,6 @@ public class ViewerPlay {
 
         if (!existent) {
             _queue.add(new CheeseViewer(dcID, dbd, yt));
-            _queue.add(new CheeseViewer(dcID, "aaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaa"));
-            _queue.add(new CheeseViewer(dcID, "bbbbbbbbbbbbbbbb", "bbbbbbbbbbbbbbbbbbbbbbbb"));
-            _queue.add(new CheeseViewer(dcID, "ccccccccc", "ccccccccccccccccccccccccccccc"));
             eb.setDescription("Successfully added `" + dbd + "` to the queue.");
             eb.setColor(Color.decode("#69FF69"));
         }
