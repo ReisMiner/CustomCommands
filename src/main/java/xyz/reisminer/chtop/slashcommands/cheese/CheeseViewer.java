@@ -5,24 +5,12 @@ public class CheeseViewer {
         return discordID;
     }
 
-    public void setDiscordID(long discordID) {
-        this.discordID = discordID;
-    }
-
     public String getDbdName() {
         return dbdName;
     }
 
-    public void setDbdName(String dbdName) {
-        this.dbdName = dbdName;
-    }
-
     public String getYtName() {
         return ytName;
-    }
-
-    public void setYtName(String ytName) {
-        this.ytName = ytName;
     }
 
     public int getGamesLeft() {

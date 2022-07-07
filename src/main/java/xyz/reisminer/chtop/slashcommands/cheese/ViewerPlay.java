@@ -54,6 +54,9 @@ public class ViewerPlay {
         eb.setColor(Color.decode("#FF6969"));
         eb.setDescription("Didnt add `" + dbd + "` to the queue since you're already registered!");
         eb.addField(new MessageEmbed.Field("Hint", "Providing a false dbd in-game name or YouTube channel name can lead to a block!", false));
+        eb.addField(new MessageEmbed.Field("Acknowledgement",
+                "By putting yourself into the queue you agree that <@"+Token.REISMINERID+"> is not responsible for a ban that might occur!" +
+                        "Ban? Take a look at [this](https://discord.com/channels/980122395547426846/980153564309643404/993953155085762690)!", false));
 
         if (!existent) {
             _queue.add(new CheeseViewer(dcID, dbd, yt));
@@ -106,6 +109,7 @@ public class ViewerPlay {
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("**Queue Manager**");
         eb.setFooter("Query performed by " + event.getMember().getUser().getAsTag(), event.getMember().getUser().getAvatarUrl());
+        eb.setColor(Color.decode("#69FF69"));
 
         if ((_queue != null ? _queue.size() : 0) > 0)
             _queue.removeIf(v -> v.getGamesLeft() == 0);
@@ -116,7 +120,8 @@ public class ViewerPlay {
                 out.append(String.format("<@%d> - **%s** - **%s** - *%d*\n", _queue.get(i).getDiscordID(), _queue.get(i).getDbdName(), _queue.get(i).getYtName(), _queue.get(i).getGamesLeft()));
                 _queue.get(i).setGamesLeft(_queue.get(i).getGamesLeft() - 1);
             }
-
+        else
+            eb.setColor(Color.decode("#FF6969"));
         eb.setDescription("The following people are playing in the next round!\n\nDiscord - DBD - YouTube - Games Left\n\n" + out);
 
         event.getHook().editOriginalEmbeds(eb.build()).queue();
