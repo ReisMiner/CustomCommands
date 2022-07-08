@@ -50,6 +50,12 @@ public class CreateCommands {
 
         CommandDataImpl viewerPlayToggle = new CommandDataImpl("viewer-play-toggle","Toggle Queue Open or Close. Mod Command!");
         jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlayToggle).queue();
+
+        CommandDataImpl viewerPlayRemove = new CommandDataImpl("viewer-play-remove","Remove yourself from the queue!");
+        viewerPlayRemove.addOption(OptionType.USER, "discord-name", "Discord", false);
+        viewerPlayRemove.addOption(OptionType.STRING, "dbd-name", "DBD IGN", false);
+        viewerPlayRemove.addOption(OptionType.STRING, "yt-name", "YT Channel name", false);
+        jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlayRemove).queue();
     }
 
     public void initialize(JDA jda, Long guildID) {

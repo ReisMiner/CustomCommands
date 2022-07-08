@@ -396,6 +396,10 @@ public class Bot extends ListenerAdapter {
                 ViewerPlay.getInstance().toggle(event);
                 break;
             }
+            case "viewer-play-remove": {
+                ViewerPlay.getInstance().remove(event);
+                break;
+            }
             default: {
                 event.reply("not a valid command").setEphemeral(true).queue();
             }

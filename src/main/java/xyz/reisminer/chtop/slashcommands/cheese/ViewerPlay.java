@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import xyz.reisminer.chtop.Token;
 
 import java.awt.*;
@@ -55,8 +56,9 @@ public class ViewerPlay {
         eb.setDescription("Didnt add `" + dbd + "` to the queue since you're already registered!");
         eb.addField(new MessageEmbed.Field("Hint", "Providing a false dbd in-game name or YouTube channel name can lead to a block!", false));
         eb.addField(new MessageEmbed.Field("Acknowledgement",
-                "By putting yourself into the queue you agree that <@"+Token.REISMINERID+"> is not responsible for a ban that might occur!" +
-                        "Ban? Take a look at [this](https://discord.com/channels/980122395547426846/980153564309643404/993953155085762690)!", false));
+                "By putting yourself into the queue you agree that <@" + Token.REISMINERID + "> is not responsible for a ban that might occur!" +
+                        "\nWhat Ban? Take a look at [this](https://discord.com/channels/980122395547426846/980153564309643404/993953155085762690)! " +
+                        "You can remove yourself out of the queue with /viewer-play-remove", false));
 
         if (!existent) {
             _queue.add(new CheeseViewer(dcID, dbd, yt));
@@ -155,6 +157,57 @@ public class ViewerPlay {
             _queue.clear();
             eb.setDescription("Queue Toggled to **Closed**");
             eb.setColor(Color.decode("#FF6969"));
+        }
+
+        event.getHook().editOriginalEmbeds(eb.build()).queue();
+    }
+
+    public void remove(SlashCommandInteractionEvent event) {
+        event.deferReply().queue();
+
+        OptionMapping dc = event.getOption("discord-name");
+        OptionMapping dbd = event.getOption("dbd-name");
+        OptionMapping yt = event.getOption("yt-name");
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("**Queue Manager**");
+        eb.setFooter("Query performed by " + event.getMember().getUser().getAsTag(), event.getMember().getUser().getAvatarUrl());
+        eb.setColor(Color.decode("#FF6969"));
+
+        if (dc == null && dbd == null && yt == null) {
+            if (_queue.removeIf(c -> c.getDiscordID() == event.getMember().getIdLong()))
+                eb.setDescription("Removed <@" + event.getMember().getIdLong() + "> from the queue!");
+            else
+                eb.setDescription("No one was removed from the queue!");
+        } else {
+            boolean allowed = false;
+            for (Role r : event.getMember().getRoles()) {
+                if (r.getIdLong() == Token.CHEESEMODROLE) {
+                    allowed = true;
+                }
+            }
+            if (!allowed) {
+                event.getHook().setEphemeral(true).editOriginal("No Permissions!").queue();
+                return;
+            }
+
+            if (dc != null) {
+                if (_queue.removeIf(c -> c.getDiscordID() == dc.getAsUser().getIdLong()))
+                    eb.setDescription("Removed <@" + dc.getAsUser().getIdLong() + "> from the queue!");
+                else
+                    eb.setDescription("No one was removed from the queue!");
+            } else if (dbd != null) {
+                if (_queue.removeIf(c -> c.getDbdName().equalsIgnoreCase(dbd.getAsString())))
+                    eb.setDescription("Removed DBD User `" + dbd.getAsString() + "` from the queue!");
+                else
+                    eb.setDescription("No one was removed from the queue!");
+            } else if (yt != null) {
+                if (_queue.removeIf(c -> c.getYtName().equalsIgnoreCase(yt.getAsString())))
+                    eb.setDescription("Removed YT Channel `" + yt.getAsString() + "` from the queue!");
+                else
+                    eb.setDescription("No one was removed from the queue!");
+            }
+
         }
 
         event.getHook().editOriginalEmbeds(eb.build()).queue();
