@@ -187,7 +187,7 @@ public class ViewerPlay {
                 }
             }
             if (!allowed) {
-                event.getHook().setEphemeral(true).editOriginal("No Permissions!").queue();
+                event.getHook().setEphemeral(true).editOriginal("No Permissions to remove others! Use the command without Parameters!").queue();
                 return;
             }
 
