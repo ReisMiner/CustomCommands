@@ -121,6 +121,14 @@ public class Bot extends ListenerAdapter {
                     return;
                 }
             }
+            if(msg.getContentRaw().equalsIgnoreCase("viewer-play")){
+                EmbedBuilder eb = new EmbedBuilder();
+                eb.setImage("https://cdn.discordapp.com/attachments/684446613028077644/995719534164066385/unknown.png")
+                        .setDescription("Enter the command with a **/** in front and select the circled command from the selection!\nIf the selection does not appear, you are doing something wrong.")
+                        .setTitle("Wrong Syntax!");
+                msg.replyEmbeds(eb.build()).queue();
+                return;
+            }
         }
 
 
