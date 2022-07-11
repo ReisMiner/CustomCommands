@@ -30,9 +30,6 @@ import xyz.reisminer.chtop.slashcommands.cheese.ViewerPlay;
 
 import javax.security.auth.login.LoginException;
 import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Objects;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.addNewUser;
@@ -91,18 +88,10 @@ public class Bot extends ListenerAdapter {
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
         if (event.getGuild().getIdLong() == Token.CHEESESERVERID) {
             EmbedBuilder eb = new EmbedBuilder();
-            InputStream file = null;
-            try {
-                file = new URL(event.getMember().getAvatarUrl()).openStream();
-                eb.setImage("attachment://user.png");
-                eb.setTitle("Member Left");
-                eb.setDescription("**" + event.getMember().getUser().getAsTag() + "** left the server!");
-                event.getGuild().getTextChannelById(980157760555581451L)
-                        .sendFile(file, "user.png").setEmbeds(eb.build()).queue();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            eb.setImage(event.getMember().getAvatarUrl());
+            eb.setTitle("Member Left");
+            eb.setDescription("**" + event.getMember().getUser().getAsTag() + "** left the server!");
+            event.getGuild().getTextChannelById(980157760555581451L).sendMessageEmbeds(eb.build()).queue();
         }
     }
 
