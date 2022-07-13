@@ -88,7 +88,7 @@ public class Bot extends ListenerAdapter {
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
         if (event.getGuild().getIdLong() == Token.CHEESESERVERID) {
             EmbedBuilder eb = new EmbedBuilder();
-            eb.setImage(event.getMember().getAvatarUrl());
+            eb.setThumbnail(event.getMember().getAvatarUrl());
             eb.setTitle("Member Left");
             eb.setDescription("**" + event.getMember().getUser().getAsTag() + "** left the server!");
             event.getGuild().getTextChannelById(980157760555581451L).sendMessageEmbeds(eb.build()).queue();
