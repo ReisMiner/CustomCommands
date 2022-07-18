@@ -3,6 +3,7 @@ package xyz.reisminer.chtop.commands.gamble;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
+import org.apache.commons.lang3.StringUtils;
 import xyz.reisminer.chtop.Token;
 
 import java.security.SecureRandom;
@@ -13,19 +14,29 @@ public class rob {
     public static void steal(Message msg, MessageChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         if (splitMessage.length == 3) {
-            User victim;
+
+
+            User victim = null;
             boolean error = false;
             User author = msg.getAuthor();
-            if(!msg.getMentionedMembers().isEmpty()) {
+            if (!msg.getMentionedMembers().isEmpty()) {
                 victim = msg.getMentionedMembers().get(0).getUser();
-            }else{
-                victim = getUserByName(splitMessage[1],msg);
+            } else if (StringUtils.isNumeric(splitMessage[1])) {
+                try {
+                    victim = msg.getJDA().getUserById(Long.parseLong(splitMessage[1]));
+                } catch (Exception ignore) {
+                    error = true;
+                }
+            } else {
+                victim = getUserByName(splitMessage[1], msg);
                 try {
                     victim.getIdLong();
-                }catch (NullPointerException e){
-                    error=true;
+                } catch (NullPointerException e) {
+                    error = true;
                 }
             }
+
+
             if (!error && victim.getIdLong() != Token.BOTID) {
 
                 int stealAmount = Integer.parseInt(splitMessage[2]);
@@ -79,7 +90,7 @@ public class rob {
             User author = msg.getAuthor();
             User victim = msg.getMentionedMembers().get(0).getUser();
 
-            if (victim.getIdLong()!= Token.BOTID) {
+            if (victim.getIdLong() != Token.BOTID) {
 
                 int giftAmount;
 
