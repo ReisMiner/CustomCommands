@@ -84,7 +84,7 @@ public class rob {
 
     public static void gift(Message msg, MessageChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
-        if (splitMessage.length == 3 && !msg.getMentionedMembers().isEmpty()) {
+        if (splitMessage.length == 3) {
             User author = msg.getAuthor();
             User victim = null;
             boolean error = false;
