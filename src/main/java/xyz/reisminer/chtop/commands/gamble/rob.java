@@ -14,8 +14,6 @@ public class rob {
     public static void steal(Message msg, MessageChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         if (splitMessage.length == 3) {
-
-
             User victim = null;
             boolean error = false;
             User author = msg.getAuthor();
@@ -57,7 +55,7 @@ public class rob {
                         int n = rand.nextInt(101);
                         System.out.println(n);
 
-                        if (n < 50) {
+                        if (n < 40) {
                             changeBalance(author, stealAmount);
                             changeBalance(victim, -stealAmount);
                             channel.sendMessage("<@" + author.getIdLong() + ">, You Robbed `" + stealAmount + "` peterZ from " + victim.getName() + "! You now have `" + getCurrencyOfUser(author) + "` peterZ!").queue();
@@ -88,7 +86,28 @@ public class rob {
         String[] splitMessage = msg.getContentRaw().split(" ");
         if (splitMessage.length == 3 && !msg.getMentionedMembers().isEmpty()) {
             User author = msg.getAuthor();
-            User victim = msg.getMentionedMembers().get(0).getUser();
+            User victim = null;
+            boolean error = false;
+            if (!msg.getMentionedMembers().isEmpty()) {
+                victim = msg.getMentionedMembers().get(0).getUser();
+            } else if (StringUtils.isNumeric(splitMessage[1])) {
+                try {
+                    victim = msg.getJDA().getUserById(Long.parseLong(splitMessage[1]));
+                } catch (Exception ignore) {
+                    error = true;
+                }
+            } else {
+                victim = getUserByName(splitMessage[1], msg);
+                try {
+                    victim.getIdLong();
+                } catch (NullPointerException e) {
+                    error = true;
+                }
+            }
+            if(error){
+                channel.sendMessage("User Not Found!").queue();
+                return;
+            }
 
             if (victim.getIdLong() != Token.BOTID) {
 
