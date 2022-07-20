@@ -33,7 +33,7 @@ public class leaderboard {
         StringBuilder sb = new StringBuilder();
         AtomicInteger count = new AtomicInteger(1);
         result.forEach((k,v) ->{
-            sb.append(String.format("**%d.** <@%d> - %d peterZ\n",count.get(),k,v));
+            sb.append(String.format("**%d.** <@%d> - %.0f peterZ\n",count.get(),k,v));
             count.getAndIncrement();
         });
         eb.setDescription(sb.toString());
