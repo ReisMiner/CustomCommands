@@ -4,9 +4,12 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class leaderboard {
     public static void showTopTen(Message msg, MessageChannel channel) {
@@ -26,6 +29,10 @@ public class leaderboard {
             channel.sendMessage("Database Error!").queue();
             return;
         }
+
+        result = result.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Currency Leaderboard");
