@@ -1,8 +1,10 @@
 package xyz.reisminer.chtop.commands.gamble;
 
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.apache.commons.lang3.StringUtils;
 import xyz.reisminer.chtop.Token;
 
@@ -104,7 +106,7 @@ public class rob {
                     error = true;
                 }
             }
-            if(error){
+            if (error) {
                 channel.sendMessage("User Not Found!").queue();
                 return;
             }
@@ -140,6 +142,58 @@ public class rob {
             }
         } else {
             channel.sendMessage("CMD Usage: [PREFIX]gift <@someone> <amount to steal>.\n").queue();
+        }
+    }
+
+    public static void adminRob(Message msg, MessageChannel channel, MessageReceivedEvent event) {
+        String[] splitMessage = msg.getContentRaw().split(" ");
+
+        if (!event.getMember().getPermissions().contains(Permission.MANAGE_PERMISSIONS)) {
+            channel.sendMessage("No Permissions!").queue();
+            return;
+        }
+
+        if (splitMessage.length == 2) {
+            User victim = null;
+            boolean error = false;
+            if (!msg.getMentionedMembers().isEmpty()) {
+                victim = msg.getMentionedMembers().get(0).getUser();
+            } else if (StringUtils.isNumeric(splitMessage[1])) {
+                try {
+                    victim = msg.getJDA().getUserById(Long.parseLong(splitMessage[1]));
+                } catch (Exception ignore) {
+                    error = true;
+                }
+            } else {
+                victim = getUserByName(splitMessage[1], msg);
+                try {
+                    victim.getIdLong();
+                } catch (NullPointerException e) {
+                    error = true;
+                }
+            }
+
+
+            if (!error && victim.getIdLong() != Token.BOTID) {
+
+                int stealAmount = Integer.parseInt(splitMessage[1]);
+
+                if (stealAmount > 0) {
+
+                    if (!userExists(victim)) {
+                        addNewUser(victim);
+                    }
+
+                    changeBalance(victim, -stealAmount);
+                    channel.sendMessage("<@" + msg.getAuthor().getIdLong() + ">, You Admin-Robbed `" + stealAmount + "` peterZ from " + victim.getName()).queue();
+
+                } else {
+                    channel.sendMessage("Cannot steal negative or no amount!").queue();
+                }
+            } else {
+                channel.sendMessage("Cannot rob this User. Make sure its spelled correctly. If not sure look in leaderboard!\n" +
+                        "Note: Cannot rob CustomCommands!").queue();
+            }
         }
     }
 }

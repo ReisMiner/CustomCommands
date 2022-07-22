@@ -110,11 +110,11 @@ public class Bot extends ListenerAdapter {
                     return;
                 }
             }
-            if(msg.getContentRaw().equalsIgnoreCase("viewer-play")){
+            if (msg.getContentRaw().equalsIgnoreCase("viewer-play")) {
                 EmbedBuilder eb = new EmbedBuilder();
                 eb.setImage("https://cdn.discordapp.com/attachments/684446613028077644/995719534164066385/unknown.png")
                         .setDescription("Enter the command with a **/** in front and select the circled command from the selection!\nIf the selection does not appear, you are doing something wrong.")
-                        .addField("MilkyWay Forum Invite?","Use Code `R1miner` as invite code on https://milkywaycheese.com",false)
+                        .addField("MilkyWay Forum Invite?", "Use Code `R1miner` as invite code on https://milkywaycheese.com", false)
                         .setTitle("Wrong Syntax!");
                 msg.replyEmbeds(eb.build()).queue();
                 return;
@@ -299,6 +299,10 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("gift"): {
                     rob.gift(msg, channel);
+                    break;
+                }
+                case ("adminrob"): {
+                    rob.adminRob(msg, channel, event);
                     break;
                 }
                 case ("lb"):
