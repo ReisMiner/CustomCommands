@@ -153,7 +153,7 @@ public class rob {
             return;
         }
 
-        if (splitMessage.length == 2) {
+        if (splitMessage.length == 3) {
             User victim = null;
             boolean error = false;
             if (!msg.getMentionedMembers().isEmpty()) {
@@ -176,7 +176,7 @@ public class rob {
 
             if (!error && victim.getIdLong() != Token.BOTID) {
 
-                int stealAmount = Integer.parseInt(splitMessage[1]);
+                int stealAmount = Integer.parseInt(splitMessage[2]);
 
                 if (stealAmount > 0) {
 
@@ -194,6 +194,8 @@ public class rob {
                 channel.sendMessage("Cannot rob this User. Make sure its spelled correctly. If not sure look in leaderboard!\n" +
                         "Note: Cannot rob CustomCommands!").queue();
             }
+        }else{
+            channel.sendMessage("Too few arguments!").queue();
         }
     }
 }
