@@ -148,7 +148,7 @@ public class rob {
     public static void adminRob(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         String[] splitMessage = msg.getContentRaw().split(" ");
 
-        if (!event.getMember().getPermissions().contains(Permission.MANAGE_PERMISSIONS)) {
+        if (!event.getMember().getPermissions().contains(Permission.ADMINISTRATOR)) {
             channel.sendMessage("No Permissions!").queue();
             return;
         }
