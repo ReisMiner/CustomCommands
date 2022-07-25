@@ -1,5 +1,6 @@
 package xyz.reisminer.chtop.commands.gamble;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -197,5 +198,19 @@ public class rob {
         }else{
             channel.sendMessage("Too few arguments!").queue();
         }
+    }
+
+    public static void adminGift(Message msg, MessageChannel channel, MessageReceivedEvent event) {
+        String[] splitMessage = msg.getContentRaw().split(" ");
+
+        if (!event.getMember().getPermissions().contains(Permission.ADMINISTRATOR)) {
+            channel.sendMessage("No Permissions!").queue();
+            return;
+        }
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("Banned from chat!");
+        eb.setThumbnail("https://cdn.discordapp.com/attachments/1000688639975641171/1001212324960534538/unknown.png");
+        channel.sendMessageEmbeds(eb.build()).queue();
     }
 }

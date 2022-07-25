@@ -305,6 +305,10 @@ public class Bot extends ListenerAdapter {
                     rob.adminRob(msg, channel, event);
                     break;
                 }
+                case ("admingift"): {
+                    rob.adminGift(msg, channel, event);
+                    break;
+                }
                 case ("lb"):
                 case ("leaderboard"): {
                     leaderboard.showTopTen(msg, channel);
