@@ -1,5 +1,6 @@
 package xyz.reisminer.chtop.commands;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 
@@ -15,6 +16,15 @@ public class Say{
             }
             channel.sendMessage(tmp).queue();
         }
+    }
+
+    public static void sayEmbed(Message msg, MessageChannel channel) {
+        String[] splitMessage = msg.getContentRaw().split(" ");
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("coming s00n!");
+        eb.setThumbnail("https://cdn.discordapp.com/attachments/967361799483695145/1001129427280867339/For_Gohtor.jpg");
+        channel.sendMessageEmbeds(eb.build()).queue();
     }
 
     public static void sayMsgBold(Message msg, MessageChannel channel) {

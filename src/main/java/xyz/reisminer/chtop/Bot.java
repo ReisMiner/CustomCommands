@@ -186,6 +186,10 @@ public class Bot extends ListenerAdapter {
                     Say.sayMsg(msg, channel);
                     break;
                 }
+                case ("ebsay"): {
+                    Say.sayEmbed(msg, channel);
+                    break;
+                }
                 case ("b0ld"): {
                     Say.sayMsgBold(msg, channel);
                     break;
