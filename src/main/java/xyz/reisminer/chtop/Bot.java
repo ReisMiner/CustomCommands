@@ -23,6 +23,7 @@ import xyz.reisminer.chtop.commands.music.*;
 import xyz.reisminer.chtop.commands.util.Base64Convert;
 import xyz.reisminer.chtop.commands.util.Crypto;
 import xyz.reisminer.chtop.commands.util.HexConvert;
+import xyz.reisminer.chtop.commands.util.UserProfile;
 import xyz.reisminer.chtop.slashcommands.CreateCommands;
 import xyz.reisminer.chtop.slashcommands.MailSpoof;
 import xyz.reisminer.chtop.slashcommands.Notion;
@@ -88,7 +89,7 @@ public class Bot extends ListenerAdapter {
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
         if (event.getGuild().getIdLong() == Token.CHEESESERVERID) {
             EmbedBuilder eb = new EmbedBuilder();
-            eb.setThumbnail(event.getMember().getAvatarUrl());
+            eb.setThumbnail(event.getUser().getEffectiveAvatarUrl());
             eb.setTitle("Member Left");
             eb.setDescription("**" + event.getMember().getUser().getAsTag() + "** left the server!");
             event.getGuild().getTextChannelById(980157760555581451L).sendMessageEmbeds(eb.build()).queue();
@@ -169,7 +170,6 @@ public class Bot extends ListenerAdapter {
                     SpamDM.sendDM(msg, channel, 100);
                     break;
                 }
-
                 case ("rename"): {
                     Rename.single(msg, channel, event);
                     break;
@@ -329,6 +329,10 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("base64"): {
                     Base64Convert.Base64Cmd(msg);
+                    break;
+                }
+                case ("avatar"): {
+                    UserProfile.getAvatar(msg, channel, event);
                     break;
                 }
                 default: {

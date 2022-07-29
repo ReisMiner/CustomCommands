@@ -210,7 +210,7 @@ public class rob {
 
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Banned from chat!");
-        eb.setThumbnail("https://cdn.discordapp.com/attachments/1000688639975641171/1001212324960534538/unknown.png");
+        eb.setThumbnail("https://cdn.discordapp.com/attachments/967361799483695145/1001129427280867339/For_Gohtor.jpg");
         channel.sendMessageEmbeds(eb.build()).queue();
     }
 }
