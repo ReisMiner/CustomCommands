@@ -21,7 +21,7 @@ public class DM {
                     tmp += splitMessage[i] + " ";
             }
             String finalTmp = tmp;
-            msg.getMentionedMembers().get(0).getUser().openPrivateChannel().queue(channnel -> {
+            msg.getMentions().getMembers().get(0).getUser().openPrivateChannel().queue(channnel -> {
                 eb.setTitle("Your DM:","http://reisminer.xyz");
                 eb.setDescription(finalTmp);
                 eb.setColor(Color.red);
@@ -30,7 +30,7 @@ public class DM {
             });
         }
 
-        Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` sent a dm to `"+ msg.getMentionedMembers().get(0).getUser().getName()+"`").queue();
+        Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` sent a dm to `"+ msg.getMentions().getMembers().get(0).getUser().getName()+"`").queue();
         channel.sendMessage("DM sent").queue();
     }
 }

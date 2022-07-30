@@ -15,8 +15,8 @@ public class UserProfile {
         if (splitMessage.length == 2) {
             User victim = null;
             boolean error = false;
-            if (!msg.getMentionedMembers().isEmpty()) {
-                victim = msg.getMentionedMembers().get(0).getUser();
+            if (!msg.getMentions().getMembers().isEmpty()) {
+                victim = msg.getMentions().getMembers().get(0).getUser();
             } else if (StringUtils.isNumeric(splitMessage[1])) {
                 try {
                     victim = msg.getJDA().getUserById(Long.parseLong(splitMessage[1]));

@@ -21,8 +21,8 @@ public class RoleCommands {
                 }
                 Role role = msg.getGuild().getRolesByName(tmp.substring(0, tmp.length() - 1), true).get(0);
                 try {
-                    msg.getGuild().addRoleToMember(msg.getMentionedMembers().get(0), role).complete();
-                    Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` gave the role `" + tmp + "` to `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
+                    msg.getGuild().addRoleToMember(msg.getMentions().getMembers().get(0), role).complete();
+                    Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` gave the role `" + tmp + "` to `" + msg.getMentions().getMembers().get(0).getUser().getName() + "`").queue();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -30,7 +30,7 @@ public class RoleCommands {
                 channel.sendMessage("Command Usage: [PREFIX]give [@user] [Role]\nNote: Just write the role down. Do not mention it.");
             }
         } else {
-            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to give the role `" + tmp + "` to `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to give the role `" + tmp + "` to `" + msg.getMentions().getMembers().get(0).getUser().getName() + "`").queue();
             channel.sendMessage("You got no permissions to do so :)").queue();
         }
     }
@@ -46,8 +46,8 @@ public class RoleCommands {
                 }
                 Role role = msg.getGuild().getRolesByName(tmp.substring(0, tmp.length() - 1), true).get(0);
                 try {
-                    msg.getGuild().removeRoleFromMember(msg.getMentionedMembers().get(0), role).complete();
-                    Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` removed the role `" + tmp + "` from `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
+                    msg.getGuild().removeRoleFromMember(msg.getMentions().getMembers().get(0), role).complete();
+                    Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` removed the role `" + tmp + "` from `" + msg.getMentions().getMembers().get(0).getUser().getName() + "`").queue();
 
 
                 } catch (Exception e) {
@@ -57,7 +57,7 @@ public class RoleCommands {
                 channel.sendMessage("Command Usage: [PREFIX]give [@user] [Role]\nNote: Just write the role down. Do not mention it.");
             }
         } else {
-            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to remove the role `" + tmp + "` to `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to remove the role `" + tmp + "` to `" + msg.getMentions().getMembers().get(0).getUser().getName() + "`").queue();
             channel.sendMessage("You got no permissions to do so :)").queue();
         }
     }

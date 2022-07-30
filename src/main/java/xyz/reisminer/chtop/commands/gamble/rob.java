@@ -20,8 +20,8 @@ public class rob {
             User victim = null;
             boolean error = false;
             User author = msg.getAuthor();
-            if (!msg.getMentionedMembers().isEmpty()) {
-                victim = msg.getMentionedMembers().get(0).getUser();
+            if (!msg.getMentions().getMembers().isEmpty()) {
+                victim = msg.getMentions().getMembers().get(0).getUser();
             } else if (StringUtils.isNumeric(splitMessage[1])) {
                 try {
                     victim = msg.getJDA().getUserById(Long.parseLong(splitMessage[1]));
@@ -91,8 +91,8 @@ public class rob {
             User author = msg.getAuthor();
             User victim = null;
             boolean error = false;
-            if (!msg.getMentionedMembers().isEmpty()) {
-                victim = msg.getMentionedMembers().get(0).getUser();
+            if (!msg.getMentions().getMembers().isEmpty()) {
+                victim = msg.getMentions().getMembers().get(0).getUser();
             } else if (StringUtils.isNumeric(splitMessage[1])) {
                 try {
                     victim = msg.getJDA().getUserById(Long.parseLong(splitMessage[1]));
@@ -157,8 +157,8 @@ public class rob {
         if (splitMessage.length == 3) {
             User victim = null;
             boolean error = false;
-            if (!msg.getMentionedMembers().isEmpty()) {
-                victim = msg.getMentionedMembers().get(0).getUser();
+            if (!msg.getMentions().getMembers().isEmpty()) {
+                victim = msg.getMentions().getMembers().get(0).getUser();
             } else if (StringUtils.isNumeric(splitMessage[1])) {
                 try {
                     victim = msg.getJDA().getUserById(Long.parseLong(splitMessage[1]));

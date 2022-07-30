@@ -14,7 +14,7 @@ public class SpamDM {
     public static void sendDM(Message msg, MessageChannel channel, int count) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         StringBuilder tmp = new StringBuilder();
-        if ((msg.getMentionedUsers().get(0).getIdLong() != 215136536260378624L) && (msg.getMentionedUsers().get(0).getIdLong() != 286888695879958530L) && (msg.getMentionedUsers().get(0).getIdLong() != 84396707305357313L)) {
+        if ((msg.getMentions().getMembers().get(0).getIdLong() != 215136536260378624L) && (msg.getMentions().getMembers().get(0).getIdLong() != 286888695879958530L) && (msg.getMentions().getMembers().get(0).getIdLong() != 84396707305357313L)) {
             if (NumberUtils.isParsable(splitMessage[2])) {
                 count = Integer.parseInt(splitMessage[2]);
                 tmp = new StringBuilder(" ");
@@ -28,7 +28,7 @@ public class SpamDM {
             String finalTmp = tmp.toString();
             int finalCount = count;
             boolean error = false;
-            msg.getMentionedMembers().get(0).getUser().openPrivateChannel().queue(channnel -> {
+            msg.getMentions().getMembers().get(0).getUser().openPrivateChannel().queue(channnel -> {
                 eb.setTitle("Your DM:", "http://reisminer.xyz");
                 eb.setDescription(finalTmp);
                 eb.setColor(Color.red);
@@ -39,7 +39,7 @@ public class SpamDM {
                 }
             });
             channel.sendMessage("Sending DMs").queue();
-            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` spammed `"+ msg.getMentionedMembers().get(0).getUser().getName()+"` full with the message: `"+tmp+"`").queue();
+            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` spammed `"+ msg.getMentions().getMembers().get(0).getUser().getName()+"` full with the message: `"+tmp+"`").queue();
 
         }
     }

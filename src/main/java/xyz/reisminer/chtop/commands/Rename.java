@@ -39,22 +39,22 @@ public class Rename {
             String[] splitMessage = msg.getContentRaw().split(" ");
             msg.delete().complete();
             StringBuilder tmp = new StringBuilder(" ");
-            msg.getMentionedMembers();
+            msg.getMentions().getMembers();
             if (splitMessage.length >= 3) {
                 for (int i = 2; i < splitMessage.length; i++) {
                     tmp.append(splitMessage[i]).append(" ");
                 }
                 try {
-                    msg.getMentionedMembers().get(0).modifyNickname(String.valueOf(tmp)).complete();
-                    Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` changed the name of `" + msg.getMentionedMembers().get(0).getUser().getName() + "` to `" + tmp + "`").queue();
+                    msg.getMentions().getMembers().get(0).modifyNickname(String.valueOf(tmp)).complete();
+                    Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` changed the name of `" + msg.getMentions().getMembers().get(0).getUser().getName() + "` to `" + tmp + "`").queue();
                 } catch (Exception ignored) {
-                    channel.sendMessage("No perms to edit `" + msg.getMentionedMembers().get(0).getNickname() + "`").queue();
+                    channel.sendMessage("No perms to edit `" + msg.getMentions().getMembers().get(0).getNickname() + "`").queue();
                 }
             } else {
                 channel.sendMessage("Use this command like this: [PREFIX]renameall [New NAME]").queue();
             }
         } else {
-            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to change the name of `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to change the name of `" + msg.getMentions().getMembers().get(0).getUser().getName() + "`").queue();
             channel.sendMessage("You got no permissions to do so :)").queue();
         }
     }

@@ -11,7 +11,7 @@ import java.util.List;
 public class Taufe {
 
     public static void doTaufi(MessageReceivedEvent event) {
-        Member baby = event.getMessage().getMentionedMembers().get(0);
+        Member baby = event.getMessage().getMentions().getMembers().get(0);
         Member sender = event.getGuild().getMemberById(event.getAuthor().getIdLong());
         Long targetID = null;
         List<VoiceChannel> chanels = event.getGuild().getVoiceChannels();

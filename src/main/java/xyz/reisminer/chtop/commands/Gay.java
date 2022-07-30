@@ -12,7 +12,7 @@ public class Gay {
         EmbedBuilder eb = new EmbedBuilder();
         String[] splitt = event.getMessage().getContentRaw().split(" ");
         if (splitt.length == 2) {
-            String user = event.getMessage().getMentionedMembers().get(0).getAsMention();
+            String user = event.getMessage().getMentions().getMembers().get(0).getAsMention();
             eb.setDescription(user + " is **" + rand.nextInt(100) + "%** Gay :rainbow_flag:");
         } else {
             eb.setDescription("You are **" + rand.nextInt(100) + "%** Gay :rainbow_flag:");

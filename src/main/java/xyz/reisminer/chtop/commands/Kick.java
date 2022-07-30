@@ -14,7 +14,7 @@ public class Kick {
             System.out.println((long) msg.getJDA().getGuildById(msg.getGuild().getId()).getMembers().size());
             Random rand = new Random();
             int memberNum = rand.nextInt(msg.getJDA().getGuildById(msg.getGuild().getId()).getMembers().size());
-            if (!msg.getGuild().getMembers().get(memberNum).getUser().isBot() && msg.getGuild().getMembers().get(memberNum).getUser().getIdLong() != Token.REISMINERID && !msg.getMentionedMembers().get(0).getRoles().contains(event.getGuild().getRoleById(Token.BRATWURSCHTROLE))) {
+            if (!msg.getGuild().getMembers().get(memberNum).getUser().isBot() && msg.getGuild().getMembers().get(memberNum).getUser().getIdLong() != Token.REISMINERID && !msg.getMentions().getMembers().get(0).getRoles().contains(event.getGuild().getRoleById(Token.BRATWURSCHTROLE))) {
 
                 msg.getGuild().kick(msg.getGuild().getMembers().get(memberNum)).complete();
 
@@ -34,12 +34,12 @@ public class Kick {
     }
 
     public static void NotRandom(Message msg, MessageChannel channel, MessageReceivedEvent event) {
-        if (event.getMember().hasPermission(Permission.KICK_MEMBERS) && msg.getMentionedMembers().get(0).getIdLong() != Token.REISMINERID && !msg.getMentionedMembers().get(0).getRoles().contains(event.getGuild().getRoleById(Token.BRATWURSCHTROLE))) {
-            msg.getGuild().kick(msg.getMentionedMembers().get(0)).complete();
-            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` kicked `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
-            System.out.println(msg.getAuthor().getName() + " Kicked " + msg.getMentionedMembers().get(0).getUser().getName() + " with notrandomkick :)");
+        if (event.getMember().hasPermission(Permission.KICK_MEMBERS) && msg.getMentions().getMembers().get(0).getIdLong() != Token.REISMINERID && !msg.getMentions().getMembers().get(0).getRoles().contains(event.getGuild().getRoleById(Token.BRATWURSCHTROLE))) {
+            msg.getGuild().kick(msg.getMentions().getMembers().get(0)).complete();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` kicked `" + msg.getMentions().getMembers().get(0).getUser().getName() + "`").queue();
+            System.out.println(msg.getAuthor().getName() + " Kicked " + msg.getMentions().getMembers().get(0).getUser().getName() + " with notrandomkick :)");
         } else {
-            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to kick `" + msg.getMentionedMembers().get(0).getUser().getName() + "`").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to kick `" + msg.getMentions().getMembers().get(0).getUser().getName() + "`").queue();
             channel.sendMessage("You got no permissions to do so :)").queue();
         }
     }

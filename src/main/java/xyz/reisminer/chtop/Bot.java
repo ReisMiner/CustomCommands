@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
@@ -123,8 +124,8 @@ public class Bot extends ListenerAdapter {
         }
 
 
-        if (!msg.getMentionedMembers().isEmpty()) {
-            if (msg.getMentionedMembers().get(0).getIdLong() == Token.BOTID) {
+        if (!msg.getMentions().getMembers().isEmpty()) {
+            if (msg.getMentions().getMembers().get(0).getIdLong() == Token.BOTID) {
                 if (!userExists(msg.getAuthor())) {
                     addNewUser(msg.getAuthor());
                 }
@@ -133,12 +134,12 @@ public class Bot extends ListenerAdapter {
         }
 
         if (msg.getContentRaw().split(" ")[0].equalsIgnoreCase("$-$block") && msg.getAuthor().getIdLong() == Token.REISMINERID) {
-            if (Token.blocked.contains(msg.getMentionedMembers().get(0).getIdLong())) {
-                Token.blocked.remove(msg.getMentionedMembers().get(0).getIdLong());
-                msg.addReaction("\uD83D\uDC4E").queue();
+            if (Token.blocked.contains(msg.getMentions().getMembers().get(0).getIdLong())) {
+                Token.blocked.remove(msg.getMentions().getMembers().get(0).getIdLong());
+                msg.addReaction(Emoji.fromUnicode("\uD83D\uDC4E")).queue();
             } else {
-                Token.blocked.add(msg.getMentionedMembers().get(0).getIdLong());
-                msg.addReaction("\uD83D\uDC4D").queue();
+                Token.blocked.add(msg.getMentions().getMembers().get(0).getIdLong());
+                msg.addReaction(Emoji.fromUnicode("\uD83D\uDC4D")).queue();
             }
         }
 
@@ -356,9 +357,9 @@ public class Bot extends ListenerAdapter {
             Token.logChannel.sendMessage("Boost Only = " + Token.boostOnly).queue();
         }
         if (Token.sendReacts) {
-            msg.addReaction(":fredy:780366700415287326").complete();
-            msg.addReaction(":joinkohl:780369817307447317").complete();
-            msg.addReaction(":hitlerthonk:817055243732123659").complete();
+            msg.addReaction(Emoji.fromFormatted(":fredy:780366700415287326")).complete();
+            msg.addReaction(Emoji.fromFormatted(":joinkohl:780369817307447317")).complete();
+            msg.addReaction(Emoji.fromFormatted(":hitlerthonk:817055243732123659")).complete();
         }
 
     }

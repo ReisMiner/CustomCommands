@@ -15,8 +15,8 @@ public class getPeterZ {
         if (splitMessage.length == 2) {
             User checkFrom = null;
             boolean error = false;
-            if (!msg.getMentionedMembers().isEmpty()) {
-                checkFrom = msg.getMentionedMembers().get(0).getUser();
+            if (!msg.getMentions().getMembers().isEmpty()) {
+                checkFrom = msg.getMentions().getMembers().get(0).getUser();
             } else if (StringUtils.isNumeric(splitMessage[1])) {
                 try {
                     checkFrom = msg.getJDA().getUserById(Long.parseLong(splitMessage[1]));
