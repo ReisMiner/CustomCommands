@@ -14,7 +14,7 @@ public class SpamDM {
     public static void sendDM(Message msg, MessageChannel channel, int count) {
         String[] splitMessage = msg.getContentRaw().split(" ");
         StringBuilder tmp = new StringBuilder();
-        if ((msg.getMentions().getMembers().get(0).getIdLong() != 215136536260378624L) && (msg.getMentions().getMembers().get(0).getIdLong() != 286888695879958530L) && (msg.getMentions().getMembers().get(0).getIdLong() != 84396707305357313L)) {
+        if ((msg.getMentions().getMembers().get(0).getIdLong() != 215136536260378624L) && msg.getGuild().getIdLong() != Token.CHEESESERVERID) {
             if (NumberUtils.isParsable(splitMessage[2])) {
                 count = Integer.parseInt(splitMessage[2]);
                 tmp = new StringBuilder(" ");
@@ -33,13 +33,13 @@ public class SpamDM {
                 eb.setDescription(finalTmp);
                 eb.setColor(Color.red);
                 eb.setImage(Token.shutImg);
-                for (int i = 0; i < finalCount; i++){
-                    if(!error)
+                for (int i = 0; i < finalCount; i++) {
+                    if (!error)
                         channnel.sendMessageEmbeds(eb.build()).queue();
                 }
             });
             channel.sendMessage("Sending DMs").queue();
-            Token.logChannel.sendMessage("On `"+msg.getGuild().getName()+"` , `"+msg.getAuthor().getName()+"` spammed `"+ msg.getMentions().getMembers().get(0).getUser().getName()+"` full with the message: `"+tmp+"`").queue();
+            Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` spammed `" + msg.getMentions().getMembers().get(0).getUser().getName() + "` full with the message: `" + tmp + "`").queue();
 
         }
     }
