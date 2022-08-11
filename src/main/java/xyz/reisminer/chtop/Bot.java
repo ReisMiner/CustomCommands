@@ -74,7 +74,6 @@ public class Bot extends ListenerAdapter {
         }
         if (event.getGuild().getIdLong() == Token.CHEESESERVERID) {
             event.getGuild().addRoleToMember(event.getMember(), Objects.requireNonNull(event.getGuild().getRoleById(980153801635946546L))).queue();
-            Token.logChannel.sendMessage("On `" + event.getGuild().getName() + "` , `" + event.getMember().getUser().getName() + "` recieved viewers Role cuz he/she joined!").queue();
 
             EmbedBuilder eb = new EmbedBuilder();
             event.getMember().getUser().openPrivateChannel().queue(channnel -> {
