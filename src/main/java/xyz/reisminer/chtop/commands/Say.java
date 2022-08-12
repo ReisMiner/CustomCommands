@@ -19,10 +19,15 @@ public class Say{
     }
 
     public static void sayEmbed(Message msg, MessageChannel channel) {
-        String[] splitMessage = msg.getContentRaw().split(" ");
+        String[] splitMessage = msg.getContentRaw().split("\\|");
+
+        if(splitMessage.length < 2){
+            return;
+        }
 
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("coming s00n!");
+        eb.setTitle(splitMessage[1]);
+        eb.setDescription(splitMessage[1]);
         eb.setThumbnail("https://cdn.discordapp.com/attachments/967361799483695145/1001129427280867339/For_Gohtor.jpg");
         channel.sendMessageEmbeds(eb.build()).queue();
     }
