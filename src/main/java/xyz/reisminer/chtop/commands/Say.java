@@ -4,6 +4,11 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
+
 public class Say{
 
     public static void sayMsg(Message msg, MessageChannel channel) {
@@ -26,9 +31,19 @@ public class Say{
         }
 
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle(splitMessage[1]);
+        eb.setTitle(splitMessage[0]);
         eb.setDescription(splitMessage[1]);
-        eb.setThumbnail("https://cdn.discordapp.com/attachments/967361799483695145/1001129427280867339/For_Gohtor.jpg");
+        if(splitMessage.length > 2){
+            try {
+                URL u = new URL(splitMessage[2]);
+                Image image = ImageIO.read(u);
+                if(image != null) {
+                    eb.setThumbnail(splitMessage[2]);
+                }
+            } catch (IOException e) {
+                eb.setThumbnail("https://cdn.discordapp.com/attachments/967361799483695145/1001129427280867339/For_Gohtor.jpg");
+            }
+        }
         channel.sendMessageEmbeds(eb.build()).queue();
     }
 
