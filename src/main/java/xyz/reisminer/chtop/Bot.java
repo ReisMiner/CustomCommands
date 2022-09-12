@@ -42,12 +42,12 @@ public class Bot extends ListenerAdapter {
     public static JDA jda;
 
     public static void main(String[] args) throws LoginException {
-        jda = JDABuilder.create(Token.TOKEN, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES)
+        jda = JDABuilder.create(Token.TOKEN, GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES)
                 .addEventListeners(new Bot())
                 .setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
-                .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT)
                 .build();
+        jda.setAutoReconnect(true);
     }
 
     public void onReady(ReadyEvent event) {
@@ -192,6 +192,10 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("b0ld"): {
                     Say.sayMsgBold(msg, channel);
+                    break;
+                }
+                case ("emotes"): {
+                    ListEmotes.listAll(msg,channel);
                     break;
                 }
                 case ("moods"): {
