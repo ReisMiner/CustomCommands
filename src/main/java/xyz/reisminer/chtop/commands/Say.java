@@ -9,7 +9,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 
-public class Say{
+public class Say {
 
     public static void sayMsg(Message msg, MessageChannel channel) {
         String[] splitMessage = msg.getContentRaw().split(" ");
@@ -24,26 +24,34 @@ public class Say{
     }
 
     public static void sayEmbed(Message msg, MessageChannel channel) {
-        String[] splitMessage = msg.getContentRaw().split("\\|");
+        String[] splitMessage = msg.getContentRaw().split(" ");
+        EmbedBuilder eb = new EmbedBuilder();
 
-        if(splitMessage.length < 2){
+        if (splitMessage.length < 2) {
             return;
         }
 
-        EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle(splitMessage[0]);
-        eb.setDescription(splitMessage[1]);
-        if(splitMessage.length > 2){
-            try {
-                URL u = new URL(splitMessage[2]);
-                Image image = ImageIO.read(u);
-                if(image != null) {
-                    eb.setThumbnail(splitMessage[2]);
-                }
-            } catch (IOException e) {
-                eb.setThumbnail("https://cdn.discordapp.com/attachments/967361799483695145/1001129427280867339/For_Gohtor.jpg");
+        int start = 3;
+
+        try {
+            URL u = null;
+            u = new URL(splitMessage[2]);
+            Image image = ImageIO.read(u);
+            if (image != null) {
+                eb.setThumbnail(splitMessage[2]);
             }
+        } catch (IOException ignored) {
+            start = 2;
         }
+
+        eb.setTitle(splitMessage[1]);
+
+        StringBuilder tmp = new StringBuilder();
+        for (int i = start; i < splitMessage.length; i++) {
+            tmp.append(splitMessage[i]).append(" ");
+        }
+
+        eb.setDescription(tmp.toString());
         channel.sendMessageEmbeds(eb.build()).queue();
     }
 

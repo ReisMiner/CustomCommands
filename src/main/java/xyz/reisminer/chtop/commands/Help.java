@@ -54,7 +54,7 @@ public class Help {
         if (splitMessage[1].equalsIgnoreCase("text")) {
             channel.sendMessage("```Text Commands: " +
                     " \n " + Token.prefix + "say" +
-                    " \n " + Token.prefix + "ebsay <title> <img url> <text>" +
+                    " \n " + Token.prefix + "ebsay <title> <optional: img url> <text>" +
                     " \n " + Token.prefix + "emotes [compact]" +
                     " \n " + Token.prefix + "b0ld```"
             ).queue();
