@@ -106,7 +106,7 @@ public class Bot extends ListenerAdapter {
             for (String x : Token.blockList) {
                 if (msg.getContentRaw().contains(x) && !msg.getAuthor().isBot()) {
                     msg.delete().queue();
-                    channel.sendMessage("Don't use words that are against Discord TOS. Use Acronyms Cheese and Choofer!").queue();
+                    channel.sendMessage("Don't use words that are against Discord TOS. Use Acronyms Cheese and Choofer!\n If you're looking for where to buy it, use command `$getmilky`").queue();
                     jda.getTextChannelById(985267292466204763L).sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg.getContentRaw().replaceAll(x, "<bad word>")).queue();
                     return;
                 }
