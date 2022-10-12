@@ -27,8 +27,9 @@ public class GetSettings {
             resultSet = statement
                     .executeQuery("SELECT word from banWords");
             while (resultSet.next()) {
-                Token.banWhenSend.add(resultSet.getString(0));
+                Token.banWhenSend.add(resultSet.getString("word"));
             }
+            System.out.println("loaded bad words");
 
         } catch (SQLException e) {
             Token.prefix = "$";
