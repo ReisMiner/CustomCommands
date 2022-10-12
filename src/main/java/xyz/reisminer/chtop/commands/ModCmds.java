@@ -7,11 +7,15 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import xyz.reisminer.chtop.Token;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
 
+import static xyz.reisminer.chtop.GetSettings.getSettings;
+
 public class ModCmds {
 
     public static void addBanWord(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         if (event.getMember().hasPermission(Permission.BAN_MEMBERS)) {
             SetStuff.addBanWord(msg.getContentRaw().split(" ")[1]);
+            msg.delete().queue();
+            getSettings();
         } else {
             Token.logChannel.sendMessage("On `" + msg.getGuild().getName() + "` , `" + msg.getAuthor().getName() + "` tried to add ban word `" + msg.getContentRaw().split(" ")[1] + "`").queue();
             channel.sendMessage("You got no permissions to do so :)").queue();
