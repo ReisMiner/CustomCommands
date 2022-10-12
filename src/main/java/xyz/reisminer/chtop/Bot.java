@@ -111,6 +111,11 @@ public class Bot extends ListenerAdapter {
                     return;
                 }
             }
+            for(String x : Token.banWhenSend){
+                if(msg.getContentRaw().contains(x)){
+                    member.ban(7,"sending fucking shit").queue();
+                }
+            }
             if (msg.getContentRaw().equalsIgnoreCase("viewer-play")) {
                 EmbedBuilder eb = new EmbedBuilder();
                 eb.setImage("https://cdn.discordapp.com/attachments/684446613028077644/995719534164066385/unknown.png")
