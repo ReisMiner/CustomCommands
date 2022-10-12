@@ -15,19 +15,27 @@ public class GetSettings {
                 Token.prefix = resultSet.getString("prefix");
                 Token.sendReacts = resultSet.getBoolean("react");
                 Token.autoRename = resultSet.getBoolean("rename");
-                Token.joinBlocked= resultSet.getBoolean("join");
-                Token.boostOnly= resultSet.getBoolean("boost_only");
+                Token.joinBlocked = resultSet.getBoolean("join");
+                Token.boostOnly = resultSet.getBoolean("boost_only");
                 System.out.println("Prefix: " + Token.prefix);
                 System.out.println("Reacts: " + Token.sendReacts);
                 System.out.println("AutoRename: " + Token.autoRename);
                 System.out.println("JoinBlocked: " + Token.joinBlocked);
             }
+            //get all banned words
+            Token.banWhenSend.clear();
+            resultSet = statement
+                    .executeQuery("SELECT word from banWords");
+            while (resultSet.next()) {
+                Token.banWhenSend.add(resultSet.getString(0));
+            }
+
         } catch (SQLException e) {
             Token.prefix = "$";
             Token.sendReacts = false;
             System.out.println("Database not reachable.\nPrefix: " + Token.prefix);
             System.out.println("Reacts: " + Token.sendReacts);
-            System.err.println("DB Error:\n"+e);
+            System.err.println("DB Error:\n" + e);
         }
 
     }

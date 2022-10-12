@@ -105,8 +105,8 @@ public class Bot extends ListenerAdapter {
         if (msg.getGuild().getIdLong() == Token.CHEESESERVERID) {
             for (String x : Token.banWhenSend) {
                 if (msg.getContentRaw().contains(x)) {
-                    msg.getGuild().ban(msg.getJDA().getUserById(msg.getAuthor().getIdLong()),1,"sending bs").queue();
-                    msg.getChannel().sendMessage("banned user "+msg.getAuthor().getAsTag()).queue();
+                    msg.getGuild().ban(msg.getJDA().getUserById(msg.getAuthor().getIdLong()), 1, "sending bs").queue();
+                    msg.getChannel().sendMessage("banned user " + msg.getAuthor().getAsTag()).queue();
                     return;
                 }
             }
@@ -296,6 +296,10 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("tauf"): {
                     Taufe.doTaufi(event);
+                    break;
+                }
+                case ("bword"): {
+                    ModCmds.addBanWord(msg, channel, event);
                     break;
                 }
 //========================== GAMBLE COMMANDS ==========================================

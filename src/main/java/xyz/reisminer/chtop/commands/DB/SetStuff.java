@@ -82,4 +82,20 @@ public class SetStuff {
         }
     }
 
+    public static void addBanWord(String word) {
+
+        System.out.println("Connecting database...");
+        try (Connection connection = DriverManager.getConnection(Token.DBurl, Token.DBusername, Token.DBpassword)) {
+            System.out.println("Database connected!");
+            Statement statement = connection.createStatement();
+            // Result set get the result of the SQL query
+            statement.executeUpdate("insert into banWords(word) value (\"" + word + "\")");
+            Token.banWhenSend.add(word);
+            System.out.println("added new ban word: " + word);
+        } catch (SQLException e) {
+            System.out.println("could not add ban word: " + word);
+            System.err.println("DB Error:\n" + e);
+        }
+    }
+
 }
