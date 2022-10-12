@@ -34,7 +34,7 @@ public class MailSpoof {
         Gson gson = new Gson();
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost("https://ramon.cc/mailspoof/send/");
+        HttpPost httpPost = new HttpPost("https://ramog.us/mailspoof/send/");
         HttpEntity stringEntity = new StringEntity(gson.toJson(mail), ContentType.APPLICATION_JSON);
         httpPost.setEntity(stringEntity);
         CloseableHttpResponse response = null;
