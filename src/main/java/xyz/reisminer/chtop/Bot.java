@@ -103,17 +103,19 @@ public class Bot extends ListenerAdapter {
         Member member = event.getMember();
 
         if (msg.getGuild().getIdLong() == Token.CHEESESERVERID) {
+            for (String x : Token.banWhenSend) {
+                if (msg.getContentRaw().contains(x)) {
+                    msg.getGuild().ban(msg.getJDA().getUserById(msg.getAuthor().getIdLong()),1,"sending bs").queue();
+                    msg.getChannel().sendMessage("banned user "+msg.getAuthor().getAsTag()).queue();
+                    return;
+                }
+            }
             for (String x : Token.blockList) {
                 if (msg.getContentRaw().contains(x) && !msg.getAuthor().isBot()) {
                     msg.delete().queue();
                     channel.sendMessage("Don't use words that are against Discord TOS. Use Acronyms Cheese and Choofer!\n If you're looking for where to buy it, use command `$getmilky`").queue();
                     jda.getTextChannelById(985267292466204763L).sendMessage(msg.getAuthor().getAsTag() + " sent: " + msg.getContentRaw().replaceAll(x, "<bad word>")).queue();
                     return;
-                }
-            }
-            for(String x : Token.banWhenSend){
-                if(msg.getContentRaw().contains(x)){
-                    member.ban(7,"sending fucking shit").queue();
                 }
             }
             if (msg.getContentRaw().equalsIgnoreCase("viewer-play")) {
@@ -200,7 +202,7 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("emotes"): {
-                    ListEmotes.listAll(msg,channel);
+                    ListEmotes.listAll(msg, channel);
                     break;
                 }
                 case ("moods"): {
