@@ -104,7 +104,7 @@ public class Bot extends ListenerAdapter {
 
         if (msg.getGuild().getIdLong() == Token.CHEESESERVERID) {
             for (String x : Token.banWhenSend) {
-                if (msg.getContentRaw().contains(x)) {
+                if (msg.getContentRaw().contains(x) && !msg.getAuthor().isBot()) {
                     msg.getGuild().ban(msg.getJDA().getUserById(msg.getAuthor().getIdLong()), 1, "sending bs").queue();
                     msg.getChannel().sendMessage("banned user " + msg.getAuthor().getAsTag()).queue();
                     jda.getTextChannelById(985267292466204763L).sendMessage("banned for saying: `" + x + "`").queue();
