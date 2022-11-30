@@ -6,6 +6,7 @@
 # Log file
 *.log
 
+out/
 # Token File
 Token.java
 
