@@ -1,6 +1,8 @@
 package xyz.reisminer.chtop.slashcommands;
 
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.internal.interactions.CommandDataImpl;
 import xyz.reisminer.chtop.Token;
@@ -25,11 +27,11 @@ public class CreateCommands {
         coin.addOption(OptionType.STRING, "currency", "in which FIAT Currency the value is converted", true);
         jda.upsertCommand(coin).queue();
 
-        CommandDataImpl notion = new CommandDataImpl("calendar-view","Get the notion calendar lool");
+        CommandDataImpl notion = new CommandDataImpl("calendar-view", "Get the notion calendar lool");
         notion.addOption(OptionType.BOOLEAN, "tests", "do you wanna see tests (true) or husi (false)", true);
         jda.upsertCommand(notion).queue();
 
-        CommandDataImpl notion2 = new CommandDataImpl("calendar-add","Add a new entry to the calendar");
+        CommandDataImpl notion2 = new CommandDataImpl("calendar-add", "Add a new entry to the calendar");
         notion2.addOption(OptionType.STRING, "title", "title of the entry", true);
         notion2.addOption(OptionType.BOOLEAN, "test", "is it a test?", true);
         notion2.addOption(OptionType.STRING, "subjects", "what subjects does the entry belong to? separate with , E.G: mati,dütsch", true);
@@ -37,32 +39,35 @@ public class CreateCommands {
         notion2.addOption(OptionType.STRING, "content", "additional information. Split individual lines with \\n", false);
         jda.upsertCommand(notion2).queue();
 
-        CommandDataImpl viewerPlay = new CommandDataImpl("viewer-play","Register Yourself to play with me during a stream!");
+        CommandDataImpl viewerPlay = new CommandDataImpl("viewer-play", "Register Yourself to play with me during a stream!");
         viewerPlay.addOption(OptionType.STRING, "dbd-name", "Your DBD Ingame Name", true);
         viewerPlay.addOption(OptionType.STRING, "yt-name", "Your Youtube Chat name", true);
         jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlay).queue();
 
-        CommandDataImpl viewerPlayViewQueue = new CommandDataImpl("viewer-play-view","Get the current queue.");
+        CommandDataImpl viewerPlayViewQueue = new CommandDataImpl("viewer-play-view", "Get the current queue.");
         jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlayViewQueue).queue();
 
-        CommandDataImpl viewerPlayNext = new CommandDataImpl("viewer-play-next","Get new players! Mod Command!");
+        CommandDataImpl viewerPlayNext = new CommandDataImpl("viewer-play-next", "Get new players! Mod Command!");
         jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlayNext).queue();
 
-        CommandDataImpl viewerPlayToggle = new CommandDataImpl("viewer-play-toggle","Toggle Queue Open or Close. Mod Command!");
+        CommandDataImpl viewerPlayToggle = new CommandDataImpl("viewer-play-toggle", "Toggle Queue Open or Close. Mod Command!");
         jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlayToggle).queue();
 
-        CommandDataImpl viewerPlayRemove = new CommandDataImpl("viewer-play-remove","Remove yourself from the queue!");
+        CommandDataImpl viewerPlayRemove = new CommandDataImpl("viewer-play-remove", "Remove yourself from the queue!");
         viewerPlayRemove.addOption(OptionType.USER, "discord-name", "Discord", false);
         viewerPlayRemove.addOption(OptionType.STRING, "dbd-name", "DBD IGN", false);
         viewerPlayRemove.addOption(OptionType.STRING, "yt-name", "YT Channel name", false);
         jda.getGuildById(Token.CHEESESERVERID).upsertCommand(viewerPlayRemove).queue();
+
+        CommandDataImpl salarySetChannel = new CommandDataImpl("salary-setup", "Setup Salary Countdown").setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.MANAGE_CHANNEL));
+        jda.upsertCommand(salarySetChannel).queue();
     }
 
     public void initialize(JDA jda, Long guildID) {
         Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand("ping", "Calculate Ping of the bot!").queue();
         Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand("resetprefix", "Resets the Bot prefix").queue();
 
-        CommandDataImpl notion = new CommandDataImpl("calendar-view","Get the notion calendar lool");
+        CommandDataImpl notion = new CommandDataImpl("calendar-view", "Get the notion calendar lool");
         notion.addOption(OptionType.BOOLEAN, "tests", "do you wanna see tests (true) or husi (false)", true);
         Objects.requireNonNull(jda.getGuildById(guildID)).upsertCommand(notion).queue();
 
@@ -78,13 +83,16 @@ public class CreateCommands {
         coin.addOption(OptionType.STRING, "currency", "in which FIAT Currency the value is converted", true);
         jda.getGuildById(guildID).upsertCommand(coin).queue();
 
-        CommandDataImpl notion2 = new CommandDataImpl("calendar-add","Add a new entry to the calendar");
+        CommandDataImpl notion2 = new CommandDataImpl("calendar-add", "Add a new entry to the calendar");
         notion2.addOption(OptionType.STRING, "title", "title of the entry", true);
         notion2.addOption(OptionType.BOOLEAN, "test", "is it a test?", true);
         notion2.addOption(OptionType.STRING, "subjects", "what subjects does the entry belong to? separate with , E.G: mathi,Finanz", true);
         notion2.addOption(OptionType.STRING, "date", "what date does it take place? Format: DD.MM.YYYY", true);
         notion2.addOption(OptionType.STRING, "content", "additional information. Split individual lines with ;;", false);
         jda.getGuildById(guildID).upsertCommand(notion2).queue();
+
+        CommandDataImpl salarySetChannel = new CommandDataImpl("salary-setup", "Setup Salary Countdown").setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.MANAGE_CHANNEL));
+        jda.getGuildById(guildID).upsertCommand(salarySetChannel).queue();
     }
 
     public void removeAll(JDA jda) {

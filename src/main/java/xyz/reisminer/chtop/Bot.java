@@ -28,11 +28,14 @@ import xyz.reisminer.chtop.commands.util.UserProfile;
 import xyz.reisminer.chtop.slashcommands.CreateCommands;
 import xyz.reisminer.chtop.slashcommands.MailSpoof;
 import xyz.reisminer.chtop.slashcommands.Notion;
+import xyz.reisminer.chtop.slashcommands.SalaryCountdown;
 import xyz.reisminer.chtop.slashcommands.cheese.ViewerPlay;
 
 import javax.security.auth.login.LoginException;
 import java.awt.*;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.addNewUser;
 import static xyz.reisminer.chtop.commands.gamble.gambleDB.userExists;
@@ -42,20 +45,18 @@ public class Bot extends ListenerAdapter {
     public static JDA jda;
 
     public static void main(String[] args) throws LoginException {
-        jda = JDABuilder.create(Token.TOKEN, GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES)
-                .addEventListeners(new Bot())
-                .setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
-                .setMemberCachePolicy(MemberCachePolicy.ALL)
-                .build();
+        jda = JDABuilder.create(Token.TOKEN, GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES).addEventListeners(new Bot()).setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
+                .setMemberCachePolicy(MemberCachePolicy.ALL).build();
         jda.setAutoReconnect(true);
     }
 
     public void onReady(ReadyEvent event) {
         Token.logChannel = event.getJDA().getTextChannelById(787026214207356938L);
-        event.getJDA().getPresence().setActivity(Activity.streaming(Token.prefix + "help | reisminer.xyz/dc", "https://twitch.tv/reisminer"));
+        event.getJDA().getPresence().setActivity(Activity.streaming(Token.prefix + "help | reisminer.xyz/dc", "https://youtube.com/dbdcheese"));
         event.getJDA().getPresence().setStatus(OnlineStatus.IDLE);
 
         CreateCommands createSlashCmds = new CreateCommands();
+
         createSlashCmds.initialize(event.getJDA());
         //createSlashCmds.initialize(event.getJDA(), Token.ELMOGUILDID);
         //createSlashCmds.removeAll(event.getJDA());
@@ -63,6 +64,18 @@ public class Bot extends ListenerAdapter {
 
         GetSettings.getSettings();
         Menu.load();
+
+
+        Timer salaryTimer = new Timer();
+        salaryTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (Token.countdownChannel == -1L) {
+                    return;
+                }
+                SalaryCountdown.updateChannel(jda);
+            }
+        }, 0, 60 * 1000);
     }
 
     @Override
@@ -121,10 +134,7 @@ public class Bot extends ListenerAdapter {
             }
             if (msg.getContentRaw().equalsIgnoreCase("viewer-play")) {
                 EmbedBuilder eb = new EmbedBuilder();
-                eb.setImage("https://cdn.discordapp.com/attachments/684446613028077644/995719534164066385/unknown.png")
-                        .setDescription("Enter the command with a **/** in front and select the circled command from the selection!\nIf the selection does not appear, you are doing something wrong.")
-                        .addField("MilkyWay Forum Invite?", "Use Code `R1miner` as invite code on https://milkywaycheese.com", false)
-                        .setTitle("Wrong Syntax!");
+                eb.setImage("https://cdn.discordapp.com/attachments/684446613028077644/995719534164066385/unknown.png").setDescription("Enter the command with a **/** in front and select the circled command from the selection!\nIf the selection does not appear, you are doing something wrong.").addField("MilkyWay Forum Invite?", "Use Code `R1miner` as invite code on https://milkywaycheese.com", false).setTitle("Wrong Syntax!");
                 msg.replyEmbeds(eb.build()).queue();
                 return;
             }
@@ -384,10 +394,8 @@ public class Bot extends ListenerAdapter {
         switch (event.getName()) {
             case "ping": {
                 long time = System.currentTimeMillis();
-                event.reply("Pong!").setEphemeral(true)
-                        .flatMap(v ->
-                                event.getHook().editOriginalFormat("Pong: %d ms", System.currentTimeMillis() - time) // then edit original
-                        ).queue();
+                event.reply("Pong!").setEphemeral(true).flatMap(v -> event.getHook().editOriginalFormat("Pong: %d ms", System.currentTimeMillis() - time) // then edit original
+                ).queue();
                 break;
             }
             case "resetprefix": {
@@ -428,6 +436,10 @@ public class Bot extends ListenerAdapter {
             }
             case "viewer-play-remove": {
                 ViewerPlay.getInstance().remove(event);
+                break;
+            }
+            case "salary-setup": {
+                SalaryCountdown.setupChannel(event);
                 break;
             }
             default: {

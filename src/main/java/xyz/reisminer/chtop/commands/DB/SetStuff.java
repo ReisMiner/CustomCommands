@@ -98,4 +98,20 @@ public class SetStuff {
         }
     }
 
+    public static void setCountdownChannel(long channelId) {
+
+        System.out.println("Connecting database...");
+        try (Connection connection = DriverManager.getConnection(Token.DBurl, Token.DBusername, Token.DBpassword)) {
+            System.out.println("Database connected!");
+            Statement statement = connection.createStatement();
+            // Result set get the result of the SQL query
+            statement.executeUpdate("UPDATE prefixTable SET `countdown_channel`=" + channelId + "");
+            Token.countdownChannel = channelId;
+            System.out.println("Countdown Channel set to: " + Token.countdownChannel);
+        } catch (SQLException e) {
+            System.out.println("Countdown Channel stays: " + Token.countdownChannel);
+            System.err.println("DB Error:\n" + e);
+        }
+    }
+
 }

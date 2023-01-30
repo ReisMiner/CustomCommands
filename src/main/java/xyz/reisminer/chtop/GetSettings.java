@@ -17,6 +17,7 @@ public class GetSettings {
                 Token.autoRename = resultSet.getBoolean("rename");
                 Token.joinBlocked = resultSet.getBoolean("join");
                 Token.boostOnly = resultSet.getBoolean("boost_only");
+                Token.countdownChannel = resultSet.getLong("countdown_channel");
                 System.out.println("Prefix: " + Token.prefix);
                 System.out.println("Reacts: " + Token.sendReacts);
                 System.out.println("AutoRename: " + Token.autoRename);
