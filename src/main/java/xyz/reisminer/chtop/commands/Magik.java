@@ -11,6 +11,7 @@ import org.opencv.imgproc.Imgproc;
 import xyz.reisminer.chtop.lib.FastNoiseLite;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
@@ -19,6 +20,7 @@ import java.net.URL;
 public class Magik {
     public static void fakeMagik(Message msg, MessageChannel channel, MessageReceivedEvent event) {
         String[] splitMessage = msg.getContentRaw().split(" ");
+        msg.reply("generating...").queue();
 
         if (splitMessage.length < 2) {
             channel.sendMessage("Too few arguments (or too many lul)").queue();
@@ -33,6 +35,7 @@ public class Magik {
         try {
             URL url = new URL(splitMessage[1]);
             BufferedImage img = ImageIO.read(url);
+            img = toBufferedImageOfType(img, BufferedImage.TYPE_3BYTE_BGR);
 
             Mat image = bufferedImageToMat(img);
 
@@ -72,10 +75,36 @@ public class Magik {
 
     }
 
-    public static Mat bufferedImageToMat(BufferedImage bi) {
+    private static Mat bufferedImageToMat(BufferedImage bi) {
         Mat mat = new Mat(bi.getHeight(), bi.getWidth(), CvType.CV_8UC3);
         byte[] data = ((DataBufferByte) bi.getRaster().getDataBuffer()).getData();
         mat.put(0, 0, data);
         return mat;
+    }
+
+    //https://stackoverflow.com/questions/21740729/converting-bufferedimage-to-mat-opencv-in-java
+    private static BufferedImage toBufferedImageOfType(BufferedImage original, int type) {
+        if (original == null) {
+            throw new IllegalArgumentException("original == null");
+        }
+
+        // Don't convert if it already has correct type
+        if (original.getType() == type) {
+            return original;
+        }
+
+        // Create a buffered image
+        BufferedImage image = new BufferedImage(original.getWidth(), original.getHeight(), type);
+
+        // Draw the image onto the new buffer
+        Graphics2D g = image.createGraphics();
+        try {
+            g.setComposite(AlphaComposite.Src);
+            g.drawImage(original, 0, 0, null);
+        } finally {
+            g.dispose();
+        }
+
+        return image;
     }
 }
