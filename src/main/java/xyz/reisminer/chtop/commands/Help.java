@@ -56,6 +56,9 @@ public class Help {
                     " \n " + Token.prefix + "say" +
                     " \n " + Token.prefix + "ebsay <title> <optional: img url> <text>" +
                     " \n " + Token.prefix + "emotes [compact]" +
+                    " \n " + Token.prefix + "avatar" +
+                    " \n " + Token.prefix + "fakemagik <img url> <optional: intensity>" +
+                    " \n " + Token.prefix + "gay <user>" +
                     " \n " + Token.prefix + "b0ld```"
             ).queue();
         }

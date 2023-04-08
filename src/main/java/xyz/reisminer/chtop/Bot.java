@@ -15,6 +15,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import nu.pattern.OpenCV;
 import org.jetbrains.annotations.NotNull;
 import xyz.reisminer.chtop.commands.DB.SetStuff;
 import xyz.reisminer.chtop.commands.Menu;
@@ -45,6 +46,7 @@ public class Bot extends ListenerAdapter {
     public static JDA jda;
 
     public static void main(String[] args) throws LoginException {
+        OpenCV.loadShared();
         jda = JDABuilder.create(Token.TOKEN, GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_VOICE_STATES).addEventListeners(new Bot()).setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
                 .setMemberCachePolicy(MemberCachePolicy.ALL).build();
         jda.setAutoReconnect(true);
@@ -359,6 +361,10 @@ public class Bot extends ListenerAdapter {
                 }
                 case ("avatar"): {
                     UserProfile.getAvatar(msg, channel, event);
+                    break;
+                }
+                case ("fakemagik"): {
+                    Magik.fakeMagik(msg, channel, event);
                     break;
                 }
                 default: {
