@@ -18,5 +18,5 @@ For self-hosting follow the steps below. i know it is confusing. might update la
 **Note:** Some stuff is hardcoded and you might want to adjust this stuff. But be warned: This code is **NOT** documented!
 
 # Help me. I get errors and cannot start the bot
-Not my beer. Google is your friend :)
+Not my beer. Google is your friend :) 
     
