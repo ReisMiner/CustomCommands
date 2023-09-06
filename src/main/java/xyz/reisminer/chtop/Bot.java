@@ -308,7 +308,7 @@ public class Bot extends ListenerAdapter {
                     break;
                 }
                 case ("tauf"): {
-                    Taufe.doTaufi(event);
+                    new Thread(() -> Taufe.doTaufi(event)).start();
                     break;
                 }
                 case ("bword"): {
@@ -388,9 +388,12 @@ public class Bot extends ListenerAdapter {
             Token.logChannel.sendMessage("Boost Only = " + Token.boostOnly).queue();
         }
         if (Token.sendReacts) {
-            msg.addReaction(Emoji.fromFormatted(":fredy:780366700415287326")).complete();
-            msg.addReaction(Emoji.fromFormatted(":joinkohl:780369817307447317")).complete();
-            msg.addReaction(Emoji.fromFormatted(":hitlerthonk:817055243732123659")).complete();
+            new Thread(() -> {
+                msg.addReaction(Emoji.fromFormatted(":fredy:780366700415287326")).complete();
+                msg.addReaction(Emoji.fromFormatted(":joinkohl:780369817307447317")).complete();
+                msg.addReaction(Emoji.fromFormatted(":hitlerthonk:817055243732123659")).complete();
+            }).start();
+
         }
 
     }
